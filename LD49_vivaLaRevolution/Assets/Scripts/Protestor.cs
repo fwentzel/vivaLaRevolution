@@ -40,6 +40,7 @@ public class Protestor : RTSUnit
     {
         buildingToLoot = building;
         moveToPosition = building.transform.position;
+         navMeshAgent.destination = moveToPosition;
     }
 
     private IEnumerator Loot()

@@ -3,16 +3,16 @@ using UnityEngine;
 using System.Collections.Generic;
 public class PoliceGroup : MonoBehaviour
 {
-    public List<GameObject> holdPoints;
+    public List<HoldPoint> holdPoints;
     public List<Police> members;
 
     public int currentHoldIndex = 0;
 
     public int startSize = 10;
 
-    public void registerFatality(Police member){
+    public void RegisterFatality(Police member){
         members.Remove(member);
-        if(members.Count/startSize< currentHoldIndex/holdPoints.Count){
+        if(members.Count/(float)startSize< currentHoldIndex/(float)holdPoints.Count){
             SetHoldPositionToNext();
         }
     }

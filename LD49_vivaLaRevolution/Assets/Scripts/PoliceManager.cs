@@ -28,7 +28,9 @@ public class PoliceManager : MonoBehaviour
             for (int i = 0; i < group.startSize; i++)
             {
                 GameObject obj = Instantiate(policePrefab, mainBuilding.transform.position, Quaternion.identity);
-                group.members.Add(obj.GetComponent<Police>());
+                Police police = obj.GetComponent<Police>();
+                group.members.Add(police);
+                police.group=group;
             }
             group.SetHoldPositionToNext();
         }

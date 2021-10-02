@@ -36,7 +36,7 @@ public class Police : RTSUnit
     }
 
 private void OnDestroy() {
-    group.members.Remove(this);
+    group.RegisterFatality(this);
 }
 
     private void OnDrawGizmos()

@@ -30,14 +30,17 @@ public class RTSUnit : MonoBehaviour
     {
 
     }
-
+    public float GetRemainingDistance()
+    {
+        return navMeshAgent.remainingDistance;
+    }
 
     protected virtual void Update()
     {
-        if(Vector3.Distance(transform.position,moveToPosition)>fightWithinRange)
-        targetHealth=null;
-        
-        if (targetHealth != null )
+        if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
+            targetHealth = null;
+
+        if (targetHealth != null)
         {
             navMeshAgent.destination = targetHealth.transform.position;
             if (Vector3.Distance(targetHealth.transform.position, transform.position) < attackRange)

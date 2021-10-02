@@ -96,6 +96,8 @@ public class Building : MonoBehaviour
         EquipProtesters();
         foreach (var protestor in protestors)
         {
+            if(protestor==null)
+            continue;
             protestor.LeaveBuilding();
         }
         protestors.Clear();

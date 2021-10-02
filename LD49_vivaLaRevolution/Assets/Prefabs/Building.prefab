@@ -136,3 +136,6 @@ MonoBehaviour:
   OnCaptured:
     m_PersistentCalls:
       m_Calls: []
+  cursorTexture: {fileID: 2800000, guid: ab932fc3a0bf115419e12c20758be310, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}

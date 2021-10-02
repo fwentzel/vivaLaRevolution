@@ -22,7 +22,8 @@ public class Police : RTSUnit
         base.Update();
         if (targetHealth == null)
         {
-            foreach (Collider collider in Physics.OverlapSphere(transform.position, detectRadius))
+            
+            foreach (Collider collider in colliders)
             {
                 if (collider.tag.Equals("Protestor"))
                 {

@@ -16,33 +16,35 @@ public class RTSUnit : MonoBehaviour
     public float detectRadius = 4f;
     public float attackRange = 2f;
     public float fightWithinRange = 5f;
-    public float uneasyness = 0.5f;
+
 
     public UnityEvent onSelection;
     public UnityEvent onDeselection;
 
     public Transform target;
-    
+
     [SerializeField]
     protected Vector3 moveToPosition;
     protected NavMeshAgent navMeshAgent;
 
     protected Health targetHealth;
     protected float nextAttackTime = 0;
-
+    protected Uneasyness uneasyness;
+    protected Collider[] colliders;
     protected virtual void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        uneasyness = GetComponent<Uneasyness>();
     }
     protected virtual void Start()
     {
         SetMovePosition(transform.position);
     }
 
-    
+
     private void OnEnable()
     {
-        
+
         StartCoroutine(MoveRandomly());
     }
 
@@ -63,17 +65,15 @@ public class RTSUnit : MonoBehaviour
 
     protected virtual void Update()
     {
+        colliders = Physics.OverlapSphere(transform.position, detectRadius);
+        uneasyness.UpdateValue(colliders);
 
         if (target)
             target.position = moveToPosition;
-        
-        if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
-            targetHealth = null;
+
 
         if (targetHealth != null && navMeshAgent.enabled)
         {
-            
-            
             navMeshAgent.destination = targetHealth.transform.position;
             if (Vector3.Distance(targetHealth.transform.position, transform.position) < attackRange)
             {
@@ -96,6 +96,11 @@ public class RTSUnit : MonoBehaviour
     public void SetMovePosition(Vector3 newPosition)
     {
         moveToPosition = newPosition;
+        if(target){
+        target.transform.localScale=Vector3.one;
+        target.transform.DOScale(Vector3.zero,1);
+        }
+
     }
 
 
@@ -104,9 +109,12 @@ public class RTSUnit : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
+            if (Vector3.Distance(moveToPosition, transform.position) < 2f)
+            {
+                float magnitude = uneasyness.value;
+                moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
+            }
 
-            float magnitude = uneasyness;
-            moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
         }
     }
 

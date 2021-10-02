@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class Building : MonoBehaviour
 {
-    
+
     public List<Protestor> protestors = new List<Protestor>();
     public List<GameObject> itemPrefabs = new List<GameObject>();
     public int maxProtestors = 3;
@@ -20,7 +20,12 @@ public class Building : MonoBehaviour
     private Color initialColor;
 
     public UnityEvent OnCaptured;
-    
+
+    public Texture2D cursorTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+
+
     private void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -35,9 +40,9 @@ public class Building : MonoBehaviour
         {
             LeaveProtestors();
         }
-        
-        
-        if(!protestors.Contains(protestor))
+
+
+        if (!protestors.Contains(protestor))
             protestors.Add(protestor);
     }
 
@@ -45,25 +50,25 @@ public class Building : MonoBehaviour
     {
         if (isCaptured)
             return;
-        
+
         captureTime += Time.deltaTime * protestors.Count;
         captureTime = Mathf.Clamp(captureTime, 0, captureDurration);
 
         float percent = captureTime / captureDurration;
-        
+
         if (renderer)
         {
-            renderer.material.color = Color.Lerp(initialColor, Color.red,percent);
+            renderer.material.color = Color.Lerp(initialColor, Color.red, percent);
         }
-        
-        
-        
+
+
+
         if (percent > 0.98f)
         {
             LikeManager.instance.IncreaseLikeability(-1);
             isCaptured = true;
             LeaveProtestors();
-            
+
             OnCaptured?.Invoke();
         }
     }
@@ -73,20 +78,20 @@ public class Building : MonoBehaviour
         print("GIVING ITEM");
         foreach (var protestor in protestors)
         {
-            if(!protestor.CanGiveItem())
+            if (!protestor.CanGiveItem())
             {
                 print("Couldn't give item");
                 continue;
             }
-            
-            if(itemPrefabs.Count ==0)
+
+            if (itemPrefabs.Count == 0)
                 return;
-            GameObject itemObj = Instantiate(itemPrefabs[0],transform.position, Quaternion.identity);
+            GameObject itemObj = Instantiate(itemPrefabs[0], transform.position, Quaternion.identity);
             Item item = itemObj.GetComponent<Item>();
 
             print("GIVING ITEM");
-            if(protestor.GiveItem(item));
-                itemPrefabs.RemoveAt(0);
+            if (protestor.GiveItem(item)) ;
+            itemPrefabs.RemoveAt(0);
 
         }
     }
@@ -96,8 +101,8 @@ public class Building : MonoBehaviour
         EquipProtesters();
         foreach (var protestor in protestors)
         {
-            if(protestor==null)
-            continue;
+            if (protestor == null)
+                continue;
             protestor.LeaveBuilding();
         }
         protestors.Clear();
@@ -106,5 +111,14 @@ public class Building : MonoBehaviour
     public bool CanEnter()
     {
         return protestors.Count < maxProtestors || isCaptured;
+    }
+    void OnMouseEnter()
+    {
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+    }
+
+    void OnMouseExit()
+    {
+        Cursor.SetCursor(null, Vector2.zero, cursorMode);
     }
 }

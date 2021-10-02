@@ -10,7 +10,7 @@ public class ItemManager : MonoBehaviour
     public RectTransform content;
     
     
-    private void Awake()
+    private void Start()
     {
         _rtsSelection = FindObjectOfType<RTSSelection>();
         _rtsSelection.OnUnitSelection.AddListener(OnSelectedUnits);

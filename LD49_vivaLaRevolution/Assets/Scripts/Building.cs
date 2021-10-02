@@ -9,6 +9,7 @@ public class Building : MonoBehaviour
 {
     
     public List<Protestor> protestors = new List<Protestor>();
+    public List<GameObject> itemPrefabs = new List<GameObject>();
     public int maxProtestors = 3;
 
     public float captureDurration = 5f;
@@ -66,8 +67,32 @@ public class Building : MonoBehaviour
         }
     }
 
+    public void EquipProtesters()
+    {
+        print("GIVING ITEM");
+        foreach (var protestor in protestors)
+        {
+            if(!protestor.CanGiveItem())
+            {
+                print("Couldn't give item");
+                continue;
+            }
+            
+            if(itemPrefabs.Count ==0)
+                return;
+            GameObject itemObj = Instantiate(itemPrefabs[0],transform.position, Quaternion.identity);
+            Item item = itemObj.GetComponent<Item>();
+
+            print("GIVING ITEM");
+            if(protestor.GiveItem(item));
+                itemPrefabs.RemoveAt(0);
+
+        }
+    }
+
     public void LeaveProtestors()
     {
+        EquipProtesters();
         foreach (var protestor in protestors)
         {
             protestor.LeaveBuilding();

@@ -29,7 +29,6 @@ public class RTSUnit : MonoBehaviour
 
     protected Health targetHealth;
     protected float nextAttackTime = 0;
-    
 
     protected virtual void Awake()
     {
@@ -40,6 +39,7 @@ public class RTSUnit : MonoBehaviour
         SetMovePosition(transform.position);
     }
 
+    
     private void OnEnable()
     {
         

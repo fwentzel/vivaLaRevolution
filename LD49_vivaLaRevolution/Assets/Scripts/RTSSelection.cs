@@ -18,6 +18,8 @@ public class RTSSelection : MonoBehaviour
 
     private void Start()
     {
+        transform.position = Vector3.zero;
+        
         OnUnitSelection.AddListener((value) =>
         {
             print(value.Count);
@@ -124,9 +126,9 @@ public class RTSSelection : MonoBehaviour
         selectionBox.isTrigger = true;
 
     
-        Destroy(selectionBox, 0.02f);
+        Destroy(selectionBox, 0.1f);
         
-        Invoke("SendSelection", 0.15f);
+        Invoke("SendSelection", 0.05f);
     }
 
     private void SendSelection()

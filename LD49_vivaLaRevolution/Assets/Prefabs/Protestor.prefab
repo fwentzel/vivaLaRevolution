@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4038683644674927036}
   - component: {fileID: 4038683644674927037}
   - component: {fileID: 4038683644674927033}
-  - component: {fileID: 4038683644674927032}
   - component: {fileID: 1501098552}
-  - component: {fileID: 7785841746893740984}
+  - component: {fileID: 1875341735549049670}
+  - component: {fileID: 1316662580604614716}
   m_Layer: 0
   m_Name: Protestor
   m_TagString: Protestor
@@ -121,23 +121,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4038683644674927032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4038683644674927026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa8d24b235dff244daf98b01a71b421d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveToPosition: {x: -8.89, y: -3, z: 22}
-  attackSpeed: 1
-  attackDamage: 5
-  detectRadius: 4
-  attackRange: 2
 --- !u!114 &1501098552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +140,25 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   maxHealth: 100
---- !u!54 &7785841746893740984
+--- !u!114 &1875341735549049670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038683644674927026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b6184fb9177324ca45746694be8c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpeed: 6.44
+  attackDamage: 5
+  detectRadius: 4
+  attackRange: 2
+  fightWithinRange: 5
+  moveToPosition: {x: -3.74, y: 0, z: 22}
+--- !u!54 &1316662580604614716
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

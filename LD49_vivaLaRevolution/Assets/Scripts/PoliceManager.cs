@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PoliceManager : MonoBehaviour
 {
-    
+    GameObject policePrefab;
     public static PoliceManager instance{get;private set;}
     
     private void Awake()

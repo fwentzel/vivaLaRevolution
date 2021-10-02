@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class Police : RTSUnit
 {
-
+    public PoliceGroup group;
     public Transform holdPosition;
     protected override void Start()
     {
@@ -35,7 +35,9 @@ public class Police : RTSUnit
         }
     }
 
-
+private void OnDestroy() {
+    group.members.Remove(this);
+}
 
     private void OnDrawGizmos()
     {

@@ -21,6 +21,8 @@ public class RTSUnit : MonoBehaviour
     public UnityEvent onSelection;
     public UnityEvent onDeselection;
 
+    public Transform target;
+    
     [SerializeField]
     protected Vector3 moveToPosition;
     protected NavMeshAgent navMeshAgent;
@@ -61,6 +63,10 @@ public class RTSUnit : MonoBehaviour
 
     protected virtual void Update()
     {
+
+        if (target)
+            target.position = moveToPosition;
+        
         if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
             targetHealth = null;
 

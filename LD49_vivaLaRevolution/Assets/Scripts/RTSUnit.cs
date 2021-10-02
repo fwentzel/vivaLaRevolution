@@ -70,7 +70,7 @@ public class RTSUnit : MonoBehaviour
     }
 
 
-    IEnumerator MoveRandomly()
+    protected IEnumerator MoveRandomly()
     {
         while (true)
         {

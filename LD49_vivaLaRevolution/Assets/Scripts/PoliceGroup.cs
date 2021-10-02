@@ -12,7 +12,7 @@ public class PoliceGroup : MonoBehaviour
 
     public void RegisterFatality(Police member){
         members.Remove(member);
-        if(members.Count/(float)startSize< currentHoldIndex/(float)holdPoints.Count){
+        if(members.Count/(float)startSize< (holdPoints.Count-currentHoldIndex)/(float)holdPoints.Count){
             SetHoldPositionToNext();
         }
     }
@@ -36,7 +36,7 @@ public class PoliceGroup : MonoBehaviour
             for (int i = 1; i < holdPoints.Count; i++)
             {
                 Gizmos.DrawLine(holdPoints[i - 1].transform.position, holdPoints[i].transform.position);
-                Gizmos.DrawSphere(holdPoints[i].transform.position, .5f);
+               
             }
         }
     }

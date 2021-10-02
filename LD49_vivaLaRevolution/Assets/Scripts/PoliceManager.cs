@@ -15,13 +15,14 @@ public class PoliceManager : MonoBehaviour
             instance = this;
         else
             Destroy(this);
-
+        if (mainBuilding == null)
+            mainBuilding = GameObject.FindGameObjectWithTag("MainBuilding").transform;
         FillGroups();
     }
 
     private void FillGroups()
     {
-        
+
         groups = new List<PoliceGroup>(FindObjectsOfType<PoliceGroup>());
         foreach (PoliceGroup group in groups)
         {
@@ -30,13 +31,13 @@ public class PoliceManager : MonoBehaviour
                 GameObject obj = Instantiate(policePrefab, mainBuilding.transform.position, Quaternion.identity);
                 Police police = obj.GetComponent<Police>();
                 group.members.Add(police);
-                police.group=group;
+                police.group = group;
             }
             group.SetHoldPositionToNext();
         }
     }
 
 
-   
+
 
 }

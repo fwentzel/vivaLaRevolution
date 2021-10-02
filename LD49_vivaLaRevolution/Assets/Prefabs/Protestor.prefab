@@ -152,12 +152,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6184fb9177324ca45746694be8c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 6.44
-  attackDamage: 50
+  attackSpeed: 0.9
+  attackDamage: 8
   detectRadius: 4
   attackRange: 2
   fightWithinRange: 5
+  uneasyness: 0.5
   moveToPosition: {x: -3.74, y: 0, z: 22}
+  buildingToLoot: {fileID: 0}
+  lootTime: 10
 --- !u!54 &1316662580604614716
 Rigidbody:
   m_ObjectHideFlags: 0

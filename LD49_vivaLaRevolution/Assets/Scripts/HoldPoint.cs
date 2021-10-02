@@ -3,15 +3,8 @@ using UnityEngine;
 
 public class HoldPoint : MonoBehaviour
 {
-    
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
+    private void OnDrawGizmos() {
+        Gizmos.color=Color.blue;
+         Gizmos.DrawSphere(transform.position, .5f);
     }
 }

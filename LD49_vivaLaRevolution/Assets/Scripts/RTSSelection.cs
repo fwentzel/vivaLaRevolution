@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +10,7 @@ public class RTSSelection : MonoBehaviour
     public LayerMask unitMask;
     public UnityEvent<List<Protestor>> OnUnitSelection;
     public List<Protestor> selectedUnits = new List<Protestor>();
-
+    public List<Protestor> oldSelectedUnits = new List<Protestor>();
 
     private Vector3 mouseStart = Vector3.zero;
     private Vector3 mouseEnd = Vector3.zero;
@@ -20,10 +21,25 @@ public class RTSSelection : MonoBehaviour
     {
         transform.position = Vector3.zero;
         
-        OnUnitSelection.AddListener((value) =>
+        OnUnitSelection.AddListener(Selection);
+    }
+
+    public void Selection(List<Protestor> selected)
+    {
+        foreach (var unit in selected)
         {
-            print(value.Count);
-        });
+            if(!oldSelectedUnits.Contains(unit))
+                unit.OnSelection();
+        }
+
+        foreach (var unit in oldSelectedUnits)
+        {
+            if(!selected.Contains(unit))
+                unit.OnDeselection();
+        }
+    
+        print("SELECTION");
+        oldSelectedUnits = selected;
     }
 
 

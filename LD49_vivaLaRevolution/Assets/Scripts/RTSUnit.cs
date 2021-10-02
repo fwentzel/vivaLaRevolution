@@ -4,6 +4,7 @@ using UnityEngine.AI;
 using DG.Tweening;
 using System;
 using System.Collections;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class RTSUnit : MonoBehaviour
@@ -17,13 +18,16 @@ public class RTSUnit : MonoBehaviour
     public float fightWithinRange = 5f;
     public float uneasyness = 0.5f;
 
+    public UnityEvent onSelection;
+    public UnityEvent onDeselection;
+
     [SerializeField]
     protected Vector3 moveToPosition;
     protected NavMeshAgent navMeshAgent;
 
     protected Health targetHealth;
     protected float nextAttackTime = 0;
-
+    
 
     protected virtual void Awake()
     {
@@ -40,6 +44,16 @@ public class RTSUnit : MonoBehaviour
         StartCoroutine(MoveRandomly());
     }
 
+    public virtual void OnSelection()
+    {
+        onSelection?.Invoke();
+    }
+
+    public virtual void OnDeselection()
+    {
+        onDeselection?.Invoke();
+    }
+
     public float GetRemainingDistance()
     {
         return navMeshAgent.remainingDistance;
@@ -50,8 +64,10 @@ public class RTSUnit : MonoBehaviour
         if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
             targetHealth = null;
 
-        if (targetHealth != null)
+        if (targetHealth != null && navMeshAgent.enabled)
         {
+            
+            
             navMeshAgent.destination = targetHealth.transform.position;
             if (Vector3.Distance(targetHealth.transform.position, transform.position) < attackRange)
             {

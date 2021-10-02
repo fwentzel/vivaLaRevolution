@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class Building : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class Building : MonoBehaviour
 
     private Renderer renderer;
     private Color initialColor;
+
+    public UnityEvent OnCaptured;
     
     private void Start()
     {
@@ -57,6 +61,8 @@ public class Building : MonoBehaviour
         {
             isCaptured = true;
             LeaveProtestors();
+            
+            OnCaptured?.Invoke();
         }
     }
 

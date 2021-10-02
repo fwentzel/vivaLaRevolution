@@ -7,8 +7,8 @@ public class RTSSelection : MonoBehaviour
 {
     public LayerMask groundLayer;
     public LayerMask unitMask;
-    public UnityEvent<List<RTSUnit>> OnUnitSelection;
-    public List<RTSUnit> selectedUnits = new List<RTSUnit>();
+    public UnityEvent<List<Protestor>> OnUnitSelection;
+    public List<Protestor> selectedUnits = new List<Protestor>();
 
 
     private Vector3 mouseStart = Vector3.zero;
@@ -60,7 +60,7 @@ public class RTSSelection : MonoBehaviour
         RaycastHit hit;
 
         if (!Input.GetKey(KeyCode.LeftShift))
-            selectedUnits = new List<RTSUnit>();
+            selectedUnits = new List<Protestor>();
         
         
         // No Unit found
@@ -71,7 +71,7 @@ public class RTSSelection : MonoBehaviour
         }
         
         // Get Unit
-        RTSUnit rtsUnit = hit.transform.GetComponentInParent<RTSUnit>();
+        Protestor rtsUnit = hit.transform.GetComponentInParent<Protestor>();
         if(rtsUnit)
             selectedUnits.Add(rtsUnit);
         
@@ -98,7 +98,7 @@ public class RTSSelection : MonoBehaviour
     {
         
         if (!Input.GetKey(KeyCode.LeftShift))
-            selectedUnits = new List<RTSUnit>();
+            selectedUnits = new List<Protestor>();
         
         print("Handling Select");
         Vector3[] verts = new Vector3[4];
@@ -139,7 +139,7 @@ public class RTSSelection : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     { 
         print("ENTERING");
-        RTSUnit rtsUnit = other.transform.GetComponentInParent<RTSUnit>();
+        Protestor rtsUnit = other.transform.GetComponentInParent<Protestor>();
         if(rtsUnit)
             selectedUnits.Add(rtsUnit);
     }

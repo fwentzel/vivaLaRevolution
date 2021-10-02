@@ -11,6 +11,10 @@ public class Protestor : RTSUnit
     bool isLooting = false;
     public float lootTime = 10;
 
+
+    private Coroutine enterCoroutine;
+    
+
     protected override void Update()
     {
         base.Update();
@@ -32,15 +36,66 @@ public class Protestor : RTSUnit
                     break;
                 }
             }
-            navMeshAgent.destination = moveToPosition;
+            if(navMeshAgent.enabled)
+                navMeshAgent.destination = moveToPosition;
         }
     }
 
-    public void GoLoot(Building building)
+    public void TryEnterBuilding(Building building)
     {
-        buildingToLoot = building;
-        moveToPosition = building.transform.position;
+        if(!gameObject.activeSelf)
+            return;
+        
+        
+        if(building != this.buildingToLoot && enterCoroutine!=null)
+            StopCoroutine(enterCoroutine);
+        
+        
+        
+        enterCoroutine = StartCoroutine(EnterBuilding(building));
     }
+
+    public void LeaveBuilding()
+    {
+        buildingToLoot = null;
+        if(enterCoroutine != null)
+            StopCoroutine(enterCoroutine);
+        enterCoroutine = null;
+        transform.DOScale(Vector3.one,.5f).OnComplete(()=>navMeshAgent.enabled = true);
+        gameObject.SetActive(true);
+        
+        
+    }
+
+    private IEnumerator EnterBuilding(Building toBuilding)
+    {
+        moveToPosition = toBuilding.transform.position;
+        navMeshAgent.destination = moveToPosition;
+        
+        while (true && toBuilding.CanEnter())
+        {
+            yield return new WaitForSeconds(0.3f);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 1.1f );
+            foreach (var collider in colliders)
+            {
+                if (collider.transform.TryGetComponent(out Building foundBuilding))
+                {
+                    if (foundBuilding == toBuilding)
+                    {
+                        navMeshAgent.enabled = false;
+                        transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
+                        {
+                            gameObject.SetActive(false);
+                            toBuilding.EnterBuilding(this);
+                            buildingToLoot = toBuilding;
+                        });
+                        yield break;
+                    }
+                }
+            }
+        }
+    }
+
 
     private IEnumerator Loot()
     {

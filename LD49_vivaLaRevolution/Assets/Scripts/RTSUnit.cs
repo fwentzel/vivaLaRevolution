@@ -31,8 +31,15 @@ public class RTSUnit : MonoBehaviour
     }
     protected virtual void Start()
     {
+        SetMovePosition(transform.position);
+    }
+
+    private void OnEnable()
+    {
+        
         StartCoroutine(MoveRandomly());
     }
+
     public float GetRemainingDistance()
     {
         return navMeshAgent.remainingDistance;

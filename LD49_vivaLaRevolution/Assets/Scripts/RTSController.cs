@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -8,7 +9,9 @@ using Random = UnityEngine.Random;
 public class RTSController : MonoBehaviour
 {
     private RTSSelection _rtsSelection;
-
+    public LayerMask defaultLayer;
+    
+    
     private void Start()
     {
         _rtsSelection = GetComponent<RTSSelection>();
@@ -18,11 +21,40 @@ public class RTSController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            OrderUnits(_rtsSelection.CastToGround(Input.mousePosition));
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+        
+        
+            // No Unit found
+            if (Physics.Raycast(ray, out hit, 1000, defaultLayer))
+            {
+                Building building = hit.transform.GetComponent<Building>();
+                if (building)
+                {
+                    OrderGoLoot(building);
+                }
+                else
+                {
+                    OrderMove(hit.point);
+                }
+            }
+            
         }
     }
 
-    public void OrderUnits(Vector3 position)
+    public void OrderGoLoot(Building building)
+    {
+        if(!building)
+            return;
+        
+        for (int i = 0; i <  _rtsSelection.selectedUnits.Count; i++)
+        {
+            _rtsSelection.selectedUnits[i].TryEnterBuilding(building);
+        }
+
+    }
+
+    public void OrderMove(Vector3 position)
     {
         print("COMMAND! " + position.ToString());
         

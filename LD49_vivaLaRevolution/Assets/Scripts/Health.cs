@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class Health : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class Health : MonoBehaviour
         {
             onTakeDamage?.Invoke(amount);
         }
+
+        transform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() => transform.DOScale(Vector3.one, 0.2f));
 
     }
 

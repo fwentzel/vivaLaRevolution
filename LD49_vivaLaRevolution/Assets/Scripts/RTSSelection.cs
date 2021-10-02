@@ -86,7 +86,7 @@ public class RTSSelection : MonoBehaviour
         
         
         // No Unit found
-        if (!Physics.Raycast(ray, out hit, 1000, groundLayer))
+        if (Physics.Raycast(ray, out hit, 1000, groundLayer))
         {
             return hit.point;
         }

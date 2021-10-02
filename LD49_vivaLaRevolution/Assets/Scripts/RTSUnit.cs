@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
 using System;
+using System.Collections;
+using Random = UnityEngine.Random;
 
 public class RTSUnit : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class RTSUnit : MonoBehaviour
     public float detectRadius = 4f;
     public float attackRange = 2f;
     public float fightWithinRange = 5f;
+    public float uneasyness = 0.5f;
 
     [SerializeField]
     protected Vector3 moveToPosition;
@@ -28,7 +31,7 @@ public class RTSUnit : MonoBehaviour
     }
     protected virtual void Start()
     {
-
+        StartCoroutine(MoveRandomly());
     }
 
 
@@ -63,6 +66,17 @@ public class RTSUnit : MonoBehaviour
         moveToPosition = newPosition;
     }
 
+
+    IEnumerator MoveRandomly()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
+
+            float magnitude = uneasyness;
+            moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
+        }
+    }
 
 
 }

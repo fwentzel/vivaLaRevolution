@@ -138,7 +138,7 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-  maxHealth: 20
+  maxHealth: 100
 --- !u!114 &4777184973159268322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +157,13 @@ MonoBehaviour:
   attackRange: 2
   fightWithinRange: 5
   uneasyness: 0.5
+  onSelection:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeselection:
+    m_PersistentCalls:
+      m_Calls: []
+  target: {fileID: 0}
   moveToPosition: {x: 0, y: 0, z: 0}
   group: {fileID: 0}
   holdPosition: {fileID: 0}

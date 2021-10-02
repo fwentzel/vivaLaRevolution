@@ -22,7 +22,7 @@ public class RTSUnit : MonoBehaviour
     public UnityEvent onDeselection;
 
     public Transform target;
-    
+
     [SerializeField]
     protected Vector3 moveToPosition;
     protected NavMeshAgent navMeshAgent;
@@ -39,10 +39,10 @@ public class RTSUnit : MonoBehaviour
         SetMovePosition(transform.position);
     }
 
-    
+
     private void OnEnable()
     {
-        
+
         StartCoroutine(MoveRandomly());
     }
 
@@ -66,14 +66,14 @@ public class RTSUnit : MonoBehaviour
 
         if (target)
             target.position = moveToPosition;
-        
+
         if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
             targetHealth = null;
 
         if (targetHealth != null && navMeshAgent.enabled)
         {
-            
-            
+
+
             navMeshAgent.destination = targetHealth.transform.position;
             if (Vector3.Distance(targetHealth.transform.position, transform.position) < attackRange)
             {
@@ -104,9 +104,12 @@ public class RTSUnit : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
+            if (Vector3.Distance(moveToPosition, transform.position) < 2f)
+            {
+                float magnitude = uneasyness;
+                moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
+            }
 
-            float magnitude = uneasyness;
-            moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
         }
     }
 

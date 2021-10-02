@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class RTSSelection : MonoBehaviour
-{
-    public LayerMask groundLayer;
+{    public LayerMask groundLayer;
     public LayerMask unitMask;
     public UnityEvent<List<Protestor>> OnUnitSelection;
     public List<Protestor> selectedUnits = new List<Protestor>();

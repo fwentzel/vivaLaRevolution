@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ItemManager : MonoBehaviour
 {
@@ -23,11 +24,13 @@ public class ItemManager : MonoBehaviour
     private void Update()
     {
         transform.position = GetMid();
-        transform.LookAt(Camera.main.transform.position);
     }
 
     Vector3 GetMid()
     {
+        if (_rtsSelection.selectedUnits.Count == 0)
+            return transform.position;
+        
         
         Vector3 mid = Vector3.zero;
         foreach (var unit in _rtsSelection.selectedUnits)

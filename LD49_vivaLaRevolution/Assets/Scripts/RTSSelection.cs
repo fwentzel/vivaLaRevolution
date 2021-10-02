@@ -37,7 +37,6 @@ public class RTSSelection : MonoBehaviour
                 unit.OnDeselection();
         }
     
-        print("SELECTION");
         oldSelectedUnits = selected;
     }
 

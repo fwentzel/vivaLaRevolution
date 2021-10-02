@@ -59,6 +59,7 @@ public class Building : MonoBehaviour
         
         if (percent > 0.98f)
         {
+            LikeManager.instance.IncreaseLikeability(-1);
             isCaptured = true;
             LeaveProtestors();
             

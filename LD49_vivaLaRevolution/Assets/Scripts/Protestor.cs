@@ -11,6 +11,9 @@ public class Protestor : RTSUnit
     bool isLooting = false;
     public float lootTime = 10;
 
+    public Item item;
+    public Transform itemHold;
+    
 
     private Coroutine enterCoroutine;
     
@@ -46,8 +49,9 @@ public class Protestor : RTSUnit
         if(!gameObject.activeSelf)
             return;
         
-        
-        if(building != this.buildingToLoot && enterCoroutine!=null)
+        if(buildingToLoot == building)
+            return;
+        if(enterCoroutine!=null)
             StopCoroutine(enterCoroutine);
         
         
@@ -94,6 +98,29 @@ public class Protestor : RTSUnit
                 }
             }
         }
+    }
+
+    public bool GiveItem(Item item)
+    {
+        if (!item)
+            return false;
+        if (!CanGiveItem())
+            return false;
+
+        this.item = item;
+
+        item.transform.SetParent(itemHold);
+        item.transform.DOLocalMove(Vector3.zero, 0.3f);
+        item.transform.localScale = Vector3.one;
+    
+        print("Got Item " + item.name);
+        
+        return true;
+    }
+
+    public bool CanGiveItem()
+    {
+        return item == null;
     }
 
 

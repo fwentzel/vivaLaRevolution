@@ -21,13 +21,14 @@ public class RTSUnit : MonoBehaviour
     public UnityEvent onSelection;
     public UnityEvent onDeselection;
 
+    public Transform target;
+    
     [SerializeField]
     protected Vector3 moveToPosition;
     protected NavMeshAgent navMeshAgent;
 
     protected Health targetHealth;
     protected float nextAttackTime = 0;
-    
 
     protected virtual void Awake()
     {
@@ -38,6 +39,7 @@ public class RTSUnit : MonoBehaviour
         SetMovePosition(transform.position);
     }
 
+    
     private void OnEnable()
     {
         
@@ -61,6 +63,10 @@ public class RTSUnit : MonoBehaviour
 
     protected virtual void Update()
     {
+
+        if (target)
+            target.position = moveToPosition;
+        
         if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
             targetHealth = null;
 

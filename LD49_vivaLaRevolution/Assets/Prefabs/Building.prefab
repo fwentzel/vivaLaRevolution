@@ -125,3 +125,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 576edefa84f62dc4698760116e30687f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  protestors: []
+  itemPrefabs:
+  - {fileID: 8559951006614986020, guid: 7f64057d051e4464c8918df419435ab0, type: 3}
+  - {fileID: 8559951006614986020, guid: 7f64057d051e4464c8918df419435ab0, type: 3}
+  - {fileID: 8559951006614986020, guid: 7f64057d051e4464c8918df419435ab0, type: 3}
+  maxProtestors: 3
+  captureDurration: 5
+  isCaptured: 0
+  OnCaptured:
+    m_PersistentCalls:
+      m_Calls: []

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PoliceManager : MonoBehaviour
 {
     public GameObject policePrefab;
-    public Transform mainBuilding;
+    public HoldPoint spawnPoint;
     public List<PoliceGroup> groups;
     public static PoliceManager instance { get; private set; }
 
@@ -15,8 +15,6 @@ public class PoliceManager : MonoBehaviour
             instance = this;
         else
             Destroy(this);
-        if (mainBuilding == null)
-            mainBuilding = GameObject.FindGameObjectWithTag("MainBuilding").transform;
         FillGroups();
     }
 
@@ -28,7 +26,7 @@ public class PoliceManager : MonoBehaviour
         {
             for (int i = 0; i < group.startSize; i++)
             {
-                GameObject obj = Instantiate(policePrefab, mainBuilding.transform.position, Quaternion.identity);
+                GameObject obj = Instantiate(policePrefab, spawnPoint.transform.position, Quaternion.identity);
                 Police police = obj.GetComponent<Police>();
                 group.members.Add(police);
                 police.group = group;

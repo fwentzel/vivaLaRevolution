@@ -2811,6 +2811,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoliceGroup_2
       objectReference: {fileID: 0}
+    - target: {fileID: 1938743203406289742, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1938743203406289743, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 135.697
@@ -7187,6 +7191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoliceGroup_4
       objectReference: {fileID: 0}
+    - target: {fileID: 1938743203406289742, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1938743203406289743, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 135.697
@@ -7670,6 +7678,7 @@ MonoBehaviour:
   policePrefab: {fileID: 8359640132132065183, guid: 265b56269f9a9f54f87b352854b8f533, type: 3}
   spawnPoint: {fileID: 939863433}
   groups: []
+  respawnInterval: 5
 --- !u!114 &778429327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7696,7 +7705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   protestorPrefab: {fileID: 4038683644674927026, guid: ac3a7d0aa10c2f445872948caab16afb, type: 3}
   protestorParent: {fileID: 2133021118}
-  repeatTime: 10
+  repeatTime: 45
 --- !u!1001 &779370197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14643,6 +14652,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoliceGroup_3
       objectReference: {fileID: 0}
+    - target: {fileID: 1938743203406289742, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1938743203406289743, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 135.697
@@ -18795,7 +18808,7 @@ PrefabInstance:
       objectReference: {fileID: 939863433}
     - target: {fileID: 1938743203406289736, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
       propertyPath: startSize
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1938743203406289742, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
       propertyPath: m_Name

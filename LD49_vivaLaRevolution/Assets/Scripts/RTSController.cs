@@ -49,7 +49,7 @@ public class RTSController : MonoBehaviour
         
         for (int i = 0; i <  _rtsSelection.selectedUnits.Count; i++)
         {
-            _rtsSelection.selectedUnits[i].TryEnterBuilding(building);
+            _rtsSelection.selectedUnits[i]?.TryEnterBuilding(building);
         }
 
     }
@@ -69,7 +69,7 @@ public class RTSController : MonoBehaviour
         
         for (int i = 0; i <  _rtsSelection.selectedUnits.Count; i++)
         {
-            _rtsSelection.selectedUnits[i].SetMovePosition(targetPositions[i]);
+            _rtsSelection.selectedUnits[i]?.SetMovePosition(targetPositions[i]);
         }
     }
 

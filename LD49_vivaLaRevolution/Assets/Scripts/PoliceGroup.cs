@@ -1,6 +1,8 @@
 ﻿
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+
 public class PoliceGroup : MonoBehaviour
 {
     public List<HoldPoint> holdPoints;
@@ -9,23 +11,36 @@ public class PoliceGroup : MonoBehaviour
     public int currentHoldIndex = 0;
 
     public int startSize = 10;
-
-    public void RegisterFatality(Police member){
-        members.Remove(member);
-        if(members.Count/(float)startSize< (holdPoints.Count-currentHoldIndex)/(float)holdPoints.Count){
-            SetHoldPositionToNext();
-        }
+    private int startSizeAtHoldpoint;
+    private void Awake() {       
+    
+    
+        startSizeAtHoldpoint = startSize;
     }
-    public void SetHoldPositionToNext()
+    public void RegisterFatality(Police member)
     {
-    print("New Pos");
-        if (holdPoints.Count <= currentHoldIndex)
-            return;
+        members.Remove(member);
+        SetHoldPosition();
+    }
+    public void SetHoldPosition()
+    {
+        float ratio = members.Count /(float) startSizeAtHoldpoint;
+        if (ratio <= 0.5f &&currentHoldIndex < holdPoints.Count - 1)
+        {
+            startSizeAtHoldpoint=members.Count;
+            currentHoldIndex++;
+        }
+
+        if (ratio >= 2f && currentHoldIndex > 0)
+        {
+            startSizeAtHoldpoint=members.Count;
+            currentHoldIndex--;
+        }
+
         foreach (Police member in members)
         {
             member.holdPosition = holdPoints[currentHoldIndex].transform;
         }
-        currentHoldIndex++;
     }
     private void OnDrawGizmos()
     {
@@ -36,8 +51,15 @@ public class PoliceGroup : MonoBehaviour
             for (int i = 1; i < holdPoints.Count; i++)
             {
                 Gizmos.DrawLine(holdPoints[i - 1].transform.position, holdPoints[i].transform.position);
-               
+
             }
         }
+    }
+
+    internal void AddMember(Police police)
+    {
+        members.Add(police);
+        
+        SetHoldPosition();
     }
 }

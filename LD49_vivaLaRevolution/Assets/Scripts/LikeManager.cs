@@ -37,13 +37,17 @@ public class LikeManager : MonoBehaviour
         }
         else if (likeability < 0)
         {
+            if(likeability*-1 > protestorParent.transform.childCount){
+                
+                print("YOU LOST! The Instable System took over");
+            }
             print("likeability: Removing "+likeability+" random protestors");
             //deactivate protestor
-            for (int i = 0; i < Mathf.CeilToInt(likeability); i++)
+            for (int i = 0; i < Mathf.FloorToInt(likeability*-1); i++)
             {
-                int index = Random.Range(0, protestorParent.transform.childCount);
+                int index = Random.Range(0, protestorParent.transform.childCount-1);
                 Transform randomProtestor = protestorParent.transform.GetChild(index);
-                Destroy(randomProtestor);
+                Destroy(randomProtestor.gameObject);
             }
         }
     }

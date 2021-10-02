@@ -11,12 +11,6 @@ public class Protestor : RTSUnit
     bool isLooting = false;
     public float lootTime = 10;
 
-    protected override void Start()
-    {
-        base.Start();
-        GoLoot(buildingToLoot);
-        navMeshAgent.destination = moveToPosition;
-    }
     protected override void Update()
     {
         base.Update();

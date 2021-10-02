@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
         currentHealth += amount;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
-        onHeal?.Invoke(amount);
+        onHeal?.Invoke(amount/(float)maxHealth);
     }
     public void takeDamage(int amount)
     {
@@ -30,7 +30,7 @@ public class Health : MonoBehaviour
         }
         else
         {
-            onTakeDamage?.Invoke(amount);
+            onTakeDamage?.Invoke(amount/(float)maxHealth);
         }
 
         transform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() => transform.DOScale(Vector3.one, 0.2f));

@@ -8,8 +8,8 @@ public class ItemManager : MonoBehaviour
 {
     private RTSSelection _rtsSelection;
     public RectTransform content;
-    
-    
+
+
     private void Awake()
     {
         _rtsSelection = FindObjectOfType<RTSSelection>();
@@ -18,7 +18,7 @@ public class ItemManager : MonoBehaviour
 
     public void OnSelectedUnits(List<Protestor> protestors)
     {
-        
+
     }
 
     private void Update()
@@ -30,21 +30,22 @@ public class ItemManager : MonoBehaviour
     {
         if (_rtsSelection.selectedUnits.Count == 0)
             return transform.position;
-        
-        
+
+
         Vector3 mid = Vector3.zero;
         foreach (var unit in _rtsSelection.selectedUnits)
         {
+            if (unit == null) continue;
             mid += unit.transform.position;
         }
 
         mid /= _rtsSelection.selectedUnits.Count;
-        
+
         return mid;
     }
 
     public void UpdateCanvas()
     {
-        
+
     }
 }

@@ -20,6 +20,8 @@ public class Protestor : RTSUnit
 
     protected override void Update()
     {
+         if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
+            targetHealth = null;
         base.Update();
 
         if (buildingToLoot != null && !isLooting && navMeshAgent.remainingDistance < 0.6f)
@@ -31,7 +33,7 @@ public class Protestor : RTSUnit
 
         if (targetHealth == null)
         {
-            foreach (Collider collider in Physics.OverlapSphere(transform.position, detectRadius))
+            foreach (Collider collider in colliders)
             {
                 if (collider.tag.Equals("Police"))
                 {

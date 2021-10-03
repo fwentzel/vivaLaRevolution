@@ -43,7 +43,13 @@ public class Health : MonoBehaviour
             onTakeDamage?.Invoke(amount / (float)maxHealth);
         }
 
-        transform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() => transform.DOScale(Vector3.one, 0.2f));
+        transform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() =>
+        {
+            if (transform != null)
+            {
+                transform.DOScale(Vector3.one, 0.2f);
+            }
+        });
         UpdateColor();
     }
 

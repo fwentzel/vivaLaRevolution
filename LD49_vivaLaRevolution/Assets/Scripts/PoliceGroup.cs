@@ -12,7 +12,6 @@ public class PoliceGroup : MonoBehaviour
 
     public int startSize = 10;
 
-    public int requiredPerHoldPoint = 6;
 
 
 
@@ -44,14 +43,14 @@ public class PoliceGroup : MonoBehaviour
     }
     public int CheckChangeHoldPosition()
     {
-        int requiredForCurrentHoldPoint = currentHoldIndex * requiredPerHoldPoint;
+        int requiredForCurrentHoldPoint = currentHoldIndex * PoliceManager.instance.requiredAmountPerHoldPoint;
         // if (ratio <= 0.5f)
         if (members.Count < requiredForCurrentHoldPoint)
         {
             return -1;
         }
 
-        if (members.Count > requiredForCurrentHoldPoint + requiredPerHoldPoint)
+        if (members.Count > requiredForCurrentHoldPoint + PoliceManager.instance.requiredAmountPerHoldPoint)
         {
             return 1;
         }
@@ -74,4 +73,21 @@ public class PoliceGroup : MonoBehaviour
         }
     }
 
+    public HoldPoint GetHeadstartHoldpoint()
+    {
+        if (holdPoints.Count > 0)
+        {
+            for (int i = holdPoints.Count - 1; i >= 0; i--)
+            {
+                if (startSize >= i * PoliceManager.instance.requiredAmountPerHoldPoint)
+                {
+                    currentHoldIndex = i;
+                    UpdateHoldPos();
+                    return holdPoints[i];
+                }
+            }
+        }
+
+        return PoliceManager.instance.defaultSpawnPoint;
+    }
 }

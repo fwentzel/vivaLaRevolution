@@ -43,7 +43,7 @@ public class RTSUnit : MonoBehaviour
         colliders = new Collider[] { GetComponent<Collider>() };
         myHealth = GetComponent<Health>();
         moveToPosition = transform.position;
-        startScale=transform.localScale;
+        startScale = transform.localScale;
     }
     protected virtual void Start()
     {
@@ -99,8 +99,14 @@ public class RTSUnit : MonoBehaviour
     {
         targetHealth.takeDamage(attackDamage);
         nextAttackTime = Time.time + attackSpeed;
-        transform.DOScale(startScale * 1.2f, 0.1f).OnComplete(() => transform.DOScale(startScale, 0.3f));
-    }
+        transform.DOScale(startScale * 1.2f, 0.1f).OnComplete(() =>
+       {
+            if (transform != null)
+            {
+                transform.DOScale(startScale, 0.3f);
+            }
+        });
+        }
 
     public void SetMovePosition(Vector3 newPosition)
     {
@@ -128,10 +134,10 @@ public class RTSUnit : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
             if (Vector3.Distance(moveToPosition, transform.position) < 2f)
             {
-                float magnitude = (1-myHealth.HealthRatio()) * magnitudeMulitplicator;
-                if(doRandomly)
+                float magnitude = (1 - myHealth.HealthRatio()) * magnitudeMulitplicator;
+                if (doRandomly)
                     moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
-                
+
 
             }
 

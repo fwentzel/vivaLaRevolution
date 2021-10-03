@@ -83,7 +83,8 @@ public class Protestor : RTSUnit
                     if (foundBuilding == toBuilding)
                     {
                         navMeshAgent.enabled = false;
-                        EffectAudioManager.instance.PlayWindowClip(transform.position);
+                        if(toBuilding.protestors.Count==0)
+                            EffectAudioManager.instance.PlayWindowClip(transform.position);
                         transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
                         {
                             gameObject.SetActive(false);

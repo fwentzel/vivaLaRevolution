@@ -5,10 +5,12 @@ using UnityEngine;
 public class PoliceManager : MonoBehaviour
 {
     public GameObject policePrefab;
-    public HoldPoint spawnPoint;
+    public HoldPoint defaultSpawnPoint;
     public List<PoliceGroup> groups;
     public float respawnInterval = 5;
     private float nextRespawn = 5;
+
+    public int requiredAmountPerHoldPoint = 6;
 
     public Vector2Int minMaxSpawnAmount = new Vector2Int(1, 3);
     public static PoliceManager instance { get; private set; }
@@ -26,6 +28,7 @@ public class PoliceManager : MonoBehaviour
     private void Start()
     {
         FillGroups();
+
     }
 
     private void Update()
@@ -64,12 +67,10 @@ public class PoliceManager : MonoBehaviour
         {
             if (advance)
             {
-                print("ADVANCE!");
                 group.TryGoToNextHoldPoint();
             }
             else if (fallBack)
             {
-                print("FALL BACK!");
                 group.TryGoToPreviousHoldPoint();
             }
 
@@ -79,21 +80,24 @@ public class PoliceManager : MonoBehaviour
 
     private void FillGroups(int amountPerGroup = -1)
     {
-
-
+        bool isStart = amountPerGroup < 0;
         foreach (PoliceGroup group in groups)
         {
-            int v = amountPerGroup < 0 ? group.startSize : amountPerGroup;
+            int v = isStart ? group.startSize : amountPerGroup;
+            HoldPoint spawnHoldPoint = isStart ? group.GetHeadstartHoldpoint() : defaultSpawnPoint;
             for (int i = 0; i < v; i++)
             {
-                GameObject obj = Instantiate(policePrefab, spawnPoint.transform.position, Quaternion.identity);
+
+                GameObject obj = Instantiate(policePrefab, spawnHoldPoint.transform.position, Quaternion.identity);
                 Police police = obj.GetComponent<Police>();
                 group.members.Add(police);
                 police.group = group;
-                police.holdPosition = group.holdPoints[1].transform;
+                police.holdPosition = spawnHoldPoint.transform;
             }
-            CheckChangeHoldPositons();
+
         }
+
+
     }
 
 

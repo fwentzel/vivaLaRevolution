@@ -15,11 +15,12 @@ public class Police : RTSUnit
     private void SetHoldPosition(Transform newPos)
     {
         holdPosition = newPos;
-        moveToPosition = newPos.position;
+        SetMovePosition(newPos.position);
+       
     }
-    protected override void FixedUpdate()
+    protected override void Update()
     {
-        base.FixedUpdate();
+        base.Update();
         if (targetHealth == null)
         {
 

@@ -17,6 +17,8 @@ public class RTSUnit : MonoBehaviour
     public float attackRange = 2f;
     public float fightWithinRange = 5f;
 
+    public float magnitudeMulitplicator = 5f;
+
     public LayerMask enemyDetection;
 
 
@@ -25,7 +27,7 @@ public class RTSUnit : MonoBehaviour
 
     public Transform target;
 
-    [SerializeField]
+
     protected Vector3 moveToPosition;
     protected NavMeshAgent navMeshAgent;
 
@@ -36,8 +38,9 @@ public class RTSUnit : MonoBehaviour
     protected virtual void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-         colliders= new Collider[]{GetComponent<Collider>()};
-         myHealth=GetComponent<Health>();
+        colliders = new Collider[] { GetComponent<Collider>() };
+        myHealth = GetComponent<Health>();
+        moveToPosition = transform.position;
     }
     protected virtual void Start()
     {
@@ -66,10 +69,10 @@ public class RTSUnit : MonoBehaviour
         return navMeshAgent.remainingDistance;
     }
 
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
-        colliders = Physics.OverlapSphere(transform.position, detectRadius,enemyDetection);
-    
+        colliders = Physics.OverlapSphere(transform.position, detectRadius, enemyDetection);
+
 
         if (target)
             target.position = moveToPosition;
@@ -98,10 +101,19 @@ public class RTSUnit : MonoBehaviour
 
     public void SetMovePosition(Vector3 newPosition)
     {
+        //decide wether it will listen to Order
+
+        if (Random.Range(0, .5f) > myHealth.HealthRatio())
+        {
+            print("NÖÖ");
+            return;
+        }
+
         moveToPosition = newPosition;
-        if(target){
-        target.transform.localScale=Vector3.one;
-        target.transform.DOScale(Vector3.zero,1);
+        if (target)
+        {
+            target.transform.localScale = Vector3.one;
+            target.transform.DOScale(Vector3.zero, 1);
         }
 
     }
@@ -114,8 +126,11 @@ public class RTSUnit : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
             if (Vector3.Distance(moveToPosition, transform.position) < 2f)
             {
-                float magnitude = (myHealth.currentHealth/(float)myHealth.maxHealth)*10;
-                moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
+                float magnitude = (1-myHealth.HealthRatio()) * magnitudeMulitplicator;
+              
+                    moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
+                
+
             }
 
         }

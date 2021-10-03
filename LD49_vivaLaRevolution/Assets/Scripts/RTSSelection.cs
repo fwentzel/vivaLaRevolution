@@ -14,7 +14,7 @@ public class RTSSelection : MonoBehaviour
     public UnityEvent<List<Protestor>> OnUnitSelection;
     public List<Protestor> selectedUnits = new List<Protestor>();
     public List<Protestor> oldSelectedUnits = new List<Protestor>();
-
+    [SerializeField] private Transform protestorParent;
     private Vector3 mouseStart = Vector3.zero;
     private Vector3 mouseEnd = Vector3.zero;
     private bool isDragging;
@@ -27,7 +27,7 @@ public class RTSSelection : MonoBehaviour
     private void Start()
     {
         transform.position = Vector3.zero;
-        
+
         OnUnitSelection.AddListener(Selection);
     }
 
@@ -35,16 +35,16 @@ public class RTSSelection : MonoBehaviour
     {
         foreach (var unit in selected)
         {
-            if(!oldSelectedUnits.Contains(unit))
+            if (!oldSelectedUnits.Contains(unit))
                 unit.OnSelection();
         }
 
         foreach (var unit in oldSelectedUnits)
         {
-            if(!selected.Contains(unit))
+            if (!selected.Contains(unit))
                 unit.OnDeselection();
         }
-    
+
         oldSelectedUnits = selected;
     }
 
@@ -67,6 +67,7 @@ public class RTSSelection : MonoBehaviour
         }
     }
 
+        
     public void MouseUp(PointerEventData eventData)
     {
         if(eventData.button != PointerEventData.InputButton.Left)
@@ -76,9 +77,22 @@ public class RTSSelection : MonoBehaviour
             HandleSelect();
         else
             HandleClick();
-
         isDragging = false;
     }
+
+    private void SelectAll()
+    {
+        selectedUnits.Clear();
+        foreach (Transform child in protestorParent)
+        {
+            if (child.TryGetComponent(out Protestor protestor))
+            {
+                selectedUnits.Add(protestor);
+            }
+        }
+        OnUnitSelection?.Invoke(selectedUnits);
+    }
+
     private void HandleClick()
     {
         Ray ray = Camera.main.ScreenPointToRay(mouseStart);
@@ -86,20 +100,20 @@ public class RTSSelection : MonoBehaviour
 
         if (!Input.GetKey(KeyCode.LeftShift))
             selectedUnits = new List<Protestor>();
-        
-        
+
+
         // No Unit found
         if (!Physics.Raycast(ray, out hit, 1000, unitMask))
         {
             OnUnitSelection?.Invoke(selectedUnits);
             return;
         }
-        
+
         // Get Unit
         Protestor rtsUnit = hit.transform.GetComponentInParent<Protestor>();
         if(rtsUnit &&  !selectedUnits.Contains(rtsUnit))
             selectedUnits.Add(rtsUnit);
-        
+
         OnUnitSelection?.Invoke(selectedUnits);
 
     }
@@ -108,27 +122,27 @@ public class RTSSelection : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
-        
-        
+
+
         // No Unit found
         if (Physics.Raycast(ray, out hit, 1000, instance.groundLayer))
         {
             return hit.point;
         }
-        
+
         return Vector3.zero;
     }
 
     void HandleSelect()
     {
-        
+
         if (!Input.GetKey(KeyCode.LeftShift))
             selectedUnits = new List<Protestor>();
-        
+
         print("Handling Select");
         Vector3[] verts = new Vector3[4];
         Vector3[] vecs = new Vector3[4];
-        
+
         Vector2[] corners = getBoundingBox(mouseStart, mouseEnd);
 
         for (int i = 0; i < corners.Length; i++)
@@ -142,17 +156,17 @@ public class RTSSelection : MonoBehaviour
                 Debug.DrawLine(Camera.main.ScreenToWorldPoint(corners[i]), hit.point, Color.red, 1.0f);
             }
         }
-        
-        Mesh selectionMesh = generateSelectionMesh(verts,vecs);
+
+        Mesh selectionMesh = generateSelectionMesh(verts, vecs);
 
         MeshCollider selectionBox = gameObject.AddComponent<MeshCollider>();
         selectionBox.sharedMesh = selectionMesh;
         selectionBox.convex = true;
         selectionBox.isTrigger = true;
 
-    
+
         Destroy(selectionBox, 0.1f);
-        
+
         Invoke("SendSelection", 0.05f);
     }
 
@@ -160,26 +174,26 @@ public class RTSSelection : MonoBehaviour
     {
         OnUnitSelection?.Invoke(selectedUnits);
     }
-    
+
     private void OnTriggerEnter(Collider other)
     { 
         Protestor rtsUnit = other.transform.GetComponentInParent<Protestor>();
         if(rtsUnit && !selectedUnits.Contains(rtsUnit))
             selectedUnits.Add(rtsUnit);
     }
-    
+
     //generate a mesh from the 4 bottom points
     Mesh generateSelectionMesh(Vector3[] corners, Vector3[] vecs)
     {
         Vector3[] verts = new Vector3[8];
         int[] tris = { 0, 1, 2, 2, 1, 3, 4, 6, 0, 0, 6, 2, 6, 7, 2, 2, 7, 3, 7, 5, 3, 3, 5, 1, 5, 0, 1, 1, 4, 0, 4, 5, 6, 6, 5, 7 }; //map the tris of our cube
 
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             verts[i] = corners[i];
         }
 
-        for(int j = 4; j < 8; j++)
+        for (int j = 4; j < 8; j++)
         {
             verts[j] = corners[j - 4] + vecs[j - 4];
         }
@@ -190,8 +204,8 @@ public class RTSSelection : MonoBehaviour
 
         return selectionMesh;
     }
-    
-    Vector2[] getBoundingBox(Vector2 p1,Vector2 p2)
+
+    Vector2[] getBoundingBox(Vector2 p1, Vector2 p2)
     {
         Vector2 newP1;
         Vector2 newP2;
@@ -238,11 +252,11 @@ public class RTSSelection : MonoBehaviour
         return corners;
 
     }
-    
-    
+
+
     private void OnGUI()
     {
-        if(isDragging)
+        if (isDragging)
         {
             var rect = Utils.GetScreenRect(mouseStart, mouseEnd);
             Utils.DrawScreenRect(rect, new Color(0.8f, 0.8f, 0.95f, 0.25f));

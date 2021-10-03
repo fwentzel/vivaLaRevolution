@@ -1,11 +1,14 @@
 ﻿
 using UnityEngine;
 
+using UnityEngine.Events;
+
 public class LikeManager : MonoBehaviour
 {
     public float likeability { get; private set; } = 0;
     public GameObject protestorPrefab;
     public GameObject protestorParent;
+    public UnityEvent<float> onLikeChange;
     [SerializeField] private int repeatTime = 10;
 
     public static LikeManager instance { get; private set; }
@@ -20,6 +23,7 @@ public class LikeManager : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("EffectProtestors", repeatTime, repeatTime);
+         onLikeChange?.Invoke(likeability);
     }
 
     private void EffectProtestors()
@@ -54,10 +58,12 @@ public class LikeManager : MonoBehaviour
     public void IncreaseLikeability(float amount)
     {
         likeability = Mathf.Clamp(likeability + amount, -10, 10);
+        onLikeChange?.Invoke(likeability);
 
     }
     public void DecreaseLikeability(float amount)
     {
         likeability = Mathf.Clamp(likeability - amount, -10, 10);
+        onLikeChange?.Invoke(likeability);
     }
 }

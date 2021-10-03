@@ -24,9 +24,6 @@ public class ItemIcon : MonoBehaviour, IPointerClickHandler
     }
     
     
-    public void OnPointerUp(PointerEventData eventData)
-    {
-    }
 
     public void Release()
     {
@@ -44,10 +41,6 @@ public class ItemIcon : MonoBehaviour, IPointerClickHandler
         Destroy(gameObject);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        print("ENTETERARA");
-    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -55,10 +48,12 @@ public class ItemIcon : MonoBehaviour, IPointerClickHandler
             return;
         print("SELECTED");
         isSelected = true;
-        
-        if(isSelected)
-            onSelect?.Invoke();
-        else
-            onDeselect?.Invoke();
+        onSelect?.Invoke();
+    }
+
+    public void Deselect()
+    {
+        isSelected = false;   
+        onDeselect?.Invoke();
     }
 }

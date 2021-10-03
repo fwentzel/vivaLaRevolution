@@ -66,6 +66,9 @@ public class ItemManager : MonoBehaviour
         {
             if(!itemIcon)
                 continue;
+            if(Input.GetMouseButtonDown(1))
+                itemIcon.Deselect();
+            
             if (itemIcon.isSelected)
                 selectedItem = itemIcon;
         }
@@ -73,6 +76,8 @@ public class ItemManager : MonoBehaviour
         aimingRecticle.gameObject.SetActive(selectedItem!=null);
         if (selectedItem)
         {
+            position = selectedItem.item.GetImprovedPosition(position);
+            
             aimingRecticle.position = position + Vector3.up * 0.5f;
             aimingRecticle.transform.localScale = Vector3.one * 2 * selectedItem.item.influenceRadius;
             

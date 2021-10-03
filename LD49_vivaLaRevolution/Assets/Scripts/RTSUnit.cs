@@ -35,6 +35,8 @@ public class RTSUnit : MonoBehaviour
     protected Health myHealth;
     protected float nextAttackTime = 0;
     protected Collider[] colliders;
+
+    protected bool doRandomly = true;
     protected virtual void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -127,7 +129,7 @@ public class RTSUnit : MonoBehaviour
             if (Vector3.Distance(moveToPosition, transform.position) < 2f)
             {
                 float magnitude = (1-myHealth.HealthRatio()) * magnitudeMulitplicator;
-              
+                if(doRandomly)
                     moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
                 
 

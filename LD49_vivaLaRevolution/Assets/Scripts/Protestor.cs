@@ -16,6 +16,7 @@ public class Protestor : RTSUnit
 
 
     private Coroutine enterCoroutine;
+    private Coroutine moveRandomlyCoroutine;
 
 
     protected override void Update()
@@ -23,13 +24,6 @@ public class Protestor : RTSUnit
          if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
             targetHealth = null;
         base.Update();
-
-        if (buildingToLoot != null && !isLooting && navMeshAgent.remainingDistance < 0.6f)
-        {
-            isLooting = true;
-            navMeshAgent.isStopped = true;
-            StartCoroutine(Loot());
-        }
 
         if (targetHealth == null)
         {
@@ -52,9 +46,9 @@ public class Protestor : RTSUnit
             return;
         if (enterCoroutine != null)
             StopCoroutine(enterCoroutine);
-
-
-        StopCoroutine(MoveRandomly());
+        
+        
+        doRandomly = false;
         enterCoroutine = StartCoroutine(EnterBuilding(building));
     }
 
@@ -66,9 +60,8 @@ public class Protestor : RTSUnit
         enterCoroutine = null;
         transform.DOScale(Vector3.one, .5f).OnComplete(() => navMeshAgent.enabled = true);
         gameObject.SetActive(true);
-        StartCoroutine(MoveRandomly());
 
-
+        doRandomly = true;
     }
 
     private IEnumerator EnterBuilding(Building toBuilding)

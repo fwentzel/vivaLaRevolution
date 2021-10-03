@@ -10,7 +10,7 @@ public class ItemManager : MonoBehaviour
     public RectTransform content;
     public ItemIcon iconPreset;
     private List<ItemIcon> _itemIcons = new List<ItemIcon>();
-
+    public CanvasGroup canvasGroup;
 
     private void Start()
     {
@@ -22,6 +22,8 @@ public class ItemManager : MonoBehaviour
     public void OnSelectedUnits(List<Protestor> protestors)
     {
         PopulateList(protestors);
+        
+        
     }
 
     public void PopulateList(List<Protestor> protestors)
@@ -68,13 +70,19 @@ public class ItemManager : MonoBehaviour
 
 
         Vector3 mid = Vector3.zero;
+        int count = 0;
         foreach (var unit in _rtsSelection.selectedUnits)
         {
             if (unit == null) continue;
+            if(unit.item==null) continue;
             mid += unit.transform.position;
+            count++;
         }
-
-        mid /= _rtsSelection.selectedUnits.Count;
+        
+        if(count== 0)
+            return transform.position;
+        
+        mid /= count;
 
         return mid;
     }

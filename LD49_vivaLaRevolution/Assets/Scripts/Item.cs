@@ -11,12 +11,16 @@ public class Item : MonoBehaviour
     public UnityEvent onUseCompleted;
     public UnityEvent onUse;
 
+    public LayerMask obstacleLayer;
 
     public virtual void Use(Vector3 position)
     {
         if(!transform)
             return;
-
+        
+        
+        
+        
         transform.parent = null;
         
         onUse?.Invoke();

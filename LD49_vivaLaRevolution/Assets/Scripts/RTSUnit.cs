@@ -35,7 +35,7 @@ public class RTSUnit : MonoBehaviour
     protected Health myHealth;
     protected float nextAttackTime = 0;
     protected Collider[] colliders;
-    protected Vector3 startScale;
+    protected Vector3 initialScale;
     protected bool doRandomly = true;
     protected virtual void Awake()
     {
@@ -43,7 +43,7 @@ public class RTSUnit : MonoBehaviour
         colliders = new Collider[] { GetComponent<Collider>() };
         myHealth = GetComponent<Health>();
         moveToPosition = transform.position;
-        startScale = transform.localScale;
+        initialScale = transform.localScale;
     }
     protected virtual void Start()
     {
@@ -99,11 +99,11 @@ public class RTSUnit : MonoBehaviour
     {
         targetHealth.takeDamage(attackDamage);
         nextAttackTime = Time.time + attackSpeed;
-        transform.DOScale(startScale * 1.2f, 0.1f).OnComplete(() =>
+        transform.DOScale(initialScale * 1.2f, 0.1f).OnComplete(() =>
        {
             if (transform != null)
             {
-                transform.DOScale(startScale, 0.3f);
+                transform.DOScale(initialScale, 0.3f);
             }
         });
         }

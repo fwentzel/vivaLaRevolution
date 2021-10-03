@@ -111,7 +111,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  damage: 1000
+  damage: 100
 --- !u!1 &7958413605842114966
 GameObject:
   m_ObjectHideFlags: 0

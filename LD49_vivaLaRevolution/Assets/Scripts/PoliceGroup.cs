@@ -32,6 +32,11 @@ public class PoliceGroup : MonoBehaviour
         }
     }
 
+    internal bool IsNearCurrentHoldPoint(Police policeEntity)
+    {
+        return Vector3.Distance(holdPoints[currentHoldIndex].transform.position, policeEntity.transform.position) < policeEntity.fightWithinRange;
+    }
+
     public void UpdateHoldPos()
     {
         foreach (Police member in members)

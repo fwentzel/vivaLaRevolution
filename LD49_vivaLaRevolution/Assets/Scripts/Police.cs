@@ -6,6 +6,8 @@ public class Police : RTSUnit
 {
     public PoliceGroup group;
     public Transform holdPosition;
+
+    bool shouldRun = false;
     protected override void Start()
     {
         moveToPosition = holdPosition.position;
@@ -20,14 +22,24 @@ public class Police : RTSUnit
     }
     protected override void Update()
     {
+        shouldRun = !group.IsNearCurrentHoldPoint(this);
+        if (shouldRun)
+        {
+            targetHealth = null;
+        }
+
         base.Update();
+
         if (targetHealth == null)
         {
-
-            foreach (Collider collider in colliders)
+            if (!shouldRun)
             {
-                targetHealth = collider.GetComponent<Health>();
-                break;
+                //Staying at holdPoint, so look for enemies
+                foreach (Collider collider in colliders)
+                {
+                    targetHealth = collider.GetComponent<Health>();
+                    break;
+                }
             }
 
             navMeshAgent.destination = holdPosition == null ? moveToPosition : holdPosition.position;
@@ -41,10 +53,10 @@ public class Police : RTSUnit
 
     private void OnDrawGizmos()
     {
-        if(!holdPosition)
+        if (!holdPosition)
             return;
-        
-        
+
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.blue;

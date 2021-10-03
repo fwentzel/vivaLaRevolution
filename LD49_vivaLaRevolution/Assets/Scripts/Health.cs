@@ -47,7 +47,7 @@ public class Health : MonoBehaviour
         {
             if (transform != null)
             {
-                transform.DOScale(Vector3.one, 0.2f);
+                transform.DOScale(initialScale, 0.2f);
             }
         });
         UpdateColor();

@@ -8,7 +8,6 @@ public class Protestor : RTSUnit
 {
 
     public Building buildingToLoot;
-    bool isLooting = false;
     public float lootTime = 10;
 
     public Item item;
@@ -58,7 +57,7 @@ public class Protestor : RTSUnit
         if (enterCoroutine != null)
             StopCoroutine(enterCoroutine);
         enterCoroutine = null;
-        transform.DOScale(startScale, .5f).OnComplete(() => navMeshAgent.enabled = true);
+        transform.DOScale(initialScale, .5f).OnComplete(() => navMeshAgent.enabled = true);
         gameObject.SetActive(true);
 
         doRandomly = true;
@@ -120,20 +119,6 @@ public class Protestor : RTSUnit
     public bool CanGiveItem()
     {
         return item == null;
-    }
-
-
-    private IEnumerator Loot()
-    {
-        Vector3 startPos = transform.position;
-        float endTime = Time.time + lootTime;
-        transform.DOScale(Vector3.zero, 1);
-        yield return new WaitForSeconds(lootTime);
-        transform.DOScale(Vector3.one, .5f);
-        transform.position = startPos;
-        navMeshAgent.isStopped = false;
-        buildingToLoot = null;
-        isLooting = false;
     }
 
     private void OnDrawGizmos()

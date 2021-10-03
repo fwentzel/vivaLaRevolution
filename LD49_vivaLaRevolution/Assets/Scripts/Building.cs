@@ -36,7 +36,7 @@ public class Building : MonoBehaviour
             initialColor = renderer.material.color;
 
         _quickOutline = GetComponent<QuickOutline>();
-        
+
         if (_quickOutline)
             _quickOutline.enabled = false;
     }
@@ -48,7 +48,7 @@ public class Building : MonoBehaviour
         {
             LeaveProtestors();
         }
-        
+
         if (!protestors.Contains(protestor))
             protestors.Add(protestor);
     }
@@ -79,6 +79,10 @@ public class Building : MonoBehaviour
 
     public void Caputure()
     {
+        if (tag.Equals("MainBuilding"))
+        {
+            print("YOU WIN!");
+        }
         captureTime = captureDurration;
         LikeManager.instance.IncreaseLikeability(likeAbilityScore);
         isCaptured = true;
@@ -134,14 +138,14 @@ public class Building : MonoBehaviour
             if (_quickOutline)
                 _quickOutline.enabled = true;
         }
-        
-        
+
+
     }
 
     void OnMouseExit()
     {
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
-        
+
         if (_quickOutline)
             _quickOutline.enabled = false;
     }

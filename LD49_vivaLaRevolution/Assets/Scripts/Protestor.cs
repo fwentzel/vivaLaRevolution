@@ -58,7 +58,7 @@ public class Protestor : RTSUnit
         if (enterCoroutine != null)
             StopCoroutine(enterCoroutine);
         enterCoroutine = null;
-        transform.DOScale(Vector3.one, .5f).OnComplete(() => navMeshAgent.enabled = true);
+        transform.DOScale(startScale, .5f).OnComplete(() => navMeshAgent.enabled = true);
         gameObject.SetActive(true);
 
         doRandomly = true;

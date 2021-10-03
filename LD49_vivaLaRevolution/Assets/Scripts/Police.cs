@@ -7,7 +7,7 @@ public class Police : RTSUnit
     public PoliceGroup group;
     public Transform holdPosition;
 
-    bool shouldRun = false;
+    public bool isRunning { get; private set; } = false;
     protected override void Start()
     {
         moveToPosition = holdPosition.position;
@@ -22,8 +22,8 @@ public class Police : RTSUnit
     }
     protected override void Update()
     {
-        shouldRun = !group.IsNearCurrentHoldPoint(this);
-        if (shouldRun)
+        isRunning = !group.IsNearCurrentHoldPoint(this);
+        if (isRunning)
         {
             targetHealth = null;
         }
@@ -32,7 +32,7 @@ public class Police : RTSUnit
 
         if (targetHealth == null)
         {
-            if (!shouldRun)
+            if (!isRunning)
             {
                 //Staying at holdPoint, so look for enemies
                 foreach (Collider collider in colliders)
@@ -46,10 +46,10 @@ public class Police : RTSUnit
         }
     }
 
-    override protected void OnDestroy()
+    override public void OnKill()
     {
         PoliceManager.instance.RegisterFatality(this);
-        base.OnDestroy();
+        base.OnKill();
     }
 
     private void OnDrawGizmos()

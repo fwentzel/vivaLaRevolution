@@ -36,7 +36,15 @@ public class Health : MonoBehaviour
         currentHealth -= amount;
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            if (TryGetComponent(out RTSUnit rts))
+            {
+                rts.OnKill();
+            }
+            else
+            {
+
+                Destroy(gameObject);
+            }
         }
         else
         {

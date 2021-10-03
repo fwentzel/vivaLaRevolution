@@ -12,9 +12,6 @@ public class PoliceGroup : MonoBehaviour
 
     public int startSize = 10;
 
-
-
-
     public void TryGoToPreviousHoldPoint()
     {
         if (currentHoldIndex > 0)
@@ -49,19 +46,34 @@ public class PoliceGroup : MonoBehaviour
     public int CheckChangeHoldPosition()
     {
         int requiredForCurrentHoldPoint = currentHoldIndex * PoliceManager.instance.requiredAmountPerHoldPoint;
+        int membersInRangeOfCurrentHoldpoint = GetMembersInRangeOfOrRunningToCurrentHoldpoint();
         // if (ratio <= 0.5f)
-        if (members.Count < requiredForCurrentHoldPoint)
+        if (membersInRangeOfCurrentHoldpoint < requiredForCurrentHoldPoint)
         {
             return -1;
         }
 
-        if (members.Count > requiredForCurrentHoldPoint + PoliceManager.instance.requiredAmountPerHoldPoint)
+        if (membersInRangeOfCurrentHoldpoint > requiredForCurrentHoldPoint + PoliceManager.instance.requiredAmountPerHoldPoint)
         {
             return 1;
         }
         return 0;
 
     }
+
+    private int GetMembersInRangeOfOrRunningToCurrentHoldpoint()
+    {
+        int amount = 0;
+        foreach (Police member in members)
+        {
+            if (IsNearCurrentHoldPoint(member) || (member.isRunning && member.holdPosition == holdPoints[currentHoldIndex]))
+            {
+                amount++;
+            }
+        }
+        return amount;
+    }
+
     private void OnDrawGizmos()
     {
         if (!Selection.Contains(gameObject))
@@ -78,7 +90,7 @@ public class PoliceGroup : MonoBehaviour
         }
     }
 
-    public HoldPoint GetHeadstartHoldpoint()
+    public void SetupCurrentHoldpoint()
     {
         if (holdPoints.Count > 0)
         {
@@ -87,12 +99,9 @@ public class PoliceGroup : MonoBehaviour
                 if (startSize >= i * PoliceManager.instance.requiredAmountPerHoldPoint)
                 {
                     currentHoldIndex = i;
-                    UpdateHoldPos();
-                    return holdPoints[i];
+                    return;
                 }
             }
         }
-
-        return PoliceManager.instance.defaultSpawnPoint;
     }
 }

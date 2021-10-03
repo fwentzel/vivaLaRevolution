@@ -67,9 +67,12 @@ public class RTSUnit : MonoBehaviour
         onDeselection?.Invoke();
     }
 
-    protected virtual void OnDestroy() {
+    public virtual void OnKill()
+    {
         transform.DOKill();
+        Destroy(gameObject);
     }
+
 
     public float GetRemainingDistance()
     {
@@ -105,12 +108,12 @@ public class RTSUnit : MonoBehaviour
         nextAttackTime = Time.time + attackSpeed;
         transform.DOScale(initialScale * 1.2f, 0.1f).OnComplete(() =>
        {
-            if (transform != null)
-            {
-                transform.DOScale(initialScale, 0.3f);
-            }
-        });
-        }
+           if (transform != null)
+           {
+               transform.DOScale(initialScale, 0.3f);
+           }
+       });
+    }
 
     public void SetMovePosition(Vector3 newPosition)
     {

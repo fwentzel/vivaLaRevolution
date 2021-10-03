@@ -13,6 +13,7 @@ public class PoliceManager : MonoBehaviour
     public int requiredAmountPerHoldPoint = 6;
 
     public Vector2Int minMaxSpawnAmount = new Vector2Int(1, 3);
+    private float nextChangeHoldpositionCheck = 0;
     public static PoliceManager instance { get; private set; }
 
     private void Awake()
@@ -27,7 +28,12 @@ public class PoliceManager : MonoBehaviour
     }
     private void Start()
     {
+        foreach (var item in groups)
+        {
+            item.SetupCurrentHoldpoint();
+        }
         FillGroups();
+        InvokeRepeating("CheckChangeHoldPositons", respawnInterval, 3f);
 
     }
 
@@ -37,8 +43,8 @@ public class PoliceManager : MonoBehaviour
         {
             FillGroups(Random.Range(minMaxSpawnAmount.x, minMaxSpawnAmount.y));
             nextRespawn = Time.time + respawnInterval;
-            CheckChangeHoldPositons();
         }
+
     }
     public void RegisterFatality(Police member)
     {
@@ -84,15 +90,15 @@ public class PoliceManager : MonoBehaviour
         foreach (PoliceGroup group in groups)
         {
             int v = isStart ? group.startSize : amountPerGroup;
-            HoldPoint spawnHoldPoint = isStart ? group.GetHeadstartHoldpoint() : defaultSpawnPoint;
+            HoldPoint spawnHoldPoint = isStart ? group.holdPoints[group.currentHoldIndex] : defaultSpawnPoint;
             for (int i = 0; i < v; i++)
             {
 
-                GameObject obj = Instantiate(policePrefab, spawnHoldPoint.transform.position, Quaternion.identity);
+                GameObject obj = Instantiate(policePrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity);
                 Police police = obj.GetComponent<Police>();
                 group.members.Add(police);
                 police.group = group;
-                police.holdPosition = spawnHoldPoint.transform;
+                police.holdPosition = group.holdPoints[group.currentHoldIndex].transform;
             }
 
         }

@@ -41,6 +41,10 @@ public class Police : RTSUnit
 
     private void OnDrawGizmos()
     {
+        if(!holdPosition)
+            return;
+        
+        
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.blue;

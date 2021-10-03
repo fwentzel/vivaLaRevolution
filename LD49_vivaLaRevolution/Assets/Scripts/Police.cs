@@ -23,6 +23,7 @@ public class Police : RTSUnit
     protected override void Update()
     {
         isRunning = !group.IsNearCurrentHoldPoint(this);
+        // isRunning = myHealth.HealthRatio()<.2f;
         if (isRunning)
         {
             targetHealth = null;

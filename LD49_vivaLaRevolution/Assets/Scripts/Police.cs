@@ -16,7 +16,7 @@ public class Police : RTSUnit
     {
         holdPosition = newPos;
         SetMovePosition(newPos.position);
-       
+
     }
     protected override void Update()
     {
@@ -36,7 +36,7 @@ public class Police : RTSUnit
 
     private void OnDestroy()
     {
-        group.RegisterFatality(this);
+        PoliceManager.instance.RegisterFatality(this);
     }
 
     private void OnDrawGizmos()

@@ -154,8 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpeed: 1
   attackDamage: 10
-  detectRadius: 13.61
-  attackRange: 3
+  detectRadius: 15
+  attackRange: 4
   fightWithinRange: 25
   magnitudeMulitplicator: 2
   enemyDetection:

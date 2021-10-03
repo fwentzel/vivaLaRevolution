@@ -22,7 +22,6 @@ public class PoliceManager : MonoBehaviour
     }
     private void Start()
     {
-
         FillGroups();
     }
 

@@ -15,7 +15,8 @@ public class Health : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         isPolice = tag.Equals("Police");
-        currentHealth = maxHealth-(Random.Range(0,maxHealth));
+        currentHealth = Mathf.FloorToInt(maxHealth - (Random.Range(0, maxHealth * 0.990f)));
+      
         UpdateColor();
     }
 
@@ -46,8 +47,13 @@ public class Health : MonoBehaviour
     private void UpdateColor()
     {
         Color color = meshRenderer.material.color;
-        float ratio=currentHealth/(float)maxHealth;
+        float ratio = 1f - HealthRatio();
         meshRenderer.material.color = isPolice ? new Color(color.b * ratio, color.b * ratio, color.b) : new Color(color.r, color.r * ratio, color.r * ratio);
+    }
+
+    public float HealthRatio()
+    {
+        return currentHealth / (float)maxHealth;
     }
 
 

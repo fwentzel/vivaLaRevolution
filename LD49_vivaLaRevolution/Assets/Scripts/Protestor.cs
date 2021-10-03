@@ -79,7 +79,7 @@ public class Protestor : RTSUnit
         while (toBuilding.CanEnter())
         {
             yield return new WaitForSeconds(0.3f);
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 1.1f);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
             foreach (var collider in colliders)
             {
                 if (collider.transform.TryGetComponent(out Building foundBuilding))

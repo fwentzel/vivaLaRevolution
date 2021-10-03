@@ -52,7 +52,7 @@ public class Building : MonoBehaviour
             return;
 
 
-        captureTime += Time.deltaTime * protestors.Count;
+        captureTime += Time.deltaTime * (protestors.Count / (float)maxProtestors);
         captureTime = Mathf.Clamp(captureTime, 0, captureDurration);
 
         float percent = captureTime / captureDurration;
@@ -115,7 +115,8 @@ public class Building : MonoBehaviour
     }
     void OnMouseEnter()
     {
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        if (protestors.Count < maxProtestors)
+            Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
 
     void OnMouseExit()

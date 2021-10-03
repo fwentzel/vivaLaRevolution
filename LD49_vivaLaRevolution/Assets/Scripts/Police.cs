@@ -51,6 +51,11 @@ public class Police : RTSUnit
         PoliceManager.instance.RegisterFatality(this);
         base.OnKill();
     }
+    void OnDestroy()
+    {
+            group.members.Remove(this);
+        //if (group.members.Contains(this))
+    }
 
     private void OnDrawGizmos()
     {

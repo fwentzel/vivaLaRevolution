@@ -66,7 +66,7 @@ public class PoliceGroup : MonoBehaviour
         int amount = 0;
         foreach (Police member in members)
         {
-            if (IsNearCurrentHoldPoint(member) || (member.isRunning && member.holdPosition == holdPoints[currentHoldIndex]))
+            if (IsNearCurrentHoldPoint(member) || (member.isRunning && member.holdPosition == holdPoints[currentHoldIndex].transform))
             {
                 amount++;
             }

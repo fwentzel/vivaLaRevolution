@@ -18,11 +18,11 @@ public class Protestor : RTSUnit
     private Coroutine enterCoroutine;
 
 
-    protected override void FixedUpdate()
+    protected override void Update()
     {
          if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
             targetHealth = null;
-        base.FixedUpdate();
+        base.Update();
 
         if (buildingToLoot != null && !isLooting && navMeshAgent.remainingDistance < 0.6f)
         {

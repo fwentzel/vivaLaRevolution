@@ -18,9 +18,9 @@ public class Police : RTSUnit
         SetMovePosition(newPos.position);
        
     }
-    protected override void FixedUpdate()
+    protected override void Update()
     {
-        base.FixedUpdate();
+        base.Update();
         if (targetHealth == null)
         {
 

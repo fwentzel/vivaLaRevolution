@@ -9,6 +9,8 @@ public class PoliceManager : MonoBehaviour
     public List<PoliceGroup> groups;
     public float respawnInterval = 5;
     private float nextRespawn = 5;
+
+    public Vector2Int minMaxSpawnAmount = new Vector2Int(1,3);
     public static PoliceManager instance { get; private set; }
 
     private void Awake()
@@ -29,7 +31,7 @@ public class PoliceManager : MonoBehaviour
     {
         if (nextRespawn < Time.time)
         {
-            FillGroups(Random.Range(0, 3));
+            FillGroups(Random.Range(minMaxSpawnAmount.x, minMaxSpawnAmount.y));
             nextRespawn = Time.time + respawnInterval;
         }
     }

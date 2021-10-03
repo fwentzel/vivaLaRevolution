@@ -69,7 +69,7 @@ public class RTSUnit : MonoBehaviour
         return navMeshAgent.remainingDistance;
     }
 
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
         colliders = Physics.OverlapSphere(transform.position, detectRadius, enemyDetection);
 

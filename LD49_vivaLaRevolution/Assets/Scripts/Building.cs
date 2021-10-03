@@ -34,7 +34,7 @@ public class Building : MonoBehaviour
     }
 
 
-    public void EnterBuilding(Protestor protestor)
+    public virtual void EnterBuilding(Protestor protestor)
     {
         if (isCaptured)
         {
@@ -46,7 +46,7 @@ public class Building : MonoBehaviour
             protestors.Add(protestor);
     }
 
-    public void Update()
+    public virtual void Update()
     {
         if (isCaptured || protestors.Count == 0)
             return;
@@ -66,15 +66,21 @@ public class Building : MonoBehaviour
 
         if (percent > 0.98f)
         {
-            LikeManager.instance.IncreaseLikeability(-1);
-            isCaptured = true;
-            LeaveProtestors();
-
-            OnCaptured?.Invoke();
+            Caputure();
         }
     }
 
-    public void EquipProtesters()
+    public void Caputure()
+    {
+        captureTime = captureDurration;
+        LikeManager.instance.IncreaseLikeability(-1);
+        isCaptured = true;
+        LeaveProtestors();
+
+        OnCaptured?.Invoke();
+    }
+
+    public virtual void EquipProtesters()
     {
         print("GIVING ITEM");
         foreach (var protestor in protestors)
@@ -97,7 +103,7 @@ public class Building : MonoBehaviour
         }
     }
 
-    public void LeaveProtestors()
+    public virtual void LeaveProtestors()
     {
         EquipProtesters();
         foreach (var protestor in protestors)

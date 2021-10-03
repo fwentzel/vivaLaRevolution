@@ -25,6 +25,7 @@ public class Building : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
+    public int likeAbilityScore = -1;
 
     private void Start()
     {
@@ -73,7 +74,7 @@ public class Building : MonoBehaviour
     public void Caputure()
     {
         captureTime = captureDurration;
-        LikeManager.instance.IncreaseLikeability(-1);
+        LikeManager.instance.IncreaseLikeability(likeAbilityScore);
         isCaptured = true;
         LeaveProtestors();
 

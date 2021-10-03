@@ -103,11 +103,14 @@ MonoBehaviour:
   onUse:
     m_PersistentCalls:
       m_Calls: []
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  influenceRadius: 30
   explosionParticles: {fileID: 7958413605842114963}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  radius: 30
   damage: 1000
 --- !u!1 &7958413605842114966
 GameObject:

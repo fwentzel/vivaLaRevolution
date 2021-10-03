@@ -12,6 +12,9 @@ public class ItemManager : MonoBehaviour
     private List<ItemIcon> _itemIcons = new List<ItemIcon>();
     public CanvasGroup canvasGroup;
 
+    public Transform aimingRecticle;
+    
+    
     private void Start()
     {
         _rtsSelection = FindObjectOfType<RTSSelection>();
@@ -22,8 +25,6 @@ public class ItemManager : MonoBehaviour
     public void OnSelectedUnits(List<Protestor> protestors)
     {
         PopulateList(protestors);
-        
-        
     }
 
     public void PopulateList(List<Protestor> protestors)
@@ -55,40 +56,39 @@ public class ItemManager : MonoBehaviour
         }
         _itemIcons.Clear();
     }
-    
 
-    private void Update()
+
+    public void Update()
     {
-        transform.position = GetMid();
-    }
-
-    Vector3 GetMid()
-    {
-
-        if (_rtsSelection == null || _rtsSelection.selectedUnits.Count == 0)
-            return transform.position;
-
-
-        Vector3 mid = Vector3.zero;
-        int count = 0;
-        foreach (var unit in _rtsSelection.selectedUnits)
+        Vector3 position = RTSSelection.CastToGround(Input.mousePosition);
+        ItemIcon selectedItem = null;
+        foreach (var itemIcon in _itemIcons)
         {
-            if (unit == null) continue;
-            if(unit.item==null) continue;
-            mid += unit.transform.position;
-            count++;
+            if(!itemIcon)
+                continue;
+            if(Input.GetMouseButtonDown(1))
+                itemIcon.Deselect();
+            
+            if (itemIcon.isSelected)
+                selectedItem = itemIcon;
         }
         
-        if(count== 0)
-            return transform.position;
+        aimingRecticle.gameObject.SetActive(selectedItem!=null);
+        if (selectedItem)
+        {
+            position = selectedItem.item.GetImprovedPosition(position);
+            
+            aimingRecticle.position = position + Vector3.up * 0.5f;
+            aimingRecticle.transform.localScale = Vector3.one * 2 * selectedItem.item.influenceRadius;
+            
+            
+            if (Input.GetMouseButtonDown(0))
+            {
+                selectedItem.Release();
+            }
+        }
         
-        mid /= count;
-
-        return mid;
-    }
-
-    public void UpdateCanvas()
-    {
-
+        
+            
     }
 }

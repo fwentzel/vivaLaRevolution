@@ -19,14 +19,21 @@ public class EffectAudioManager : MonoBehaviour
     public void PlayWindowClip()
     {
         int rdmIndex = Random.Range(0, windowClips.Length);
-        audioSource.clip = windowClips[rdmIndex];
-        audioSource.Play();
+        if (rdmIndex <= windowClips.Length - 1)
+        {
+            audioSource.clip = windowClips[rdmIndex];
+            audioSource.Play();
+        }
+
     }
 
     public void PlayMolotovClip()
     {
-        int rdmIndex = Random.Range(0, windowClips.Length);
-        audioSource.clip = molotovClips[rdmIndex];
-        audioSource.Play();
+        int rdmIndex = Random.Range(0, molotovClips.Length);
+        if (rdmIndex <= molotovClips.Length - 1)
+        {
+            audioSource.clip = molotovClips[rdmIndex];
+            audioSource.Play();
+        }
     }
 }

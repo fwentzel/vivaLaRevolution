@@ -67,6 +67,10 @@ public class RTSUnit : MonoBehaviour
         onDeselection?.Invoke();
     }
 
+    protected virtual void OnDestroy() {
+        transform.DOKill();
+    }
+
     public float GetRemainingDistance()
     {
         return navMeshAgent.remainingDistance;

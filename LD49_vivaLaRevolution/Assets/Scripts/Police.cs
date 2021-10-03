@@ -46,9 +46,10 @@ public class Police : RTSUnit
         }
     }
 
-    private void OnDestroy()
+    override protected void OnDestroy()
     {
         PoliceManager.instance.RegisterFatality(this);
+        base.OnDestroy();
     }
 
     private void OnDrawGizmos()

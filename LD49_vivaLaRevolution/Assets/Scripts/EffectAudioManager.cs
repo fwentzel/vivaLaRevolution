@@ -7,8 +7,10 @@ public class EffectAudioManager : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip[] windowClips;
     [SerializeField] AudioClip[] molotovClips;
+    [SerializeField] AudioClip[] healingClips;
     [SerializeField] [Range(0,0.4f)] float windowsSoundVolume=0.1f;
     [SerializeField] [Range(0,0.7f)] float molotovSoundVolume=0.4f;
+    [SerializeField] [Range(0,0.7f)] float healingSoundVolume=0.4f;
     public static EffectAudioManager instance { get; private set; }
 
     private void Awake()
@@ -39,6 +41,18 @@ public class EffectAudioManager : MonoBehaviour
         {
             audioSource.volume = molotovSoundVolume;
             audioSource.clip = molotovClips[rdmIndex];
+            audioSource.Play();
+        }
+    }
+
+    public void PlayHealingClip(Vector3 pos)
+    {
+        audioSource.transform.position=pos;
+        int rdmIndex = Random.Range(0, healingClips.Length);
+        if (rdmIndex <= healingClips.Length - 1)
+        {
+            audioSource.volume = healingSoundVolume;
+            audioSource.clip = healingClips[rdmIndex];
             audioSource.Play();
         }
     }

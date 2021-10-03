@@ -44,6 +44,8 @@ public class RTSUnit : MonoBehaviour
         myHealth = GetComponent<Health>();
         moveToPosition = transform.position;
         initialScale = transform.localScale;
+        NavMeshPath path;
+        
     }
     protected virtual void Start()
     {

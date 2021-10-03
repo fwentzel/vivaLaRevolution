@@ -12,8 +12,9 @@ public class Molotov : Item
     public override void UseCompleted()
     {
         explosionParticles.Play();
-        
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.1f,enemyLayer);
+        EffectAudioManager.instance.PlayMolotovClip();
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.1f, enemyLayer);
         foreach (var collider in colliders)
         {
             if (collider.transform.TryGetComponent(out Health health))
@@ -21,21 +22,21 @@ public class Molotov : Item
                 health.takeDamage(damage);
             }
         }
-        
+
         explosionParticles.Play();
-        
-        Invoke("DoBaseCompleted",explosionParticles.main.duration);
+
+        Invoke("DoBaseCompleted", explosionParticles.main.duration);
     }
 
     public void DoBaseCompleted()
     {
-        
+
         base.UseCompleted();
     }
-    
+
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position,influenceRadius);
+        Gizmos.DrawWireSphere(transform.position, influenceRadius);
     }
 }

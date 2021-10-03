@@ -41,7 +41,9 @@ public class Building : MonoBehaviour
         {
             LeaveProtestors();
         }
-
+        if(protestors.Count==0){
+            EffectAudioManager.instance.PlayWindowClip();
+        }
 
         if (!protestors.Contains(protestor))
             protestors.Add(protestor);

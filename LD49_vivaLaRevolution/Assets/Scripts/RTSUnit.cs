@@ -69,7 +69,7 @@ public class RTSUnit : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         colliders = Physics.OverlapSphere(transform.position, detectRadius,enemyDetection);
-        uneasyness.UpdateValue(colliders);
+        uneasyness.UpdateValueForGroups(colliders);
 
         if (target)
             target.position = moveToPosition;

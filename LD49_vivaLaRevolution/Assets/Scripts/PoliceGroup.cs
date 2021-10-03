@@ -12,9 +12,10 @@ public class PoliceGroup : MonoBehaviour
 
     public int startSize = 10;
     private int startSizeAtHoldpoint;
-    private void Awake() {       
-    
-    
+    private void Awake()
+    {
+
+
         startSizeAtHoldpoint = startSize;
     }
     public void RegisterFatality(Police member)
@@ -24,21 +25,23 @@ public class PoliceGroup : MonoBehaviour
     }
     public void SetHoldPosition()
     {
-        float ratio = members.Count /(float) startSizeAtHoldpoint;
-        if (ratio <= 0.5f &&currentHoldIndex < holdPoints.Count - 1)
+        float ratio = members.Count / (float)startSizeAtHoldpoint;
+        if (ratio <= 0.5f && currentHoldIndex < holdPoints.Count - 1)
         {
-            startSizeAtHoldpoint=members.Count;
+            startSizeAtHoldpoint = members.Count;
             currentHoldIndex++;
         }
 
         if (ratio >= 2f && currentHoldIndex > 0)
         {
-            startSizeAtHoldpoint=members.Count;
+            startSizeAtHoldpoint = members.Count;
             currentHoldIndex--;
         }
 
         foreach (Police member in members)
         {
+            if (member == null||holdPoints[currentHoldIndex]==null)
+                continue;
             member.holdPosition = holdPoints[currentHoldIndex].transform;
         }
     }
@@ -59,7 +62,7 @@ public class PoliceGroup : MonoBehaviour
     internal void AddMember(Police police)
     {
         members.Add(police);
-        
+
         SetHoldPosition();
     }
 }

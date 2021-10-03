@@ -8,10 +8,12 @@ public class Health : MonoBehaviour
     public UnityEvent<float> onHeal;
     public UnityEvent<float> onTakeDamage;
     public int maxHealth = 100;
+    public Uneasyness uneasyness ;
     public int currentHealth { get; private set; }
     private void Awake()
     {
         currentHealth = maxHealth;
+        uneasyness=GetComponent<Uneasyness>();
     }
 
     public void heal(int amount)
@@ -34,7 +36,7 @@ public class Health : MonoBehaviour
         }
 
         transform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() => transform.DOScale(Vector3.one, 0.2f));
-
+        uneasyness.UpdateValue(.01f);
     }
 
 

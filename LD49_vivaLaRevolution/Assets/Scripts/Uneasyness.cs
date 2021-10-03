@@ -7,15 +7,17 @@ public class Uneasyness : MonoBehaviour
     public float nextUpdate = 0;
     public float value { get; private set; } = .2f;
     MeshRenderer meshRenderer;
+     bool isPolice;
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+         isPolice= tag.Equals("Police");
     }
-    public void UpdateValue(Collider[] colliders)
+    public void UpdateValueForGroups(Collider[] colliders)
     {
         if (Time.time >= nextUpdate)
         {
-            bool isPolice = tag.Equals("Police");
+           
             int numPolice = 0;
             int numProtestors = 0;
             foreach (Collider collider in colliders)
@@ -46,5 +48,13 @@ public class Uneasyness : MonoBehaviour
             Color color = meshRenderer.material.color;
             meshRenderer.material.color = isPolice ? new Color(color.b * value, color.b * value, color.b) : new Color(color.r, color.r * value, color.r * value);
         }
+    }
+
+    public void UpdateValue(float amount)
+    {
+        value += amount;
+        value = Mathf.Clamp(value, 0, 1);
+         Color color = meshRenderer.material.color;
+         meshRenderer.material.color = isPolice ? new Color(color.b * value, color.b * value, color.b) : new Color(color.r, color.r * value, color.r * value);
     }
 }

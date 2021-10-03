@@ -74,8 +74,9 @@ public class ItemManager : MonoBehaviour
         }
         
         aimingRecticle.gameObject.SetActive(selectedItem!=null);
-        if (selectedItem)
+        if (selectedItem && selectedItem.item)
         {
+            
             position = selectedItem.item.GetImprovedPosition(position);
             
             aimingRecticle.position = position + Vector3.up * 0.5f;

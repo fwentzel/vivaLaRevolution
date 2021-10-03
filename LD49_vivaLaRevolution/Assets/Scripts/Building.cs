@@ -27,11 +27,18 @@ public class Building : MonoBehaviour
 
     public int likeAbilityScore = -1;
 
+    private QuickOutline _quickOutline;
+
     private void Start()
     {
         renderer = GetComponent<Renderer>();
         if (renderer)
             initialColor = renderer.material.color;
+
+        _quickOutline = GetComponent<QuickOutline>();
+        
+        if (_quickOutline)
+            _quickOutline.enabled = false;
     }
 
 
@@ -121,12 +128,21 @@ public class Building : MonoBehaviour
     }
     void OnMouseEnter()
     {
-        if (protestors.Count < maxProtestors )
+        if (protestors.Count < maxProtestors)
+        {
             Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+            if (_quickOutline)
+                _quickOutline.enabled = true;
+        }
+        
+        
     }
 
     void OnMouseExit()
     {
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
+        
+        if (_quickOutline)
+            _quickOutline.enabled = false;
     }
 }

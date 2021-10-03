@@ -106,7 +106,7 @@ public class Protestor : RTSUnit
             return false;
 
         this.item = item;
-        item.onUseCompleted.AddListener(() => this.item = null);
+        item.onUse.AddListener(() => this.item = null);
 
         item.transform.SetParent(itemHold);
         item.transform.DOLocalMove(Vector3.zero, 0.3f);

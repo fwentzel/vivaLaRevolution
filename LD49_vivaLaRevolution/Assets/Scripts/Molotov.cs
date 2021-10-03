@@ -14,7 +14,7 @@ public class Molotov : Item
         explosionParticles.Play();
         EffectAudioManager.instance.PlayMolotovClip(transform.position);
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.1f, enemyLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, influenceRadius, enemyLayer);
         foreach (var collider in colliders)
         {
             if (collider.transform.TryGetComponent(out Health health))

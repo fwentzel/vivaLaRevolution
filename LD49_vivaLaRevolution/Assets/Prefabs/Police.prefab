@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 346771560}
   - component: {fileID: 346771561}
   - component: {fileID: 4777184973159268322}
+  - component: {fileID: 3012109985939300580}
   m_Layer: 9
   m_Name: Police
   m_TagString: Police
@@ -182,3 +183,19 @@ MonoBehaviour:
   target: {fileID: 0}
   group: {fileID: 0}
   holdPosition: {fileID: 0}
+--- !u!54 &3012109985939300580
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359640132132065183}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

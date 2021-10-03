@@ -66,7 +66,7 @@ public class RTSController : MonoBehaviour
         float distance = _rtsSelection.selectedUnits[0].transform.localScale.x / 2;
         distance *= 1.5f;
 
-        List<Vector3> targetPositions = GetPositionListAround(position, new float[] { 1, 2, 3 }, new int[] { 5, 10, 20 });
+        List<Vector3> targetPositions = GetPositionListAround(position, new float[] { 1, 2, 3,4,5,6 }, new int[] { 5, 10, 20,30,40,100 });
 
 
         for (int i = 0; i < _rtsSelection.selectedUnits.Count; i++)

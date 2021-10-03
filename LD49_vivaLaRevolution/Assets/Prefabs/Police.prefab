@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 346771560}
   - component: {fileID: 346771561}
   - component: {fileID: 4777184973159268322}
-  - component: {fileID: 1444535851724953582}
   m_Layer: 9
   m_Name: Police
   m_TagString: Police
@@ -159,7 +158,7 @@ MonoBehaviour:
   fightWithinRange: 25
   enemyDetection:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 1024
   onSelection:
     m_PersistentCalls:
       m_Calls:
@@ -182,17 +181,3 @@ MonoBehaviour:
   moveToPosition: {x: 0, y: 0, z: 0}
   group: {fileID: 0}
   holdPosition: {fileID: 0}
---- !u!114 &1444535851724953582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8359640132132065183}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70eeed8de8ecf98458e4e2584d5323b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateInterval: 1
-  nextUpdate: 0

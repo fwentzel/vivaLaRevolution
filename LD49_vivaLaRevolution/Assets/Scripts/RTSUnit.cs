@@ -30,14 +30,14 @@ public class RTSUnit : MonoBehaviour
     protected NavMeshAgent navMeshAgent;
 
     protected Health targetHealth;
+    protected Health myHealth;
     protected float nextAttackTime = 0;
-    protected Uneasyness uneasyness;
     protected Collider[] colliders;
     protected virtual void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        uneasyness = GetComponent<Uneasyness>();
          colliders= new Collider[]{GetComponent<Collider>()};
+         myHealth=GetComponent<Health>();
     }
     protected virtual void Start()
     {
@@ -69,7 +69,7 @@ public class RTSUnit : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         colliders = Physics.OverlapSphere(transform.position, detectRadius,enemyDetection);
-        uneasyness.UpdateValueForGroups(colliders);
+    
 
         if (target)
             target.position = moveToPosition;
@@ -114,7 +114,7 @@ public class RTSUnit : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
             if (Vector3.Distance(moveToPosition, transform.position) < 2f)
             {
-                float magnitude = uneasyness.value;
+                float magnitude = (myHealth.currentHealth/(float)myHealth.maxHealth)*10;
                 moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
             }
 

@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class RTSSelection : MonoBehaviour
-{    public LayerMask groundLayer;
+{
+    public static RTSSelection instance;
+    public LayerMask groundLayer;
     public LayerMask unitMask;
     public UnityEvent<List<Protestor>> OnUnitSelection;
     public List<Protestor> selectedUnits = new List<Protestor>();
@@ -15,6 +19,10 @@ public class RTSSelection : MonoBehaviour
     private Vector3 mouseEnd = Vector3.zero;
     private bool isDragging;
 
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -40,33 +48,36 @@ public class RTSSelection : MonoBehaviour
         oldSelectedUnits = selected;
     }
 
-
-    void Update()
+    public void MouseDown(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonDown(0))
+        if(eventData.button != PointerEventData.InputButton.Left)
+            return;
+        
+        mouseStart = eventData.position;
+    }
+
+    public void MouseDrag(PointerEventData eventData)
+    {
+        if(eventData.button != PointerEventData.InputButton.Left)
+            return;
+        mouseEnd =eventData.position;
+        if((mouseStart - mouseEnd).magnitude > 40)
         {
-            mouseStart = Input.mousePosition;
+            isDragging = true;
         }
+    }
 
-        if (Input.GetMouseButton(0))
-        {
-            mouseEnd = Input.mousePosition;
-            if((mouseStart - mouseEnd).magnitude > 40)
-            {
-                isDragging = true;
-            }
-        }
+    public void MouseUp(PointerEventData eventData)
+    {
+        if(eventData.button != PointerEventData.InputButton.Left)
+            return;
+        
+        if(isDragging)
+            HandleSelect();
+        else
+            HandleClick();
 
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            if(isDragging)
-                HandleSelect();
-            else
-                HandleClick();
-
-            isDragging = false;
-        }
+        isDragging = false;
     }
     private void HandleClick()
     {
@@ -86,21 +97,21 @@ public class RTSSelection : MonoBehaviour
         
         // Get Unit
         Protestor rtsUnit = hit.transform.GetComponentInParent<Protestor>();
-        if(rtsUnit)
+        if(rtsUnit &&  !selectedUnits.Contains(rtsUnit))
             selectedUnits.Add(rtsUnit);
         
         OnUnitSelection?.Invoke(selectedUnits);
 
     }
 
-    public Vector3 CastToGround(Vector2 mousePos)
+    public static Vector3 CastToGround(Vector2 mousePos)
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
         
         
         // No Unit found
-        if (Physics.Raycast(ray, out hit, 1000, groundLayer))
+        if (Physics.Raycast(ray, out hit, 1000, instance.groundLayer))
         {
             return hit.point;
         }
@@ -152,9 +163,8 @@ public class RTSSelection : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     { 
-        print("ENTERING");
         Protestor rtsUnit = other.transform.GetComponentInParent<Protestor>();
-        if(rtsUnit)
+        if(rtsUnit && !selectedUnits.Contains(rtsUnit))
             selectedUnits.Add(rtsUnit);
     }
     

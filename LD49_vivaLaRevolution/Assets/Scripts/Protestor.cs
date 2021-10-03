@@ -74,6 +74,9 @@ public class Protestor : RTSUnit
     private IEnumerator EnterBuilding(Building toBuilding)
     {
         moveToPosition = toBuilding.transform.position;
+        if (!navMeshAgent.enabled)
+            yield break;
+            
         navMeshAgent.destination = moveToPosition;
 
         while (toBuilding.CanEnter())
@@ -108,6 +111,7 @@ public class Protestor : RTSUnit
             return false;
 
         this.item = item;
+        item.onUseCompleted.AddListener(()=>this.item = null);
 
         item.transform.SetParent(itemHold);
         item.transform.DOLocalMove(Vector3.zero, 0.3f);

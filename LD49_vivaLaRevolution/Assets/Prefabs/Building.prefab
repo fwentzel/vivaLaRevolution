@@ -127,9 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   protestors: []
   itemPrefabs:
-  - {fileID: 8559951006614986020, guid: 7f64057d051e4464c8918df419435ab0, type: 3}
-  - {fileID: 8559951006614986020, guid: 7f64057d051e4464c8918df419435ab0, type: 3}
-  - {fileID: 8559951006614986020, guid: 7f64057d051e4464c8918df419435ab0, type: 3}
+  - {fileID: 7958413604708030817, guid: bb3bbe5d5fd152d4cb9b6b9c58149fdb, type: 3}
   maxProtestors: 3
   captureDurration: 5
   isCaptured: 0

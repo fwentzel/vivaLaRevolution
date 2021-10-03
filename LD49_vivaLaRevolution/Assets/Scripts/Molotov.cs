@@ -7,7 +7,6 @@ public class Molotov : Item
 {
     public ParticleSystem explosionParticles;
     public LayerMask enemyLayer;
-    public float radius = 10;
     public int damage = 100;
 
     public override void UseCompleted()
@@ -37,6 +36,6 @@ public class Molotov : Item
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position,radius);
+        Gizmos.DrawWireSphere(transform.position,influenceRadius);
     }
 }

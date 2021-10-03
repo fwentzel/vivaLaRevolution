@@ -14,12 +14,25 @@ public class Item : MonoBehaviour
     public LayerMask obstacleLayer;
 
     private float maxDistance = 50;
+    public float influenceRadius = 30f;
 
     public virtual void Use(Vector3 position)
     {
         if(!transform)
             return;
+
+
+
+        position = GetImprovedPosition(position);
         
+        transform.parent = null;
+        
+        onUse?.Invoke();
+        transform.DOMove(position, 0.3f).OnComplete(UseCompleted);
+    }
+
+    public Vector3 GetImprovedPosition(Vector3 position)
+    {
         // Correct for Distance
         Vector3 difference = position - transform.position;
         if (difference.magnitude > maxDistance)
@@ -35,13 +48,9 @@ public class Item : MonoBehaviour
             position = hit.point;
         }
 
-
-        
-        transform.parent = null;
-        
-        onUse?.Invoke();
-        transform.DOMove(position, 0.3f).OnComplete(UseCompleted);
+        return position;
     }
+    
     
     public virtual void UseCompleted()
     {

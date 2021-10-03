@@ -107,7 +107,6 @@ public class RTSUnit : MonoBehaviour
 
         if (Random.Range(0, .5f) > myHealth.HealthRatio())
         {
-            print("NÖÖ");
             return;
         }
 

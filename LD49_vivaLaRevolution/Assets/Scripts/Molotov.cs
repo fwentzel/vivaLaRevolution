@@ -12,7 +12,7 @@ public class Molotov : Item
     public override void UseCompleted()
     {
         explosionParticles.Play();
-        EffectAudioManager.instance.PlayMolotovClip();
+        EffectAudioManager.instance.PlayMolotovClip(transform.position);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, 1.1f, enemyLayer);
         foreach (var collider in colliders)

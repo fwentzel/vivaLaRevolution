@@ -12,12 +12,14 @@ public class Health : MonoBehaviour
     MeshRenderer meshRenderer;
     bool isPolice;
     public bool randomizeHealth = true;
+
+    private Vector3 initialScale;
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         isPolice = tag.Equals("Police");
         currentHealth = randomizeHealth ? Mathf.FloorToInt(maxHealth - (Random.Range(1, maxHealth * 0.15f))) : maxHealth;
-
+        initialScale = transform.localScale;
         UpdateColor();
     }
 

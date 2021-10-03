@@ -122,7 +122,7 @@ public class Building : MonoBehaviour
     }
     void OnMouseEnter()
     {
-        if (protestors.Count < maxProtestors)
+        if (protestors.Count < maxProtestors )
             Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
     }
 

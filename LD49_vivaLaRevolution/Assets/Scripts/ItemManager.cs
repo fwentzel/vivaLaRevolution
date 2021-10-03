@@ -8,12 +8,13 @@ public class ItemManager : MonoBehaviour
 {
     private RTSSelection _rtsSelection;
     public RectTransform content;
-    
-    
+
+
     private void Start()
     {
         _rtsSelection = FindObjectOfType<RTSSelection>();
-        _rtsSelection.OnUnitSelection.AddListener(OnSelectedUnits);
+        if (_rtsSelection != null)
+            _rtsSelection.OnUnitSelection.AddListener(OnSelectedUnits);
     }
 
     public void OnSelectedUnits(List<Protestor> protestors)
@@ -28,7 +29,8 @@ public class ItemManager : MonoBehaviour
 
     Vector3 GetMid()
     {
-        if (_rtsSelection.selectedUnits.Count == 0)
+
+        if (_rtsSelection == null || _rtsSelection.selectedUnits.Count == 0)
             return transform.position;
 
 

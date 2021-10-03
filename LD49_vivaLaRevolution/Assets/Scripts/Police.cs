@@ -17,32 +17,30 @@ public class Police : RTSUnit
         holdPosition = newPos;
         moveToPosition = newPos.position;
     }
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
         if (targetHealth == null)
         {
-            
+
             foreach (Collider collider in colliders)
             {
-                if (collider.tag.Equals("Protestor"))
-                {
-                    targetHealth = collider.GetComponent<Health>();
-                    break;
-                }
+                targetHealth = collider.GetComponent<Health>();
+                break;
             }
 
             navMeshAgent.destination = holdPosition == null ? moveToPosition : holdPosition.position;
         }
     }
 
-private void OnDestroy() {
-    group.RegisterFatality(this);
-}
+    private void OnDestroy()
+    {
+        group.RegisterFatality(this);
+    }
 
     private void OnDrawGizmos()
     {
- Gizmos.color = Color.red;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectRadius);

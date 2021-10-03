@@ -17,6 +17,8 @@ public class RTSUnit : MonoBehaviour
     public float attackRange = 2f;
     public float fightWithinRange = 5f;
 
+    public LayerMask enemyDetection;
+
 
     public UnityEvent onSelection;
     public UnityEvent onDeselection;
@@ -35,6 +37,7 @@ public class RTSUnit : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         uneasyness = GetComponent<Uneasyness>();
+         colliders= new Collider[]{GetComponent<Collider>()};
     }
     protected virtual void Start()
     {
@@ -63,9 +66,9 @@ public class RTSUnit : MonoBehaviour
         return navMeshAgent.remainingDistance;
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
-        colliders = Physics.OverlapSphere(transform.position, detectRadius);
+        colliders = Physics.OverlapSphere(transform.position, detectRadius,enemyDetection);
         uneasyness.UpdateValue(colliders);
 
         if (target)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3507606986865461521}
   - component: {fileID: 4016673598716910659}
   - component: {fileID: 786108174487687861}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SelectionCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2170390156423901853}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 1827089720804681188}
   - component: {fileID: 919668107470728183}
   - component: {fileID: 2960068667976433030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GoalCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 6676897269284859423}
   - component: {fileID: 1286139877505457479}
   - component: {fileID: 1604877033608093929}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 3337245741025811600}
   - component: {fileID: 4708679879795059518}
   - component: {fileID: 67566253602186356}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3149884992394322957}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Item Hold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 1875341735549049670}
   - component: {fileID: 1316662580604614716}
   - component: {fileID: -2330390605544062554}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Protestor
   m_TagString: Protestor
   m_Icon: {fileID: 0}
@@ -570,6 +570,9 @@ MonoBehaviour:
   detectRadius: 4
   attackRange: 2
   fightWithinRange: 5
+  enemyDetection:
+    serializedVersion: 2
+    m_Bits: 1536
   onSelection:
     m_PersistentCalls:
       m_Calls:
@@ -648,7 +651,7 @@ GameObject:
   - component: {fileID: 2957618001273371530}
   - component: {fileID: 413581684276088262}
   - component: {fileID: 3860553126390985422}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SelectionCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

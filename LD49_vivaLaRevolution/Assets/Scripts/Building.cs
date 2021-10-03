@@ -48,8 +48,9 @@ public class Building : MonoBehaviour
 
     public void Update()
     {
-        if (isCaptured)
+        if (isCaptured || protestors.Count == 0)
             return;
+
 
         captureTime += Time.deltaTime * protestors.Count;
         captureTime = Mathf.Clamp(captureTime, 0, captureDurration);

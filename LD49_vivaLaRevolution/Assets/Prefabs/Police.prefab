@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 346771561}
   - component: {fileID: 4777184973159268322}
   - component: {fileID: 1444535851724953582}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Police
   m_TagString: Police
   m_Icon: {fileID: 0}
@@ -154,10 +154,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpeed: 1
   attackDamage: 10
-  detectRadius: 4
+  detectRadius: 12.99
   attackRange: 2
-  fightWithinRange: 5
-  uneasyness: {fileID: 0}
+  fightWithinRange: 25
+  enemyDetection:
+    serializedVersion: 2
+    m_Bits: 1536
   onSelection:
     m_PersistentCalls:
       m_Calls:

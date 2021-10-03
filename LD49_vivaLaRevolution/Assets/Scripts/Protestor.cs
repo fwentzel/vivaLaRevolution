@@ -18,11 +18,11 @@ public class Protestor : RTSUnit
     private Coroutine enterCoroutine;
 
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
          if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
             targetHealth = null;
-        base.Update();
+        base.FixedUpdate();
 
         if (buildingToLoot != null && !isLooting && navMeshAgent.remainingDistance < 0.6f)
         {
@@ -35,11 +35,8 @@ public class Protestor : RTSUnit
         {
             foreach (Collider collider in colliders)
             {
-                if (collider.tag.Equals("Police"))
-                {
                     targetHealth = collider.GetComponent<Health>();
                     break;
-                }
             }
             if (navMeshAgent.enabled)
                 navMeshAgent.destination = moveToPosition;

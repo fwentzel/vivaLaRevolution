@@ -21,7 +21,7 @@ public class Protestor : RTSUnit
 
     protected override void Update()
     {
-         if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
+        if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
             targetHealth = null;
         base.Update();
 
@@ -29,8 +29,8 @@ public class Protestor : RTSUnit
         {
             foreach (Collider collider in colliders)
             {
-                    targetHealth = collider.GetComponent<Health>();
-                    break;
+                targetHealth = collider.GetComponent<Health>();
+                break;
             }
             if (navMeshAgent.enabled)
                 navMeshAgent.destination = moveToPosition;
@@ -46,8 +46,8 @@ public class Protestor : RTSUnit
             return;
         if (enterCoroutine != null)
             StopCoroutine(enterCoroutine);
-        
-        
+
+
         doRandomly = false;
         enterCoroutine = StartCoroutine(EnterBuilding(building));
     }
@@ -69,7 +69,7 @@ public class Protestor : RTSUnit
         moveToPosition = toBuilding.transform.position;
         if (!navMeshAgent.enabled)
             yield break;
-            
+
         navMeshAgent.destination = moveToPosition;
 
         while (toBuilding.CanEnter())
@@ -104,7 +104,7 @@ public class Protestor : RTSUnit
             return false;
 
         this.item = item;
-        item.onUseCompleted.AddListener(()=>this.item = null);
+        item.onUseCompleted.AddListener(() => this.item = null);
 
         item.transform.SetParent(itemHold);
         item.transform.DOLocalMove(Vector3.zero, 0.3f);

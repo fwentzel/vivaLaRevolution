@@ -453,6 +453,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   maxHealth: 100
+  randomizeHealth: 1
 --- !u!114 &1875341735549049670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,9 +468,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpeed: 0.9
   attackDamage: 8
-  detectRadius: 4
-  attackRange: 2
-  fightWithinRange: 5
+  detectRadius: 10
+  attackRange: 3
+  fightWithinRange: 30
   magnitudeMulitplicator: 3
   enemyDetection:
     serializedVersion: 2

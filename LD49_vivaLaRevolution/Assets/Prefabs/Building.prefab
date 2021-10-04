@@ -140,7 +140,7 @@ MonoBehaviour:
   cursorMode: 0
   hotSpot: {x: 0, y: 0}
   likeAbilityScore: -1
-  lootProbability: 100
+  lootProbability: 30
 --- !u!114 &1016681390
 MonoBehaviour:
   m_ObjectHideFlags: 0

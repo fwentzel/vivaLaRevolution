@@ -84,11 +84,11 @@ public class Building : MonoBehaviour
             GameManager.instance.EndGame(true);
         }
         captureTime = captureDurration;
-        int rdm = UnityEngine.Random.Range(0, 100);
-        if (rdm < 50)
-        {
+        // int rdm = UnityEngine.Random.Range(0, 100);
+        // if (rdm < 50)
+        
             ProtestorManager.instance.SpawnProtestor();
-        }
+        
 
         float initialScaleY = transform.localScale.y;
         transform.DOScaleY(transform.localScale.y * 1.4f, .20f).OnComplete(() => transform.DOScaleY(initialScaleY, .1f));

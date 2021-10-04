@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 1
-  attackDamage: 10
+  attackDamage: 11
   detectRadius: 15
   attackRange: 4
   fightWithinRange: 30

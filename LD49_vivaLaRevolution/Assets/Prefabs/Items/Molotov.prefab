@@ -106,7 +106,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 2048
-  influenceRadius: 30
+  influenceRadius: 20
   explosionParticles: {fileID: 7958413605842114963}
   enemyLayer:
     serializedVersion: 2

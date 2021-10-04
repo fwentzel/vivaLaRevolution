@@ -7,7 +7,8 @@ public class Police : RTSUnit
     public PoliceGroup group;
     public Transform holdPosition;
 
-    public bool isRunning { get; private set; } = false;
+    public bool isRunning = false;
+    public bool isAdvancing = false;
     protected override void Start()
     {
         moveToPosition = holdPosition.position;
@@ -22,12 +23,12 @@ public class Police : RTSUnit
     }
     protected override void Update()
     {
-        isRunning = !group.IsNearCurrentHoldPoint(this);
-        // isRunning = myHealth.HealthRatio()<.2f;
-        if (isRunning)
+        if ((isAdvancing || isRunning) && group.IsNearCurrentHoldPoint(this))
         {
-            targetHealth = null;
+            isAdvancing = false;
+            isRunning = false;
         }
+        // isRunning = myHealth.HealthRatio()<.2f;
 
         base.Update();
 
@@ -42,7 +43,7 @@ public class Police : RTSUnit
                     break;
                 }
             }
-
+            
             navMeshAgent.destination = holdPosition == null ? moveToPosition : holdPosition.position;
         }
     }
@@ -54,7 +55,7 @@ public class Police : RTSUnit
     }
     void OnDestroy()
     {
-            group.members.Remove(this);
+        group.members.Remove(this);
         //if (group.members.Contains(this))
     }
 

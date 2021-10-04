@@ -8,7 +8,7 @@ public class PoliceManager : MonoBehaviour
     public HoldPoint defaultSpawnPoint;
     public List<PoliceGroup> groups;
     public float respawnInterval = 5;
-    private float nextRespawn = 5;
+    private float nextRespawn = 0;
 
     public int requiredAmountPerHoldPoint = 6;
 
@@ -22,7 +22,6 @@ public class PoliceManager : MonoBehaviour
             instance = this;
         else
             Destroy(this);
-        nextRespawn = Time.time + respawnInterval;
         groups = new List<PoliceGroup>(FindObjectsOfType<PoliceGroup>());
 
     }
@@ -59,6 +58,12 @@ public class PoliceManager : MonoBehaviour
         bool advance = false;
         foreach (PoliceGroup group in groups)
         {
+            if (group.ignoreRespawnAndHoldpointCalc)
+            {
+                result++;
+                continue;
+            }
+
             //Returns +1 if this group can advance, returns -1 if needs to fall back
             int tempResult = group.CheckChangeHoldPosition();
             result += tempResult;
@@ -90,6 +95,8 @@ public class PoliceManager : MonoBehaviour
         foreach (PoliceGroup group in groups)
         {
             int v = isStart ? group.startSize : amountPerGroup;
+            if (group.ignoreRespawnAndHoldpointCalc && !isStart)
+                continue;
             HoldPoint spawnHoldPoint = isStart ? group.holdPoints[group.currentHoldIndex] : defaultSpawnPoint;
             for (int i = 0; i < v; i++)
             {

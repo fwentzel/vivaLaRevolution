@@ -466,8 +466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6184fb9177324ca45746694be8c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 0.9
-  attackDamage: 8
+  attackSpeed: 1
+  attackDamage: 10
   detectRadius: 15
   attackRange: 4
   fightWithinRange: 30

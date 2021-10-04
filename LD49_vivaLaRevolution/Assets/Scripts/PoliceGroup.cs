@@ -12,12 +12,14 @@ public class PoliceGroup : MonoBehaviour
 
     public int startSize = 10;
 
+    public bool ignoreRespawnAndHoldpointCalc=false;
+
     public void TryGoToPreviousHoldPoint()
     {
         if (currentHoldIndex > 0)
         {
             currentHoldIndex--;
-            UpdateHoldPos();
+            UpdateHoldPos(false);
         }
     }
     public void TryGoToNextHoldPoint()
@@ -25,7 +27,7 @@ public class PoliceGroup : MonoBehaviour
         if (currentHoldIndex < holdPoints.Count - 1)
         {
             currentHoldIndex++;
-            UpdateHoldPos();
+            UpdateHoldPos(true);
         }
     }
 
@@ -34,13 +36,24 @@ public class PoliceGroup : MonoBehaviour
         return Vector3.Distance(holdPoints[currentHoldIndex].transform.position, policeEntity.transform.position) < policeEntity.fightWithinRange;
     }
 
-    public void UpdateHoldPos()
+    public void UpdateHoldPos(bool isAdvancing)
     {
         foreach (Police member in members)
         {
             if (member == null || holdPoints[currentHoldIndex] == null)
                 continue;
             member.holdPosition = holdPoints[currentHoldIndex].transform;
+            if (isAdvancing)
+            {
+                member.isAdvancing = true;
+                member.isRunning = false;
+            }
+            else
+            {
+                //fleeing
+                member.isAdvancing = false;
+                member.isRunning = true;
+            }
         }
     }
     public int CheckChangeHoldPosition()
@@ -66,7 +79,7 @@ public class PoliceGroup : MonoBehaviour
         int amount = 0;
         foreach (Police member in members)
         {
-            if (IsNearCurrentHoldPoint(member) || (member.isRunning && member.holdPosition == holdPoints[currentHoldIndex].transform))
+            if (IsNearCurrentHoldPoint(member) || (member.isRunning || member.isAdvancing))
             {
                 amount++;
             }

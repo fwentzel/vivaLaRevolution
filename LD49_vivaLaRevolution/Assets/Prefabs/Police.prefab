@@ -139,7 +139,7 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-  maxHealth: 200
+  maxHealth: 120
   randomizeHealth: 1
 --- !u!114 &4777184973159268322
 MonoBehaviour:
@@ -183,6 +183,8 @@ MonoBehaviour:
   target: {fileID: 0}
   group: {fileID: 0}
   holdPosition: {fileID: 0}
+  isRunning: 0
+  isAdvancing: 0
 --- !u!54 &3012109985939300580
 Rigidbody:
   m_ObjectHideFlags: 0

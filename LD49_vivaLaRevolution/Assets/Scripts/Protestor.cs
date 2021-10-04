@@ -82,7 +82,7 @@ public class Protestor : RTSUnit
                     if (foundBuilding == toBuilding)
                     {
                         navMeshAgent.enabled = false;
-                        if(toBuilding.protestors.Count==0)
+                        if (toBuilding.protestors.Count == 0)
                             EffectAudioManager.instance.PlayWindowClip(transform.position);
                         transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
                         {
@@ -115,7 +115,11 @@ public class Protestor : RTSUnit
 
         return true;
     }
-
+    public override void OnKill()
+    {
+        ProtestorManager.instance.OnProtestorDeath();
+        base.OnKill();
+    }
     public bool CanGiveItem()
     {
         return item == null;

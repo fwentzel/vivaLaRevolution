@@ -12,17 +12,17 @@ public class Tutorial : MonoBehaviour
 {
     public static Tutorial instance;
 
-    [SerializeField]private List<TutorialStep> _tutorialSteps = new List<TutorialStep>();
-    [SerializeField]private CanvasGroup canvasGroup;
-    [SerializeField]private TMP_Text title;
-    [SerializeField]private TMP_Text description;
-    [SerializeField]private Image iconImage;
+    [SerializeField] private List<TutorialStep> _tutorialSteps = new List<TutorialStep>();
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private TMP_Text title;
+    [SerializeField] private TMP_Text description;
+    [SerializeField] private Image iconImage;
     [SerializeField] private Sprite defaultIcon;
 
     private RectTransform rect;
 
     public UnityEvent onClose;
-    
+
     private void Awake()
     {
         instance = this;
@@ -31,7 +31,7 @@ public class Tutorial : MonoBehaviour
     private void Start()
     {
         rect = GetComponent<RectTransform>();
-        
+
         onClose.AddListener(OpenNextTutorial);
         OpenNextTutorial();
     }
@@ -42,26 +42,26 @@ public class Tutorial : MonoBehaviour
         canvasGroup.interactable = true;
         canvasGroup.DOFade(1, 0.3f);
     }
-    public void OpenTutorial(string title,string description, Sprite icon)
+    public void OpenTutorial(string title, string description, Sprite icon)
     {
         SetTitle(title);
         SetDescription(description);
         SetIcon(icon);
         OpenTutorial();
     }
-    
+
 
     public void CloseTutorial()
     {
         canvasGroup.interactable = false;
-        canvasGroup.DOFade(0, 0.3f).OnComplete(()=>onClose?.Invoke());
+        canvasGroup.DOFade(0, 0.3f).OnComplete(() => onClose?.Invoke());
     }
 
     public void SetIcon(Sprite sprite)
     {
         if (sprite == null)
             sprite = defaultIcon;
-        
+
         iconImage.sprite = sprite;
     }
 
@@ -82,9 +82,9 @@ public class Tutorial : MonoBehaviour
 
     public void OpenNextTutorial()
     {
-        if(_tutorialSteps.Count==0)
+        if (_tutorialSteps.Count == 0)
             return;
-        
+
         _tutorialSteps[0].Apply();
         _tutorialSteps.RemoveAt(0);
     }
@@ -93,7 +93,7 @@ public class Tutorial : MonoBehaviour
     {
         _tutorialSteps.Clear();
     }
-    
+
     [System.Serializable]
     public class TutorialStep
     {
@@ -102,11 +102,26 @@ public class Tutorial : MonoBehaviour
         public string description;
         public Sprite icon;
 
+        public bool setCamera = false;
+        public Transform cameraTarget;
+
         public void Apply()
         {
-            Tutorial.instance.OpenTutorial(title,description,icon);
+            Tutorial.instance.OpenTutorial(title, description, icon);
+            if (setCamera)
+            {
+                Transform camTransform = Camera.main.transform;
+                Quaternion initialRotation = camTransform.rotation;
+                camTransform.DOLookAt(cameraTarget.position, 2f).OnComplete(() => { Tutorial.instance.StartCoroutine(RotateBack(initialRotation));});
+            }
+        }
+
+        private IEnumerator RotateBack(Quaternion initialRotation)
+        {
+            yield return new WaitForSeconds(2f);
+            Camera.main.transform.DORotateQuaternion(initialRotation, 2f);
         }
     }
-    
+
 
 }

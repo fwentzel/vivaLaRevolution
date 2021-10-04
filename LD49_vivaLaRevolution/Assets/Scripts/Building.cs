@@ -81,10 +81,10 @@ public class Building : MonoBehaviour
     {
         if (tag.Equals("MainBuilding"))
         {
-            print("YOU WIN!");
+            GameManager.instance.EndGame(true);
         }
         captureTime = captureDurration;
-        LikeManager.instance.IncreaseLikeability(likeAbilityScore);
+        ProtestorManager.instance.SpawnProtestor(transform.position);
         isCaptured = true;
         LeaveProtestors();
 

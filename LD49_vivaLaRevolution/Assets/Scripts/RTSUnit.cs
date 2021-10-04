@@ -128,7 +128,8 @@ public class RTSUnit : MonoBehaviour
 
         moveToPosition = newPosition;
         if (target)
-        {
+        {      
+            target.transform.DOKill(); 
             target.transform.localScale = Vector3.one;
             target.transform.DOScale(Vector3.zero, 1);
         }

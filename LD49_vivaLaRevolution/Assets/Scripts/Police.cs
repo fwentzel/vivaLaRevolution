@@ -61,8 +61,7 @@ public class Police : RTSUnit
 
     private void OnDrawGizmos()
     {
-        if (!holdPosition)
-            return;
+        
 
 
         Gizmos.color = Color.red;
@@ -70,6 +69,8 @@ public class Police : RTSUnit
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectRadius);
         Gizmos.color = Color.green;
+        if (!holdPosition)
+            return;
         Gizmos.DrawWireSphere(holdPosition.position, fightWithinRange);
     }
 }

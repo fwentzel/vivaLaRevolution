@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpeed: 1
   attackDamage: 10
-  detectRadius: 15
+  detectRadius: 35
   attackRange: 4
   fightWithinRange: 35
   magnitudeMulitplicator: 2

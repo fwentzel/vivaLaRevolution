@@ -40,7 +40,6 @@ public class ItemManager : MonoBehaviour
             ItemIcon itemIcon = itemIconObj.GetComponent<ItemIcon>();
             itemIcon.Setup(protestor.item);
             itemIconObj.SetActive(true);
-            
             _itemIcons.Add(itemIcon);
         }
 

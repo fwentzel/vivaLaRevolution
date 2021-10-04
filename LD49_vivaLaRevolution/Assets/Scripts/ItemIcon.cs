@@ -21,6 +21,7 @@ public class ItemIcon : MonoBehaviour, IPointerClickHandler
     public void Setup(Item item)
     {
         this.item = item;
+        this.iconImage.sprite=item.icon;
     }
     
     

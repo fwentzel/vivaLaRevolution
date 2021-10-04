@@ -26,8 +26,9 @@ public class ProtestorManager : MonoBehaviour
         }
     }
 
-    internal void SpawnProtestor(Vector3 position)
+    internal void SpawnProtestor()
     {
-        Instantiate(protestorPrefab , position, Quaternion.identity,transform);
+        int v = UnityEngine.Random.Range(0,protestorParent.childCount-1);
+        Instantiate(protestorPrefab , protestorParent.GetChild(v).transform.position, Quaternion.identity,transform);
     }
 }

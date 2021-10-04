@@ -3,8 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
-
+using DG.Tweening;
 public class Building : MonoBehaviour
 {
 
@@ -28,6 +27,7 @@ public class Building : MonoBehaviour
     public int likeAbilityScore = -1;
 
     private QuickOutline _quickOutline;
+    [SerializeField] int lootProbability =20;
 
     private void Start()
     {
@@ -84,7 +84,14 @@ public class Building : MonoBehaviour
             GameManager.instance.EndGame(true);
         }
         captureTime = captureDurration;
-        ProtestorManager.instance.SpawnProtestor(transform.position);
+        int rdm = UnityEngine.Random.Range(0, 100);
+        if (rdm < 50)
+        {
+            ProtestorManager.instance.SpawnProtestor();
+        }
+
+        float initialScaleY = transform.localScale.y;
+        transform.DOScaleY(transform.localScale.y * 1.4f, .20f).OnComplete(() => transform.DOScaleY(initialScaleY, .1f));
         isCaptured = true;
         LeaveProtestors();
 
@@ -101,15 +108,21 @@ public class Building : MonoBehaviour
                 print("Couldn't give item");
                 continue;
             }
+            int rdm = UnityEngine.Random.Range(0, 100);
+            if (rdm < lootProbability)
+            {
+                if (itemPrefabs.Count == 0)
+                    return;
+                int itemIndex = UnityEngine.Random.Range(0, itemPrefabs.Count);
+                GameObject itemObj = Instantiate(itemPrefabs[itemIndex], transform.position, Quaternion.identity);
+                Item item = itemObj.GetComponent<Item>();
 
-            if (itemPrefabs.Count == 0)
-                return;
-            GameObject itemObj = Instantiate(itemPrefabs[0], transform.position, Quaternion.identity);
-            Item item = itemObj.GetComponent<Item>();
+                print("GIVING ITEM");
+                if (protestor.GiveItem(item)) ;
+            }
 
-            print("GIVING ITEM");
-            if (protestor.GiveItem(item)) ;
-            itemPrefabs.RemoveAt(0);
+
+
 
         }
     }

@@ -106,12 +106,12 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 2048
-  influenceRadius: 20
+  influenceRadius: 6
   explosionParticles: {fileID: 7958413605842114963}
   healLayer:
     serializedVersion: 2
     m_Bits: 1024
-  heal: 100
+  heal: 50
 --- !u!1 &7958413605684528454
 GameObject:
   m_ObjectHideFlags: 0

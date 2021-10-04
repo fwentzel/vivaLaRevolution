@@ -12,7 +12,7 @@ public class HealItem : Item
     {
         explosionParticles.Play();
         
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.1f,healLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, influenceRadius,healLayer);
         foreach (var collider in colliders)
         {
             if (collider.transform.TryGetComponent(out Health health))
@@ -20,6 +20,9 @@ public class HealItem : Item
                 health.heal(heal);
             }
         }
+
+    
+
         
         explosionParticles.Play();
         

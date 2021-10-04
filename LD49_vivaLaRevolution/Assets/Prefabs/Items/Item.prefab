@@ -44,13 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1022e6608569d0e45a6da38dd8031b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: cc4ecf55af1cd724894761687487dc35, type: 3}
+  icon: {fileID: 21300000, guid: 64da6fa01fc634d45b74e12407125d84, type: 3}
   onUseCompleted:
     m_PersistentCalls:
       m_Calls: []
   onUse:
     m_PersistentCalls:
       m_Calls: []
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  influenceRadius: 30
 --- !u!1 &8559951006674118580
 GameObject:
   m_ObjectHideFlags: 0

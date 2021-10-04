@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
-using TMPro.EditorUtilities;
 using UnityEngine.Events;
 
 public class Tutorial : MonoBehaviour

@@ -2,7 +2,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using UnityEditor;
 public class PoliceGroup : MonoBehaviour
 {
     public List<HoldPoint> holdPoints;
@@ -89,8 +88,6 @@ public class PoliceGroup : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!Selection.Contains(gameObject))
-            return;
         Gizmos.color = Color.yellow;
         if (holdPoints.Count > 2)
         {

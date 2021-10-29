@@ -87,7 +87,7 @@ public class Building : MonoBehaviour
         // int rdm = UnityEngine.Random.Range(0, 100);
         // if (rdm < 50)
         
-            ProtestorManager.instance.SpawnProtestor();
+            // ProtestorManager.instance.SpawnProtestor();
         
 
         float initialScaleY = transform.localScale.y;

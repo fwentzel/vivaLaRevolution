@@ -21,6 +21,7 @@ public class Tutorial : MonoBehaviour
     private RectTransform rect;
 
     public UnityEvent onClose;
+    public UnityEvent onFinish;
 
     private void Awake()
     {
@@ -81,8 +82,10 @@ public class Tutorial : MonoBehaviour
 
     public void OpenNextTutorial()
     {
-        if (_tutorialSteps.Count == 0)
+        if (_tutorialSteps.Count == 0){
+             onFinish?.Invoke();
             return;
+        }
 
         _tutorialSteps[0].Apply();
         _tutorialSteps.RemoveAt(0);
@@ -91,6 +94,7 @@ public class Tutorial : MonoBehaviour
     public void SkipTutorial()
     {
         _tutorialSteps.Clear();
+        onFinish?.Invoke();
     }
 
     [System.Serializable]

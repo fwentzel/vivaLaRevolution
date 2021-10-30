@@ -12,10 +12,13 @@ public class Molotov : Item
     public float ticksPerSecond = 2;
     public int damagePerTick = 5;
 
+private void Start() {
+    flameParticles.Play();
+}
     public override void UseCompleted()
     {
         explosionParticles.Play();
-        flameParticles.Play();
+        
         EffectAudioManager.instance.PlayMolotovClip(transform.position);
 
         StartCoroutine(DealDamageOverTime());

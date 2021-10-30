@@ -9869,7 +9869,7 @@ MonoBehaviour:
   influenceRadius: 20
   explosionParticles: {fileID: 7958413605842114963}
   burnDamageParticles: {fileID: 2698711876595618718}
-  flameParticles: {fileID: 7757320343478999682}
+  flameParticles: {fileID: 7958413605684528451}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1536
@@ -14759,7 +14759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2720263154682370321, guid: 6a3ccff402c5a9042a0bb8865130d294, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.318
       objectReference: {fileID: 0}
     - target: {fileID: 2720263154682370321, guid: 6a3ccff402c5a9042a0bb8865130d294, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14806,5 +14806,10 @@ PrefabInstance:
 --- !u!4 &7958413605684528453 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2720263154682370321, guid: 6a3ccff402c5a9042a0bb8865130d294, type: 3}
+  m_PrefabInstance: {fileID: 5454325270542244948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7958413605684528451 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2720263154682370327, guid: 6a3ccff402c5a9042a0bb8865130d294, type: 3}
   m_PrefabInstance: {fileID: 5454325270542244948}
   m_PrefabAsset: {fileID: 0}

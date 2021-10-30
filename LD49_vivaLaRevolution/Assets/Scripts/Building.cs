@@ -105,7 +105,6 @@ public class Building : MonoBehaviour
         {
             if (!protestor.CanGiveItem())
             {
-                print("Couldn't give item");
                 continue;
             }
             int rdm = UnityEngine.Random.Range(0, 100);
@@ -117,8 +116,7 @@ public class Building : MonoBehaviour
                 GameObject itemObj = Instantiate(itemPrefabs[itemIndex], transform.position, Quaternion.identity);
                 Item item = itemObj.GetComponent<Item>();
 
-                print("GIVING ITEM");
-                if (protestor.GiveItem(item)) ;
+                protestor.GiveItem(item) ;
             }
 
 

@@ -106,10 +106,10 @@ public class Protestor : RTSUnit
 
         this.item = item;
         item.onUse.AddListener(() => this.item = null);
-
+        Vector3 scaleBeforeParent = item.transform.localScale;
         item.transform.SetParent(itemHold);
         item.transform.DOLocalMove(Vector3.zero, 0.3f);
-        item.transform.localScale = Vector3.one;
+        item.transform.localScale = scaleBeforeParent;
 
         print("Got Item " + item.name);
 

@@ -113,6 +113,10 @@ public class Protestor : RTSUnit
 
         print("Got Item " + item.name);
 
+        if(RTSSelection.instance.selectedUnits.Contains(this)){
+            ItemManager.instance.AddToList(this);
+        }
+
         return true;
     }
     public override void OnKill()

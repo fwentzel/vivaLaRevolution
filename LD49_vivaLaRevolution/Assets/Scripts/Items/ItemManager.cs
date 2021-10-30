@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 public class ItemManager : MonoBehaviour
@@ -16,10 +17,23 @@ public class ItemManager : MonoBehaviour
     public Transform aimingRecticle;
     public Transform maxDistanceRecticle;
 
+    InputActions.ItemActions itemInput;
+
     private void Awake()
     {
         instance = this;
+       itemInput = new InputActions().Item;
     }
+    private void OnEnable()
+    {
+        itemInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        itemInput.Disable();
+    }
+
 
     private void Start()
     {
@@ -80,13 +94,14 @@ public class ItemManager : MonoBehaviour
 
     public void Update()
     {
-        Vector3 position = RTSSelection.CastToGround(Input.mousePosition);
+        Vector3 position = RTSSelection.CastToGround(itemInput.Point.ReadValue<Vector2>());
         ItemIcon selectedItem = null;
         foreach (var itemIcon in _itemIcons)
         {
+            //TODO refactor to event
             if (!itemIcon)
                 continue;
-            if (Input.GetMouseButtonDown(1))
+            if (itemInput.Cancel.triggered)
                 itemIcon.Deselect();
 
             if (itemIcon.isSelected)
@@ -97,7 +112,7 @@ public class ItemManager : MonoBehaviour
         maxDistanceRecticle.gameObject.SetActive(selectedItem != null);
         if (selectedItem && selectedItem.item)
         {
-
+            
             position = selectedItem.item.GetImprovedPosition(position);
 
             aimingRecticle.position = position + Vector3.up * 0.5f;
@@ -106,7 +121,7 @@ public class ItemManager : MonoBehaviour
             maxDistanceRecticle.position = selectedItem.item.transform.position;
             maxDistanceRecticle.transform.localScale = Vector3.one * 2 * selectedItem.item.maxDistance;
 
-            if (Input.GetMouseButtonDown(0))
+            if (itemInput.Fire.triggered)
             {
                 selectedItem.Release();
             }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class RTSController : MonoBehaviour
@@ -11,36 +11,49 @@ public class RTSController : MonoBehaviour
     private RTSSelection _rtsSelection;
     public LayerMask defaultLayer;
 
+    InputActions.SelectionActions selectionInput;
+
+    private void Awake()
+    {
+        selectionInput = new InputActions().Selection;
+    }
+    private void OnEnable()
+    {
+        selectionInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        selectionInput.Disable();
+    }
 
     private void Start()
     {
         _rtsSelection = GetComponent<RTSSelection>();
+        selectionInput.RightClick.performed += ctx => HandleRightClick();
     }
 
-    private void Update()
+    private void HandleRightClick()
     {
-        if (Input.GetMouseButtonDown(1))
+        Ray ray = Camera.main.ScreenPointToRay(selectionInput.Point.ReadValue<Vector2>());
+        RaycastHit hit;
+
+
+        // No Unit found
+        if (Physics.Raycast(ray, out hit, 1000, defaultLayer))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-
-            // No Unit found
-            if (Physics.Raycast(ray, out hit, 1000, defaultLayer))
+            Building building = hit.transform.GetComponent<Building>();
+            if (building)
             {
-                Building building = hit.transform.GetComponent<Building>();
-                if (building)
-                {
-                    OrderGoLoot(building);
-                }
-                else
-                {
-                    OrderMove(hit.point);
-                }
+                OrderGoLoot(building);
             }
-
+            else
+            {
+                OrderMove(hit.point);
+            }
         }
     }
+
 
     public void OrderGoLoot(Building building)
     {
@@ -65,7 +78,7 @@ public class RTSController : MonoBehaviour
         float distance = _rtsSelection.selectedUnits[0].transform.localScale.x / 2;
         distance *= 1.5f;
 
-        List<Vector3> targetPositions = GetPositionListAround(position, new float[] { 1, 2, 3,4,5,6 }, new int[] { 5, 10, 20,30,40,100 });
+        List<Vector3> targetPositions = GetPositionListAround(position, new float[] { 1, 2, 3, 4, 5, 6 }, new int[] { 5, 10, 20, 30, 40, 100 });
 
 
         for (int i = 0; i < _rtsSelection.selectedUnits.Count; i++)

@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -33,8 +34,9 @@ public class ItemIcon : MonoBehaviour, IPointerClickHandler
             Destroy(gameObject);
             return;
         }
+        //TODO
         
-        Vector3 position = RTSSelection.CastToGround(Input.mousePosition);
+        Vector3 position = RTSSelection.CastToGround(InputSystem.GetDevice<Pointer>().position.ReadValue());
         
         Debug.DrawRay(position,Vector3.up*100,Color.magenta,1f);
         

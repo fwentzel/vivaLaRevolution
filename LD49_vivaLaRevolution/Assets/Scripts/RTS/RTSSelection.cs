@@ -17,11 +17,23 @@ public class RTSSelection : MonoBehaviour
     private Vector3 mouseStart = Vector3.zero;
     private Vector3 mouseEnd = Vector3.zero;
     private bool isDragging;
+    InputActions.SelectionActions selectionInput;
 
     private void Awake()
     {
         instance = this;
+        selectionInput = new InputActions().Selection;
     }
+    private void OnEnable()
+    {
+        selectionInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        selectionInput.Disable();
+    }
+
 
     private void Start()
     {
@@ -49,30 +61,30 @@ public class RTSSelection : MonoBehaviour
 
     public void MouseDown(PointerEventData eventData)
     {
-        if(eventData.button != PointerEventData.InputButton.Left)
+        if (eventData.button != PointerEventData.InputButton.Left)
             return;
-        
+
         mouseStart = eventData.position;
     }
 
     public void MouseDrag(PointerEventData eventData)
     {
-        if(eventData.button != PointerEventData.InputButton.Left)
+        if (eventData.button != PointerEventData.InputButton.Left)
             return;
-        mouseEnd =eventData.position;
-        if((mouseStart - mouseEnd).magnitude > 40)
+        mouseEnd = eventData.position;
+        if ((mouseStart - mouseEnd).magnitude > 40)
         {
             isDragging = true;
         }
     }
 
-        
+
     public void MouseUp(PointerEventData eventData)
     {
-        if(eventData.button != PointerEventData.InputButton.Left)
+        if (eventData.button != PointerEventData.InputButton.Left)
             return;
-        
-        if(isDragging)
+
+        if (isDragging)
             HandleSelect();
         else
             HandleClick();
@@ -97,8 +109,9 @@ public class RTSSelection : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(mouseStart);
         RaycastHit hit;
 
-        if (!Input.GetKey(KeyCode.LeftShift))
-            selectedUnits = new List<Protestor>();
+        // didnt work anyways, maybe later 
+        // if (!Input.GetKey(KeyCode.LeftShift))
+        //     selectedUnits = new List<Protestor>();
 
 
         // No Unit found
@@ -110,7 +123,7 @@ public class RTSSelection : MonoBehaviour
 
         // Get Unit
         Protestor rtsUnit = hit.transform.GetComponentInParent<Protestor>();
-        if(rtsUnit &&  !selectedUnits.Contains(rtsUnit))
+        if (rtsUnit && !selectedUnits.Contains(rtsUnit))
             selectedUnits.Add(rtsUnit);
 
         OnUnitSelection?.Invoke(selectedUnits);
@@ -135,8 +148,9 @@ public class RTSSelection : MonoBehaviour
     void HandleSelect()
     {
 
-        if (!Input.GetKey(KeyCode.LeftShift))
-            selectedUnits = new List<Protestor>();
+        // didnt work anyways, maybe later 
+        // if (!Input.GetKey(KeyCode.LeftShift))
+        //     selectedUnits = new List<Protestor>();
 
         print("Handling Select");
         Vector3[] verts = new Vector3[4];
@@ -175,9 +189,9 @@ public class RTSSelection : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    { 
+    {
         Protestor rtsUnit = other.transform.GetComponentInParent<Protestor>();
-        if(rtsUnit && !selectedUnits.Contains(rtsUnit))
+        if (rtsUnit && !selectedUnits.Contains(rtsUnit))
             selectedUnits.Add(rtsUnit);
     }
 

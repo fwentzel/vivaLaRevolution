@@ -47,7 +47,6 @@ public class ItemIcon : MonoBehaviour, IPointerClickHandler
     {
         if(eventData.button!= PointerEventData.InputButton.Left)
             return;
-        print("SELECTED");
         isSelected = true;
         onSelect?.Invoke();
     }

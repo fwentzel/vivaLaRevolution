@@ -9,11 +9,13 @@ public class Health : MonoBehaviour
     public UnityEvent<float> onTakeDamage;
     public int maxHealth = 100;
     public int currentHealth { get; private set; }
+    public bool randomizeHealth = true;
+    public Damage lastDamage;
     MeshRenderer meshRenderer;
     bool isPolice;
-    public bool randomizeHealth = true;
 
     private Vector3 initialScale;
+
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
@@ -31,9 +33,9 @@ public class Health : MonoBehaviour
         onHeal?.Invoke(amount / (float)maxHealth);
         UpdateColor();
     }
-    public void takeDamage(int amount)
+    public void takeDamage(Damage damage)
     {
-        currentHealth -= amount;
+        currentHealth -= damage.amount;
         if (currentHealth <= 0)
         {
             if (TryGetComponent(out RTSUnit rts))
@@ -48,7 +50,8 @@ public class Health : MonoBehaviour
         }
         else
         {
-            onTakeDamage?.Invoke(amount / (float)maxHealth);
+            lastDamage = damage;
+            onTakeDamage?.Invoke(damage.amount / (float)maxHealth);
         }
 
         transform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() =>
@@ -74,4 +77,25 @@ public class Health : MonoBehaviour
     }
 
 
+}
+
+public struct Damage
+{
+    public DamageType damageType;
+    public int amount;
+    public Transform originTransform;
+
+    public Damage(DamageType damageType, int amount, Transform originTransform)
+    {
+        this.damageType = damageType;
+        this.amount = amount;
+        this.originTransform = originTransform;
+    }
+}
+
+public enum DamageType
+{
+    Molotov,
+    Meele,
+    Ranged
 }

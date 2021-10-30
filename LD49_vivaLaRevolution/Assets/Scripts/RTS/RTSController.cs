@@ -58,7 +58,6 @@ public class RTSController : MonoBehaviour
 
     public void OrderMove(Vector3 position)
     {
-        print("COMMAND! " + position.ToString());
 
         if (_rtsSelection.selectedUnits.Count == 0)
             return;

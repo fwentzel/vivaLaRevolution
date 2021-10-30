@@ -12,13 +12,14 @@ public class Molotov : Item
     public float ticksPerSecond = 2;
     public int damagePerTick = 5;
 
-private void Start() {
-    flameParticles.Play();
-}
+    private void Start()
+    {
+        flameParticles.Play();
+    }
     public override void UseCompleted()
     {
         explosionParticles.Play();
-        
+
         EffectAudioManager.instance.PlayMolotovClip(transform.position);
 
         StartCoroutine(DealDamageOverTime());
@@ -36,7 +37,7 @@ private void Start() {
             {
                 if (collider.transform.TryGetComponent(out Health health))
                 {
-                    health.takeDamage(damagePerTick);
+                    health.takeDamage(new Damage(DamageType.Molotov, damagePerTick, transform));
                 }
             }
             yield return new WaitForSeconds(1 / ticksPerSecond);

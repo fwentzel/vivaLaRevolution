@@ -106,7 +106,7 @@ public class RTSUnit : MonoBehaviour
 
     private void Attack()
     {
-        targetHealth.takeDamage(attackDamage);
+        targetHealth.takeDamage(new Damage(DamageType.Meele,attackDamage,transform));
         nextAttackTime = Time.time + attackSpeed;
         transform.DOScale(initialScale * 1.2f, 0.1f).OnComplete(() =>
        {

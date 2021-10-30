@@ -111,8 +111,6 @@ public class Protestor : RTSUnit
         item.transform.DOLocalMove(Vector3.zero, 0.3f);
         item.transform.localScale = scaleBeforeParent;
 
-        print("Got Item " + item.name);
-
         if(RTSSelection.instance.selectedUnits.Contains(this)){
             ItemManager.instance.AddToList(this);
         }

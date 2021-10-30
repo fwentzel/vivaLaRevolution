@@ -9866,6 +9866,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 2048
+  maxDistance: 50
   influenceRadius: 20
   explosionParticles: {fileID: 7958413605842114963}
   burnDamageParticles: {fileID: 2698711876595618718}
@@ -9873,9 +9874,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1536
-  duration: 4
+  duration: 10
   ticksPerSecond: 2
-  damagePerTick: 5
+  damagePerTick: 3
 --- !u!1 &7958413605842114966
 GameObject:
   m_ObjectHideFlags: 0

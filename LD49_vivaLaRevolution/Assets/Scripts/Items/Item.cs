@@ -55,7 +55,7 @@ public class Item : MonoBehaviour
     public virtual void UseCompleted()
     {
         onUseCompleted?.Invoke();
-        
+        transform.DOKill();
         Destroy(gameObject);
     }
 }

@@ -129,6 +129,7 @@ MonoBehaviour:
   protestors: []
   itemPrefabs:
   - {fileID: 7958413604708030817, guid: bb3bbe5d5fd152d4cb9b6b9c58149fdb, type: 3}
+  - {fileID: 7958413604708030817, guid: d569dc5df5a4dbc41a9a6821dac240ee, type: 3}
   maxProtestors: 3
   captureDurration: 5
   isCaptured: 0

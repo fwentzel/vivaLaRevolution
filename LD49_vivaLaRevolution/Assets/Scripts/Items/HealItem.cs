@@ -2,42 +2,63 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using DG.Tweening;
+
 public class HealItem : Item
 {
-    public ParticleSystem explosionParticles;
+    public ParticleSystem flameParticles;
+    public ParticleSystem healParticles;
     public LayerMask healLayer;
-    public int heal = 100;
+    public int duration = 10;
+    public float ticksPerSecond = 2;
+    public int healPerTick = 5;
 
+    public float timeToRotate = 10;
+    private void Start()
+    {
+        flameParticles.Play();
+    }
     public override void UseCompleted()
     {
-        explosionParticles.Play();
-        
-        Collider[] colliders = Physics.OverlapSphere(transform.position, influenceRadius,healLayer);
-        foreach (var collider in colliders)
+        healParticles.transform.DORotate(new Vector3 (0, 360,0), timeToRotate, RotateMode.WorldAxisAdd).SetLoops(-1).SetEase(Ease.Linear);
+        healParticles.Play();
+
+        EffectAudioManager.instance.PlayHealingClip(transform.position);
+
+        StartCoroutine(HealOverTime());
+
+    }
+
+    private IEnumerator HealOverTime()
+    {
+        float startTime = Time.time;
+
+        while (Time.time < startTime + duration)
         {
-            if (collider.transform.TryGetComponent(out Health health))
+            Collider[] colliders = Physics.OverlapSphere(transform.position, influenceRadius, healLayer);
+            foreach (var collider in colliders)
             {
-                health.heal(heal);
+                if (collider.transform.TryGetComponent(out Health health))
+                {
+                    health.heal(healPerTick);
+                }
             }
+            yield return new WaitForSeconds(1 / ticksPerSecond);
         }
 
-    
+        DoBaseCompleted();
 
-        
-        explosionParticles.Play();
-        
-        Invoke("DoBaseCompleted",explosionParticles.main.duration);
     }
 
     public void DoBaseCompleted()
     {
-        
+
         base.UseCompleted();
     }
-    
+
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position,influenceRadius);
+        Gizmos.DrawWireSphere(transform.position, influenceRadius);
     }
 }

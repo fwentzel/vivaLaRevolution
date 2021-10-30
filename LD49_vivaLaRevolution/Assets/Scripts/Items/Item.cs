@@ -13,7 +13,7 @@ public class Item : MonoBehaviour
 
     public LayerMask obstacleLayer;
 
-    private float maxDistance = 50;
+    public float maxDistance = 50;
     public float influenceRadius = 30f;
 
     public virtual void Use(Vector3 position)

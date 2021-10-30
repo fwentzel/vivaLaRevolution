@@ -14,6 +14,7 @@ public class ItemManager : MonoBehaviour
     public CanvasGroup canvasGroup;
 
     public Transform aimingRecticle;
+    public Transform maxDistanceRecticle;
 
     private void Awake()
     {
@@ -93,6 +94,7 @@ public class ItemManager : MonoBehaviour
         }
 
         aimingRecticle.gameObject.SetActive(selectedItem != null);
+        maxDistanceRecticle.gameObject.SetActive(selectedItem != null);
         if (selectedItem && selectedItem.item)
         {
 
@@ -101,6 +103,8 @@ public class ItemManager : MonoBehaviour
             aimingRecticle.position = position + Vector3.up * 0.5f;
             aimingRecticle.transform.localScale = Vector3.one * 2 * selectedItem.item.influenceRadius;
 
+            maxDistanceRecticle.position = selectedItem.item.transform.position;
+            maxDistanceRecticle.transform.localScale = Vector3.one * 2 * selectedItem.item.maxDistance;
 
             if (Input.GetMouseButtonDown(0))
             {

@@ -20,7 +20,7 @@ public class HealItem : Item
     }
     public override void UseCompleted()
     {
-        healParticles.transform.DORotate(new Vector3 (0, 360,0), timeToRotate, RotateMode.WorldAxisAdd).SetLoops(-1).SetEase(Ease.Linear);
+        healParticles.transform.DORotate(new Vector3(0, 360, 0), timeToRotate, RotateMode.WorldAxisAdd).SetLoops(-1).SetEase(Ease.Linear);
         healParticles.Play();
 
         EffectAudioManager.instance.PlayHealingClip(transform.position);
@@ -52,7 +52,8 @@ public class HealItem : Item
 
     public void DoBaseCompleted()
     {
-
+        healParticles.transform.DOKill();
+       
         base.UseCompleted();
     }
 

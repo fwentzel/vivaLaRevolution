@@ -52,19 +52,15 @@ public class Police : RTSUnit
     public void onTakeDamage()
     {
         Damage lastDamage = myHealth.lastDamage;
-        if (lastDamage.damageType == DamageType.Molotov)
+        if (lastDamage.damageType == DamageType.Molotov && lastDamage.originTransform.TryGetComponent<Molotov>(out Molotov molotov))
         {
             //Run away from Molotov
             Vector3 fleeDirection = transform.position - lastDamage.originTransform.position;
             fleeDirection.y = 0;
-            
-                moveToPosition += fleeDirection.normalized * 2f;
-            
+            moveToPosition += fleeDirection.normalized * 2f;
             isRunning = true;
-            if (lastDamage.originTransform.TryGetComponent<Molotov>(out Molotov molotov))
-            {
-                molotov.onUseCompleted.AddListener(()=>StopRunning());
-            }
+            molotov.onUseCompleted.AddListener(() => StopRunning());
+
         }
     }
 
@@ -75,7 +71,7 @@ public class Police : RTSUnit
         isRunning = false;
     }
 
-      private void StopRunning()
+    private void StopRunning()
     {
         moveToPosition = transform.position;
         isRunning = false;

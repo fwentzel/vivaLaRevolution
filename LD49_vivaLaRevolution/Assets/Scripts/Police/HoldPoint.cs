@@ -2,9 +2,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HoldPoint : MonoBehaviour
+public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     public UnityEvent onCapturePoint;
@@ -19,16 +20,24 @@ public class HoldPoint : MonoBehaviour
     [SerializeField] LayerMask buildingLayer;
     [SerializeField] Image protestorProgessImage;
     [SerializeField] Image policeProgessImage;
+    [SerializeField] Image buildingInfluenceRangeImage;
 
     Collider[] output = new Collider[4];
     float capturedAmount = 0;
     Building[] buildingsToInfluence;
 
     Boolean isCaptured = false;
+
+    private void Awake()
+    {
+        GetComponent<SphereCollider>().radius = captureRadius;
+        buildingInfluenceRangeImage.gameObject.SetActive(false);
+    }
     private void Start()
     {
         protestorProgessImage.rectTransform.sizeDelta = new Vector2(captureRadius * 2, captureRadius * 2);
         policeProgessImage.rectTransform.sizeDelta = new Vector2(captureRadius * 2, captureRadius * 2);
+        buildingInfluenceRangeImage.rectTransform.sizeDelta = new Vector2(buildingInfluenceRadius * 2, buildingInfluenceRadius * 2);
         UpdateFillAmounts();
         SetupBuildingsToInfluence();
     }
@@ -115,6 +124,28 @@ public class HoldPoint : MonoBehaviour
         }
         isCaptured = false;
         onLoosePoint?.Invoke();
+    }
+
+
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
+    {
+        // buildingInfluenceRangeImage.gameObject.SetActive(true);
+        foreach (Building building in buildingsToInfluence)
+        {
+            building.quickOutline.OutlineColor = building.lootable ? Color.green : Color.red;
+            building.quickOutline.enabled = true;
+
+        }
+    }
+
+    void IPointerExitHandler.OnPointerExit(PointerEventData pointerEventData)
+    {
+        // buildingInfluenceRangeImage.gameObject.SetActive(false);
+        foreach (Building building in buildingsToInfluence)
+        {
+            building.quickOutline.enabled = false;
+            building.quickOutline.OutlineColor = Color.white;
+        }
     }
 
     private void OnDrawGizmos()

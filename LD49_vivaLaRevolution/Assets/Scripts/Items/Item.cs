@@ -18,15 +18,15 @@ public class Item : MonoBehaviour
 
     public virtual void Use(Vector3 position)
     {
-        if(!transform)
+        if (!transform)
             return;
 
 
 
         position = GetImprovedPosition(position);
-        
+
         transform.parent = null;
-        
+
         onUse?.Invoke();
         transform.DOMove(position, 0.3f).OnComplete(UseCompleted);
     }
@@ -39,7 +39,7 @@ public class Item : MonoBehaviour
         {
             position = transform.position + difference.normalized * maxDistance;
         }
-        
+
         //Correct for Hits
         RaycastHit hit;
         difference = position - transform.position;
@@ -50,8 +50,8 @@ public class Item : MonoBehaviour
 
         return position;
     }
-    
-    
+
+
     public virtual void UseCompleted()
     {
         onUseCompleted?.Invoke();

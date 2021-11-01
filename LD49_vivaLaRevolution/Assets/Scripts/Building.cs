@@ -29,7 +29,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public int likeAbilityScore = -1;
 
-    private QuickOutline _quickOutline;
+    public QuickOutline quickOutline;
     [SerializeField] int lootProbability = 20;
 
     private void Awake()
@@ -44,10 +44,10 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (renderer)
             initialColor = renderer.material.color;
 
-        _quickOutline = GetComponent<QuickOutline>();
+        quickOutline = GetComponent<QuickOutline>();
 
-        if (_quickOutline)
-            _quickOutline.enabled = false;
+        if (quickOutline)
+            quickOutline.enabled = false;
     }
 
 
@@ -158,8 +158,8 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (lootable && protestors.Count < maxProtestors)
         {
             Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-            if (_quickOutline)
-                _quickOutline.enabled = true;
+            if (quickOutline)
+                quickOutline.enabled = true;
         }
 
 
@@ -169,7 +169,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
 
-        if (_quickOutline)
-            _quickOutline.enabled = false;
+        if (quickOutline)
+            quickOutline.enabled = false;
     }
 }

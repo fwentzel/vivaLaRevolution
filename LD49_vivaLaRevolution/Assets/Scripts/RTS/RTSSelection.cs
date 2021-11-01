@@ -18,9 +18,10 @@ public class RTSSelection : MonoBehaviour
     private Vector3 mouseEnd = Vector3.zero;
     private bool isDragging;
     InputActions.SelectionActions selectionInput;
-
+    int uiLayer;
     private void Awake()
     {
+        uiLayer = LayerMask.NameToLayer("UI");
         instance = this;
     }
 
@@ -37,6 +38,7 @@ public class RTSSelection : MonoBehaviour
 
     private void Start()
     {
+
         transform.position = Vector3.zero;
         selectionInput = InputActionsManager.instance.inputActions.Selection;
         EnableSelectionInput();
@@ -78,10 +80,6 @@ public class RTSSelection : MonoBehaviour
         {
             HandleSelect();
         }
-        else
-        {
-            HandleClick();
-        }
 
         isDragging = false;
     }
@@ -100,10 +98,27 @@ public class RTSSelection : MonoBehaviour
         OnUnitSelection?.Invoke(selectedUnits);
     }
 
+    private bool IsMouseOverUI()
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = selectionInput.Point.ReadValue<Vector2>();
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+
+        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+        foreach (var item in raycastResults)
+        {
+            if (item.gameObject.layer == uiLayer)
+                return true;
+        }
+        return false;
+    }
     private void HandleClick()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (IsMouseOverUI())
+        {
             return;
+        }
         Ray ray = Camera.main.ScreenPointToRay(mouseStart);
         RaycastHit hit;
 

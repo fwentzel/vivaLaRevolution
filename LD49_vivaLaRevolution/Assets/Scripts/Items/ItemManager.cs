@@ -16,8 +16,14 @@ public class ItemManager : MonoBehaviour
 
     public Transform aimingRecticle;
     public Transform maxDistanceRecticle;
+    public ItemIcon selectedItem = null;
 
     InputActions.ItemActions itemInput;
+
+    //Debugging
+    public int giveItemsToProtestorsOnStart = 3;
+    public List<Item> items;
+
 
     private void Awake()
     {
@@ -33,6 +39,22 @@ public class ItemManager : MonoBehaviour
 
         itemInput = InputActionsManager.instance.inputActions.Item;
         itemInput.Enable();
+        itemInput.Cancel.performed += ctx => DeselectItem();
+
+
+        //Debugging 
+        Protestor[] protestors = FindObjectsOfType<Protestor>();
+        int itemsGiven = 0;
+        for (int i = 0; i < protestors.Length; i++)
+        {
+            if (itemsGiven < giveItemsToProtestorsOnStart && items.Count > 0)
+            {
+                Item item = Instantiate(items[UnityEngine.Random.Range(0, items.Count)]);
+                protestors[i].GiveItem(item);
+                itemsGiven++;
+            }
+        }
+
     }
 
     public void OnSelectedUnits(List<Protestor> protestors)
@@ -42,17 +64,12 @@ public class ItemManager : MonoBehaviour
 
     public void PopulateList(List<Protestor> protestors)
     {
-        ClearList();
+        _itemIcons.ForEach((itemIcon) => itemIcon.gameObject.SetActive(false));
         foreach (var protestor in protestors)
         {
             if (!protestor.item)
                 continue;
-
-            GameObject itemIconObj = Instantiate(iconPrefab, content);
-            ItemIcon itemIcon = itemIconObj.GetComponent<ItemIcon>();
-            itemIcon.Setup(protestor.item);
-            itemIconObj.SetActive(true);
-            _itemIcons.Add(itemIcon);
+            _itemIcons.Find(itemIcon => itemIcon.item == protestor.item)?.gameObject.SetActive(true);
         }
 
     }
@@ -65,39 +82,45 @@ public class ItemManager : MonoBehaviour
         GameObject itemIconObj = Instantiate(iconPrefab, content);
         ItemIcon itemIcon = itemIconObj.GetComponent<ItemIcon>();
         itemIcon.Setup(protestor.item);
-        itemIconObj.SetActive(true);
+        itemIconObj.SetActive(RTSSelection.instance.selectedUnits.Contains(protestor));
         _itemIcons.Add(itemIcon);
 
 
     }
-
-    public void ClearList()
+    public void RemoveItemFromList(ItemIcon itemIcon)
     {
-        foreach (var itemIcon in _itemIcons)
+        _itemIcons.Remove(itemIcon);
+        if (selectedItem == itemIcon)
+            DeselectItem();
+
+
+    }
+    public void RemoveItemFromList(Item item)
+    {
+        foreach (ItemIcon itemIcon in _itemIcons)
         {
-            if (!itemIcon)
-                continue;
-            Destroy(itemIcon.gameObject);
+            if (itemIcon.item == item)
+            {
+                RemoveItemFromList(itemIcon);
+                return;
+            }
         }
-        _itemIcons.Clear();
+    }
+    private void DeselectItem()
+    {
+        if (selectedItem != null)
+        {
+
+            selectedItem.Deselect();
+            selectedItem = null;
+        }
     }
 
 
     public void Update()
     {
         Vector3 position = RTSSelection.CastToGround(itemInput.Point.ReadValue<Vector2>());
-        ItemIcon selectedItem = null;
-        foreach (var itemIcon in _itemIcons)
-        {
-            //TODO refactor to event
-            if (!itemIcon)
-                continue;
-            if (itemInput.Cancel.triggered)
-                itemIcon.Deselect();
 
-            if (itemIcon.isSelected)
-                selectedItem = itemIcon;
-        }
 
         aimingRecticle.gameObject.SetActive(selectedItem != null);
         maxDistanceRecticle.gameObject.SetActive(selectedItem != null);

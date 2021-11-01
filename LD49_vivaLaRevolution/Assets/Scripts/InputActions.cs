@@ -171,7 +171,7 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""id"": ""c90611b6-dd0f-4be8-9262-599284ecf9c3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=1)""
                 },
                 {
                     ""name"": ""Drag"",

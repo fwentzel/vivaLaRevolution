@@ -17,15 +17,14 @@ public class ItemIcon : MonoBehaviour
 
     public UnityEvent onSelect;
     public UnityEvent onDeselect;
-    public bool isSelected = false;
-    
+
     public void Setup(Item item)
     {
         this.item = item;
-        this.iconImage.sprite=item.icon;
+        this.iconImage.sprite = item.icon;
     }
-    
-    
+
+
 
     public void Release()
     {
@@ -35,25 +34,26 @@ public class ItemIcon : MonoBehaviour
             return;
         }
         //TODO
-        
+
         Vector3 position = RTSSelection.CastToGround(InputSystem.GetDevice<Pointer>().position.ReadValue());
-        
-        Debug.DrawRay(position,Vector3.up*100,Color.magenta,1f);
-        
+
+        Debug.DrawRay(position, Vector3.up * 100, Color.magenta, 1f);
+
         item.Use(position);
+        ItemManager.instance.RemoveItemFromList(this);
         Destroy(gameObject);
     }
 
 
     public void Select()
     {
-        isSelected = true;
+        ItemManager.instance.selectedItem = this;
+        print("Selected item");
         onSelect?.Invoke();
     }
 
     public void Deselect()
     {
-        isSelected = false;   
         onDeselect?.Invoke();
     }
 }

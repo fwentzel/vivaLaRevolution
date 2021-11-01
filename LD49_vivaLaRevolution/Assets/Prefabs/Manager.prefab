@@ -52,7 +52,7 @@ MonoBehaviour:
   groups: []
   respawnInterval: 50
   requiredAmountPerHoldPoint: 3
-  minMaxSpawnAmount: {x: 1, y: 4}
+  minMaxSpawnAmount: {x: 0, y: 0}
 --- !u!114 &7060042828405826471
 MonoBehaviour:
   m_ObjectHideFlags: 0

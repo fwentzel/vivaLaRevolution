@@ -111,14 +111,17 @@ public class Protestor : RTSUnit
         item.transform.DOLocalMove(Vector3.zero, 0.3f);
         item.transform.localScale = scaleBeforeParent;
 
-        if(RTSSelection.instance.selectedUnits.Contains(this)){
-            ItemManager.instance.AddToList(this);
-        }
+        ItemManager.instance.AddToList(this);
+
 
         return true;
     }
     public override void OnKill()
     {
+        if (item)
+        {
+            ItemManager.instance.RemoveItemFromList(item);
+        }
         ProtestorManager.instance.OnProtestorDeath();
         base.OnKill();
     }

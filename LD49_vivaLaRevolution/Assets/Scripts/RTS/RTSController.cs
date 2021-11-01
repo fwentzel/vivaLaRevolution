@@ -13,22 +13,12 @@ public class RTSController : MonoBehaviour
 
     InputActions.SelectionActions selectionInput;
 
-    private void Awake()
-    {
-        selectionInput = new InputActions().Selection;
-    }
-    private void OnEnable()
-    {
-        selectionInput.Enable();
-    }
 
-    private void OnDisable()
-    {
-        selectionInput.Disable();
-    }
 
     private void Start()
     {
+        selectionInput = InputActionsManager.instance.inputActions.Selection;
+        selectionInput.Enable();
         _rtsSelection = GetComponent<RTSSelection>();
         selectionInput.RightClick.performed += ctx => HandleRightClick();
     }

@@ -10,7 +10,7 @@ public class ItemManager : MonoBehaviour
     public static ItemManager instance;
     private RTSSelection _rtsSelection;
     public RectTransform content;
-    public ItemIcon iconPreset;
+    public GameObject iconPrefab;
     private List<ItemIcon> _itemIcons = new List<ItemIcon>();
     public CanvasGroup canvasGroup;
 
@@ -22,24 +22,17 @@ public class ItemManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-       itemInput = new InputActions().Item;
-    }
-    private void OnEnable()
-    {
-        itemInput.Enable();
-    }
 
-    private void OnDisable()
-    {
-        itemInput.Disable();
     }
-
 
     private void Start()
     {
         _rtsSelection = FindObjectOfType<RTSSelection>();
         if (_rtsSelection != null)
             _rtsSelection.OnUnitSelection.AddListener(OnSelectedUnits);
+
+        itemInput = InputActionsManager.instance.inputActions.Item;
+        itemInput.Enable();
     }
 
     public void OnSelectedUnits(List<Protestor> protestors)
@@ -50,13 +43,12 @@ public class ItemManager : MonoBehaviour
     public void PopulateList(List<Protestor> protestors)
     {
         ClearList();
-        iconPreset.gameObject.SetActive(false);
         foreach (var protestor in protestors)
         {
             if (!protestor.item)
                 continue;
 
-            GameObject itemIconObj = Instantiate(iconPreset.gameObject, content);
+            GameObject itemIconObj = Instantiate(iconPrefab, content);
             ItemIcon itemIcon = itemIconObj.GetComponent<ItemIcon>();
             itemIcon.Setup(protestor.item);
             itemIconObj.SetActive(true);
@@ -67,11 +59,10 @@ public class ItemManager : MonoBehaviour
 
     public void AddToList(Protestor protestor)
     {
-        iconPreset.gameObject.SetActive(false);
         if (!protestor.item)
             return;
 
-        GameObject itemIconObj = Instantiate(iconPreset.gameObject, content);
+        GameObject itemIconObj = Instantiate(iconPrefab, content);
         ItemIcon itemIcon = itemIconObj.GetComponent<ItemIcon>();
         itemIcon.Setup(protestor.item);
         itemIconObj.SetActive(true);
@@ -112,7 +103,7 @@ public class ItemManager : MonoBehaviour
         maxDistanceRecticle.gameObject.SetActive(selectedItem != null);
         if (selectedItem && selectedItem.item)
         {
-            
+            RTSSelection.instance.DisableSelectionInput();
             position = selectedItem.item.GetImprovedPosition(position);
 
             aimingRecticle.position = position + Vector3.up * 0.5f;
@@ -123,8 +114,13 @@ public class ItemManager : MonoBehaviour
 
             if (itemInput.Fire.triggered)
             {
+                RTSSelection.instance.EnableSelectionInput();
                 selectedItem.Release();
             }
+        }
+        else
+        {
+            RTSSelection.instance.EnableSelectionInput();
         }
 
 

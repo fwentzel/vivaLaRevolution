@@ -13,19 +13,12 @@ public class CameraController : MonoBehaviour
 
     private InputActions.CameraActions cameraInput;
 
-    private void Awake()
+    private void Start()
     {
-        cameraInput = new InputActions().Camera;
-    }
-    private void OnEnable()
-    {
+        cameraInput = InputActionsManager.instance.inputActions.Camera;
         cameraInput.Enable();
     }
 
-    private void OnDisable()
-    {
-        cameraInput.Disable();
-    }
     private void Update()
     {
         Vector3 position = transform.position;

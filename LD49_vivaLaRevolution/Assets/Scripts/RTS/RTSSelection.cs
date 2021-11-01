@@ -22,23 +22,27 @@ public class RTSSelection : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        selectionInput = new InputActions().Selection;
     }
-    private void OnEnable()
+
+    public void EnableSelectionInput()
     {
         selectionInput.Enable();
     }
 
-    private void OnDisable()
+
+    public void DisableSelectionInput()
     {
         selectionInput.Disable();
     }
 
-
     private void Start()
     {
         transform.position = Vector3.zero;
-
+        selectionInput = InputActionsManager.instance.inputActions.Selection;
+        EnableSelectionInput();
+        selectionInput.Drag.started += ctx => StartDrag();
+        selectionInput.Drag.canceled += ctx => EndDrag();
+        selectionInput.Click.performed += ctx => HandleClick();
         OnUnitSelection.AddListener(Selection);
     }
 
@@ -59,37 +63,29 @@ public class RTSSelection : MonoBehaviour
         oldSelectedUnits = selected;
     }
 
-    public void MouseDown(PointerEventData eventData)
-    {
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
 
-        mouseStart = eventData.position;
+    public void StartDrag()
+    {
+        mouseStart = selectionInput.Point.ReadValue<Vector2>();
+        isDragging = true;
+
     }
-
-    public void MouseDrag(PointerEventData eventData)
+    public void EndDrag()
     {
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
-        mouseEnd = eventData.position;
+
+        mouseEnd = selectionInput.Point.ReadValue<Vector2>();
         if ((mouseStart - mouseEnd).magnitude > 40)
         {
-            isDragging = true;
-        }
-    }
-
-
-    public void MouseUp(PointerEventData eventData)
-    {
-        if (eventData.button != PointerEventData.InputButton.Left)
-            return;
-
-        if (isDragging)
             HandleSelect();
+        }
         else
+        {
             HandleClick();
+        }
+
         isDragging = false;
     }
+
 
     private void SelectAll()
     {
@@ -106,13 +102,15 @@ public class RTSSelection : MonoBehaviour
 
     private void HandleClick()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         Ray ray = Camera.main.ScreenPointToRay(mouseStart);
         RaycastHit hit;
 
         // didnt work anyways, maybe later 
         // if (!Input.GetKey(KeyCode.LeftShift))
         //     selectedUnits = new List<Protestor>();
-
+        selectedUnits = new List<Protestor>();
 
         // No Unit found
         if (!Physics.Raycast(ray, out hit, 1000, unitMask))
@@ -151,7 +149,7 @@ public class RTSSelection : MonoBehaviour
         // didnt work anyways, maybe later 
         // if (!Input.GetKey(KeyCode.LeftShift))
         //     selectedUnits = new List<Protestor>();
-
+        selectedUnits = new List<Protestor>();
         print("Handling Select");
         Vector3[] verts = new Vector3[4];
         Vector3[] vecs = new Vector3[4];
@@ -271,6 +269,7 @@ public class RTSSelection : MonoBehaviour
     {
         if (isDragging)
         {
+            mouseEnd = selectionInput.Point.ReadValue<Vector2>();
             var rect = Utils.GetScreenRect(mouseStart, mouseEnd);
             Utils.DrawScreenRect(rect, new Color(0.8f, 0.8f, 0.95f, 0.25f));
             Utils.DrawScreenRectBorder(rect, 2, new Color(0.8f, 0.8f, 0.95f));

@@ -10,7 +10,7 @@ using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class ItemIcon : MonoBehaviour, IPointerClickHandler
+public class ItemIcon : MonoBehaviour
 {
     public Item item;
     public Image iconImage;
@@ -45,10 +45,8 @@ public class ItemIcon : MonoBehaviour, IPointerClickHandler
     }
 
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void Select()
     {
-        if(eventData.button!= PointerEventData.InputButton.Left)
-            return;
         isSelected = true;
         onSelect?.Invoke();
     }

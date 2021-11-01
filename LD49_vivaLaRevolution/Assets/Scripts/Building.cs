@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
-public class Building : MonoBehaviour
+using UnityEngine.EventSystems;
+
+public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     public List<Protestor> protestors = new List<Protestor>();
@@ -141,7 +143,7 @@ public class Building : MonoBehaviour
     {
         return protestors.Count < maxProtestors || isCaptured;
     }
-    void OnMouseEnter()
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
     {
         if (protestors.Count < maxProtestors)
         {
@@ -153,7 +155,7 @@ public class Building : MonoBehaviour
 
     }
 
-    void OnMouseExit()
+       void IPointerExitHandler.OnPointerExit(PointerEventData pointerEventData)
     {
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
 

@@ -12,6 +12,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public List<Protestor> protestors = new List<Protestor>();
     public List<GameObject> itemPrefabs = new List<GameObject>();
     public int maxProtestors = 3;
+    public bool lootable = false;
 
     public float captureDurration = 5f;
     private float captureTime = 0;
@@ -29,8 +30,14 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public int likeAbilityScore = -1;
 
     private QuickOutline _quickOutline;
-    [SerializeField] int lootProbability =20;
+    [SerializeField] int lootProbability = 20;
 
+    private void Awake()
+    {
+        lootable = CompareTag("MainBuilding");
+
+
+    }
     private void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -51,7 +58,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             LeaveProtestors();
         }
 
-        if (!protestors.Contains(protestor))
+        if (lootable&&!protestors.Contains(protestor))
             protestors.Add(protestor);
     }
 
@@ -88,9 +95,9 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         captureTime = captureDurration;
         // int rdm = UnityEngine.Random.Range(0, 100);
         // if (rdm < 50)
-        
-            // ProtestorManager.instance.SpawnProtestor();
-        
+
+        // ProtestorManager.instance.SpawnProtestor();
+
 
         float initialScaleY = transform.localScale.y;
         transform.DOScaleY(transform.localScale.y * 1.4f, .20f).OnComplete(() => transform.DOScaleY(initialScaleY, .1f));
@@ -118,7 +125,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 GameObject itemObj = Instantiate(itemPrefabs[itemIndex], transform.position, Quaternion.identity);
                 Item item = itemObj.GetComponent<Item>();
 
-                protestor.GiveItem(item) ;
+                protestor.GiveItem(item);
             }
 
 
@@ -143,9 +150,12 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         return protestors.Count < maxProtestors || isCaptured;
     }
+
+
     void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
     {
-        if (protestors.Count < maxProtestors)
+        print(lootable && protestors.Count < maxProtestors);
+        if (lootable && protestors.Count < maxProtestors)
         {
             Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
             if (_quickOutline)
@@ -155,7 +165,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     }
 
-       void IPointerExitHandler.OnPointerExit(PointerEventData pointerEventData)
+    void IPointerExitHandler.OnPointerExit(PointerEventData pointerEventData)
     {
         Cursor.SetCursor(null, Vector2.zero, cursorMode);
 

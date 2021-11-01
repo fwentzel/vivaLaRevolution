@@ -1849,10 +1849,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 589067514}
     m_Modifications:
     - target: {fileID: -2684925288725058556, guid: a8adf83b380abab43ae2492b6ad516b0, type: 3}
-      propertyPath: changePerSecond
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -2684925288725058556, guid: a8adf83b380abab43ae2492b6ad516b0, type: 3}
       propertyPath: effectRange
       value: 25
       objectReference: {fileID: 0}

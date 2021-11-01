@@ -47,7 +47,7 @@ public class RTSController : MonoBehaviour
 
     public void OrderGoLoot(Building building)
     {
-        if (!building)
+        if (!building||!building.lootable)
             return;
 
         for (int i = 0; i < _rtsSelection.selectedUnits.Count; i++)

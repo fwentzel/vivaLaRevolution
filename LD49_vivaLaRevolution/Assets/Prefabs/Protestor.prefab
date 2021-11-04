@@ -471,7 +471,7 @@ MonoBehaviour:
   detectRadius: 15
   attackRange: 4
   fightWithinRange: 30
-  magnitudeMulitplicator: 3
+  magnitudeMulitplicator: 2.3
   enemyDetection:
     serializedVersion: 2
     m_Bits: 512

@@ -23,7 +23,7 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [SerializeField] Image buildingInfluenceRangeImage;
 
     Collider[] output = new Collider[4];
-    float capturedAmount = 0;
+    float capturedAmount = 50;
     Building[] buildingsToInfluence;
 
     Boolean isCaptured = false;

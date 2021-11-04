@@ -26,11 +26,13 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Texture2D cursorTexture;
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
-
+    public Transform entryPoint;
     public int likeAbilityScore = -1;
 
     public QuickOutline quickOutline;
     [SerializeField] int lootProbability = 20;
+
+
 
     private void Awake()
     {
@@ -58,7 +60,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             LeaveProtestors();
         }
 
-        if (lootable&&!protestors.Contains(protestor))
+        if (lootable && !protestors.Contains(protestor))
             protestors.Add(protestor);
     }
 
@@ -154,7 +156,6 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
     {
-        print(lootable && protestors.Count < maxProtestors);
         if (lootable && protestors.Count < maxProtestors)
         {
             Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);

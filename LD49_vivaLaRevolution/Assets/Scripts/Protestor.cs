@@ -53,6 +53,7 @@ public class Protestor : RTSUnit
 
     public void LeaveBuilding()
     {
+        transform.DOMove(buildingToLoot.entryPoint.position,.5f);
         buildingToLoot = null;
         if (enterCoroutine != null)
             StopCoroutine(enterCoroutine);
@@ -65,7 +66,7 @@ public class Protestor : RTSUnit
 
     private IEnumerator EnterBuilding(Building toBuilding)
     {
-        moveToPosition = toBuilding.transform.position;
+        moveToPosition = toBuilding.entryPoint.position;
         if (!navMeshAgent.enabled)
             yield break;
 
@@ -73,27 +74,22 @@ public class Protestor : RTSUnit
 
         while (toBuilding.CanEnter())
         {
-            yield return new WaitForSeconds(0.3f);
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
-            foreach (var collider in colliders)
+            yield return new WaitForSeconds(0.1f);
+            if (Vector3.Distance(toBuilding.entryPoint.position, transform.position) < 1f)
             {
-                if (collider.transform.TryGetComponent(out Building foundBuilding))
+                navMeshAgent.enabled = false;
+                if (toBuilding.protestors.Count == 0)
+                    EffectAudioManager.instance.PlayWindowClip(transform.position);
+                transform.DOMove(toBuilding.transform.position,1f);
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
                 {
-                    if (foundBuilding == toBuilding)
-                    {
-                        navMeshAgent.enabled = false;
-                        if (toBuilding.protestors.Count == 0)
-                            EffectAudioManager.instance.PlayWindowClip(transform.position);
-                        transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
-                        {
-                            gameObject.SetActive(false);
-                            toBuilding.EnterBuilding(this);
-                            buildingToLoot = toBuilding;
-                        });
-                        yield break;
-                    }
-                }
+                    gameObject.SetActive(false);
+                    toBuilding.EnterBuilding(this);
+                    buildingToLoot = toBuilding;
+                });
+                yield break;
             }
+
         }
     }
 

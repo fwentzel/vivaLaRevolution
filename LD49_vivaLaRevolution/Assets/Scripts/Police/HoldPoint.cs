@@ -121,6 +121,7 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         foreach (Building building in buildingsToInfluence)
         {
             building.lootable = false;
+            building.LeaveProtestors();
         }
         isCaptured = false;
         onLoosePoint?.Invoke();

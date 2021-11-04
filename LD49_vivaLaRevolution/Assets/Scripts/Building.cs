@@ -138,7 +138,8 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public virtual void LeaveProtestors()
     {
-        EquipProtesters();
+        if(isCaptured)
+            EquipProtesters();
         foreach (var protestor in protestors)
         {
             if (protestor == null)

@@ -62,7 +62,7 @@ public class RTSSelection : MonoBehaviour
                 unit.OnDeselection();
         }
 
-        oldSelectedUnits = selected;
+        oldSelectedUnits = new List<Protestor>(selected);
     }
 
 
@@ -82,6 +82,15 @@ public class RTSSelection : MonoBehaviour
         }
 
         isDragging = false;
+    }
+
+
+    public void AddToSelection(Protestor protestor)
+    {
+        if (selectedUnits.Contains(protestor))
+            return;
+        selectedUnits.Add(protestor);
+        OnUnitSelection?.Invoke(selectedUnits);
     }
 
 

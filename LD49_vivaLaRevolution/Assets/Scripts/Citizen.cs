@@ -8,45 +8,52 @@ public class Citizen : MonoBehaviour
     [SerializeField]
     GameObject protestorPrefab;
 
-     [SerializeField] private float magnitudeMulitplicator;
+    [SerializeField] private float magnitudeMulitplicator;
     NavMeshAgent navMeshAgent;
     protected Vector3 moveToPosition;
-    
+
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-         moveToPosition=transform.position;
+        moveToPosition = transform.position;
 
     }
 
     private void OnEnable()
     {
-
         StartCoroutine(MoveRandomly());
     }
-    private void OnTriggerEnter(Collider other) {
-        if(other.TryGetComponent<Protestor>(out Protestor protestor)){
-            Instantiate(protestorPrefab,transform.position,transform.rotation);
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<Protestor>(out Protestor protestor))
+        {
+            GameObject spawnedProtestor = Instantiate(protestorPrefab, transform.position, transform.rotation);
+            if (RTSSelection.instance.selectedUnits.Contains(protestor))
+            {
+                //Add new Protestor to Selection aswell
+                RTSSelection.instance.AddToSelection(spawnedProtestor.GetComponent<Protestor>());
+            }
             Destroy(gameObject);
         }
     }
 
-     protected IEnumerator MoveRandomly()
+    protected IEnumerator MoveRandomly()
     {
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
             if (Vector3.Distance(moveToPosition, transform.position) < 2f)
-            {                
-                    moveToPosition += new Vector3(Random.Range(-magnitudeMulitplicator, magnitudeMulitplicator), 0, Random.Range(-magnitudeMulitplicator, magnitudeMulitplicator));
-                    navMeshAgent.SetDestination(moveToPosition);
+            {
+                moveToPosition += new Vector3(Random.Range(-magnitudeMulitplicator, magnitudeMulitplicator), 0, Random.Range(-magnitudeMulitplicator, magnitudeMulitplicator));
+                navMeshAgent.SetDestination(moveToPosition);
             }
 
         }
     }
 
-     private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
 
         Gizmos.color = Color.grey;

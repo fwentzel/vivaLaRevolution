@@ -15,11 +15,11 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public bool lootable = false;
 
     public float captureDurration = 5f;
-    private float captureTime = 0;
+    protected float captureTime = 0;
     public bool isCaptured = false;
 
-    private Renderer renderer;
-    private Color initialColor;
+    protected Renderer renderer;
+    protected Color initialColor;
 
     public UnityEvent OnCaptured;
 
@@ -28,9 +28,8 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public Vector2 hotSpot = Vector2.zero;
     public Transform entryPoint;
     public int likeAbilityScore = -1;
-
     public QuickOutline quickOutline;
-    [SerializeField] int lootProbability = 20;
+    [SerializeField] protected int lootProbability = 20;
 
 
 

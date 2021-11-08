@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5426190935164966881
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6383994225432185397}
-  m_Layer: 11
-  m_Name: Entrypoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6383994225432185397
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5426190935164966881}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016, y: -0.002, z: 0.739}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5555196915123002202}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5555196915123002206
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,9 +13,7 @@ GameObject:
   - component: {fileID: 5555196915123002204}
   - component: {fileID: 5555196915123002205}
   - component: {fileID: 5555196915123002201}
-  - component: {fileID: 350416864}
-  - component: {fileID: 1016681390}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,9 +29,8 @@ Transform:
   m_GameObject: {fileID: 5555196915123002206}
   m_LocalRotation: {x: -0.0025743432, y: 0.000027698208, z: 0.0005760573, w: 0.99999654}
   m_LocalPosition: {x: -10.87615, y: -3.8532014, z: -29.545115}
-  m_LocalScale: {x: 18.519745, y: 14.213908, z: 10.309022}
-  m_Children:
-  - {fileID: 6383994225432185397}
+  m_LocalScale: {x: 18.519747, y: 14.213909, z: 10.309023}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.295, y: 0.003, z: 0.066}
@@ -145,51 +112,3 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &350416864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555196915123002206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576edefa84f62dc4698760116e30687f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  protestors: []
-  itemPrefabs:
-  - {fileID: 7958413604708030817, guid: bb3bbe5d5fd152d4cb9b6b9c58149fdb, type: 3}
-  - {fileID: 7958413604708030817, guid: d569dc5df5a4dbc41a9a6821dac240ee, type: 3}
-  maxProtestors: 3
-  lootable: 0
-  captureDurration: 5
-  isCaptured: 0
-  OnCaptured:
-    m_PersistentCalls:
-      m_Calls: []
-  cursorTexture: {fileID: 2800000, guid: ab932fc3a0bf115419e12c20758be310, type: 3}
-  cursorMode: 0
-  hotSpot: {x: 0, y: 0}
-  entryPoint: {fileID: 6383994225432185397}
-  likeAbilityScore: -1
-  quickOutline: {fileID: 0}
-  lootProbability: 100
---- !u!114 &1016681390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555196915123002206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []

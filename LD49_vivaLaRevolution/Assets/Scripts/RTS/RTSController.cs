@@ -29,7 +29,6 @@ public class RTSController : MonoBehaviour
         RaycastHit hit;
 
 
-        // No Unit found
         if (Physics.Raycast(ray, out hit, 1000, defaultLayer))
         {
             Building building = hit.transform.GetComponent<Building>();

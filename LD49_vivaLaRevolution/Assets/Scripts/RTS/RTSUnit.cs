@@ -125,7 +125,6 @@ public class RTSUnit : MonoBehaviour
         {
             return;
         }
-
         moveToPosition = newPosition;
         if (target)
         {      

@@ -32,13 +32,6 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] protected int lootProbability = 20;
 
 
-
-    private void Awake()
-    {
-        lootable = CompareTag("MainBuilding");
-
-
-    }
     private void Start()
     {
         renderer = GetComponent<Renderer>();
@@ -89,10 +82,6 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void Caputure()
     {
-        if (tag.Equals("MainBuilding"))
-        {
-            GameManager.instance.EndGame(true);
-        }
         captureTime = captureDurration;
         // int rdm = UnityEngine.Random.Range(0, 100);
         // if (rdm < 50)
@@ -128,9 +117,6 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
                 protestor.GiveItem(item);
             }
-
-
-
 
         }
     }

@@ -24,6 +24,7 @@ public class ProtestorManager : MonoBehaviour
         {
             GameManager.instance.EndGame(false);
         }
+       
     }
 
     internal void SpawnProtestor()

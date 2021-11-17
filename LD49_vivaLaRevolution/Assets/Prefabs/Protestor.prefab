@@ -280,6 +280,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.01
+--- !u!1 &3480557869982795923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7140742058112537271}
+  m_Layer: 10
+  m_Name: Misc Item Hold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7140742058112537271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480557869982795923}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.74, y: 0.04, z: -0.069999725}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4038683644674927038}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3986859919969135432
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3986859919969135432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 0.04, z: 0.7}
+  m_LocalPosition: {x: -0.69, y: 0.04, z: -0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4038683644674927038}
@@ -347,6 +377,7 @@ Transform:
   - {fileID: 5162594831248640425}
   - {fileID: 2170390156423901853}
   - {fileID: 3149884992394322957}
+  - {fileID: 7140742058112537271}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -421,7 +452,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4038683644674927026}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
@@ -509,7 +540,9 @@ MonoBehaviour:
   buildingToLoot: {fileID: 0}
   lootTime: 10
   item: {fileID: 0}
+  miscItem: {fileID: 0}
   itemHold: {fileID: 3149884992394322957}
+  miscItemHold: {fileID: 7140742058112537271}
 --- !u!54 &1316662580604614716
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -93,6 +93,15 @@ public class RTSSelection : MonoBehaviour
         OnUnitSelection?.Invoke(selectedUnits);
     }
 
+    public void RemoveFromSelection(Protestor protestor)
+    {
+        if (selectedUnits.Contains(protestor))
+        {
+            selectedUnits.Remove(protestor);
+        }
+
+    }
+
 
     private void SelectAll()
     {

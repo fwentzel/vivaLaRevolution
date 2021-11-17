@@ -2330,12 +2330,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 8261962841305142197}
-  iconPrefab: {fileID: 0}
+  iconPrefab: {fileID: 6667789797104194386, guid: f7486b3144099654b85a73d30fec2e84, type: 3}
   canvasGroup: {fileID: 0}
   aimingRecticle: {fileID: 0}
   maxDistanceRecticle: {fileID: 0}
+  selectedItem: {fileID: 0}
   giveItemsToProtestorsOnStart: 3
-  items: []
+  items:
+  - {fileID: 964455079, guid: bb3bbe5d5fd152d4cb9b6b9c58149fdb, type: 3}
+  - {fileID: 7746711510906121370, guid: d569dc5df5a4dbc41a9a6821dac240ee, type: 3}
 --- !u!1 &8261962841840183871
 GameObject:
   m_ObjectHideFlags: 0

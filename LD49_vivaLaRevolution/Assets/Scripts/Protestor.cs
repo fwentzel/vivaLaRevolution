@@ -11,7 +11,9 @@ public class Protestor : RTSUnit
     public float lootTime = 10;
 
     public Item item;
+    public MiscItem miscItem;
     public Transform itemHold;
+    public Transform miscItemHold;
 
 
     private Coroutine enterCoroutine;
@@ -53,7 +55,7 @@ public class Protestor : RTSUnit
 
     public void LeaveBuilding()
     {
-        transform.DOMove(buildingToLoot.entryPoint.position,.5f);
+        transform.DOMove(buildingToLoot.entryPoint.position, .5f);
         buildingToLoot = null;
         if (enterCoroutine != null)
             StopCoroutine(enterCoroutine);
@@ -80,7 +82,7 @@ public class Protestor : RTSUnit
                 navMeshAgent.enabled = false;
                 if (toBuilding.protestors.Count == 0)
                     EffectAudioManager.instance.PlayWindowClip(transform.position);
-                transform.DOMove(toBuilding.transform.position,1f);
+                transform.DOMove(toBuilding.transform.position, 1f);
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
                 {
                     gameObject.SetActive(false);
@@ -112,18 +114,40 @@ public class Protestor : RTSUnit
 
         return true;
     }
+    public bool GiveMiscItem(MiscItem miscItem)
+    {
+        if (!miscItem)
+            return false;
+        if (!CanGiveMiscItem())
+            return false;
+
+        this.miscItem = miscItem;
+        miscItem.holderNavmeshAgent = navMeshAgent;
+
+        miscItem.onUse.AddListener(() => this.miscItem = null);
+        miscItem.transform.SetParent(miscItemHold);
+        miscItem.transform.DOLocalMove(Vector3.zero, 0.3f);
+
+        return true;
+    }
     public override void OnKill()
     {
         if (item)
         {
             ItemManager.instance.RemoveItemFromList(item);
         }
+        RTSSelection.instance.RemoveFromSelection(this);
         ProtestorManager.instance.OnProtestorDeath();
         base.OnKill();
     }
     public bool CanGiveItem()
     {
         return item == null;
+    }
+
+    public bool CanGiveMiscItem()
+    {
+        return miscItem == null;
     }
 
     private void OnDrawGizmos()

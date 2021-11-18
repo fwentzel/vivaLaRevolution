@@ -10,7 +10,6 @@ public class MiscStone : MiscItem
 {
     public LayerMask policeLayer;
 
-
     [SerializeField]
     SphereCollider pickUpCollider;
 
@@ -56,6 +55,7 @@ public class MiscStone : MiscItem
         Transform aimTransform = hits[0].transform;
         rangeCollider.enabled = false;
         holderNavmeshAgent.enabled = false;
+        transform.DOMoveY(transform.position.y+5,useTime);
         holderNavmeshAgent.transform.DOLookAt(aimTransform.position, useTime).OnComplete(() => Fly(aimTransform));
         base.Use();
     }

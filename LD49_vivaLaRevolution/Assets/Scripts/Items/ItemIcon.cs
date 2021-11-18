@@ -41,7 +41,7 @@ public class ItemIcon : MonoBehaviour
 
         item.Use(position);
         ItemManager.instance.RemoveItemFromList(this);
-        Destroy(gameObject);
+       
     }
 
 

@@ -93,6 +93,8 @@ public class ItemManager : MonoBehaviour
         if (selectedItem == itemIcon)
             DeselectItem();
 
+         Destroy(itemIcon.gameObject);
+
 
     }
     public void RemoveItemFromList(Item item)

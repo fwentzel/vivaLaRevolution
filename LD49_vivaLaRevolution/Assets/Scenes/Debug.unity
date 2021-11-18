@@ -2098,6 +2098,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RTSManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2093975674987848559, guid: db3d562daad0d4f42a1d25c285c6a653, type: 3}
+      propertyPath: defaultLayer.m_Bits
+      value: 2304
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db3d562daad0d4f42a1d25c285c6a653, type: 3}
 --- !u!1 &1732214473
@@ -2185,13 +2189,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3331181711611494185, guid: 1d0868539ecb0cd419f75658e29bef69, type: 3}
+      propertyPath: useTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3331181711611494185, guid: 1d0868539ecb0cd419f75658e29bef69, type: 3}
+      propertyPath: maxThrowRange
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3331181711611494191, guid: 1d0868539ecb0cd419f75658e29bef69, type: 3}
       propertyPath: m_Name
       value: Stone (4)
       objectReference: {fileID: 0}
     - target: {fileID: 3331181711611494191, guid: 1d0868539ecb0cd419f75658e29bef69, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d0868539ecb0cd419f75658e29bef69, type: 3}

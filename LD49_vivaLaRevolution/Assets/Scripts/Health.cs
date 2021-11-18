@@ -11,17 +11,22 @@ public class Health : MonoBehaviour
     public int currentHealth { get; private set; }
     public bool randomizeHealth = true;
     public Damage lastDamage;
-    MeshRenderer meshRenderer;
+    public MeshRenderer meshRenderer;
+    Transform meshTransform;
     bool isPolice;
 
     private Vector3 initialScale;
 
     private void Awake()
     {
+
         meshRenderer = GetComponent<MeshRenderer>();
+        if(!meshRenderer)
+          meshRenderer = GetComponentInChildren<MeshRenderer>();
+           meshTransform=meshRenderer.transform;
         isPolice = tag.Equals("Police");
         currentHealth = randomizeHealth ? Mathf.FloorToInt(maxHealth - (Random.Range(1, maxHealth * 0.15f))) : maxHealth;
-        initialScale = transform.localScale;
+        initialScale = meshTransform.localScale;
         UpdateColor();
     }
 
@@ -54,11 +59,11 @@ public class Health : MonoBehaviour
             onTakeDamage?.Invoke(damage.amount / (float)maxHealth);
         }
 
-        transform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() =>
+        meshTransform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() =>
         {
             if (transform != null)
             {
-                transform.DOScale(initialScale, 0.2f);
+                meshTransform.DOScale(initialScale, 0.2f);
             }
         });
         UpdateColor();

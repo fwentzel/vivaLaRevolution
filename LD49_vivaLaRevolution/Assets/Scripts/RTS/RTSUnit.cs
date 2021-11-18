@@ -27,6 +27,8 @@ public class RTSUnit : MonoBehaviour
 
     public Transform target;
 
+    public Transform meshTransform;
+
 
     protected Vector3 moveToPosition;
     protected NavMeshAgent navMeshAgent;
@@ -36,6 +38,7 @@ public class RTSUnit : MonoBehaviour
     protected float nextAttackTime = 0;
     protected Collider[] colliders;
     protected Vector3 initialScale;
+    protected Vector3 initialScaleMesh;
     protected bool doRandomly = true;
     protected virtual void Awake()
     {
@@ -43,8 +46,8 @@ public class RTSUnit : MonoBehaviour
         colliders = new Collider[] { GetComponent<Collider>() };
         myHealth = GetComponent<Health>();
         moveToPosition = transform.position;
+        initialScaleMesh = meshTransform.localScale;
         initialScale = transform.localScale;
-        NavMeshPath path;
         
     }
     protected virtual void Start()
@@ -71,7 +74,7 @@ public class RTSUnit : MonoBehaviour
 
     public virtual void OnKill()
     {
-        transform.DOKill();
+        meshTransform.DOKill();
         Destroy(gameObject);
     }
 

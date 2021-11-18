@@ -8,31 +8,28 @@ using UnityEngine.EventSystems;
 
 public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
-    public List<Protestor> protestors = new List<Protestor>();
+    [Header("Looting")]
     public List<GameObject> itemPrefabs = new List<GameObject>();
     public int maxProtestors = 3;
     public bool lootable = false;
 
     public float captureDurration = 5f;
     protected float captureTime = 0;
-    public bool isCaptured = false;
-
-    protected Renderer renderer;
-    protected Color initialColor;
-
+    public Transform entryPoint;
+    [SerializeField] protected int lootProbability = 20;
     public UnityEvent OnCaptured;
 
+    [Header("Cursor")]
     public Texture2D cursorTexture;
-    public CursorMode cursorMode = CursorMode.Auto;
-    public Vector2 hotSpot = Vector2.zero;
-    public Transform entryPoint;
-    public int likeAbilityScore = -1;
-    public QuickOutline quickOutline;
-    [SerializeField] protected int lootProbability = 20;
 
-
-    private void Start()
+    public List<Protestor> protestors { get; private set; } = new List<Protestor>();
+    public QuickOutline quickOutline { get; private set; }
+    protected Renderer renderer;
+    protected Color initialColor;
+    private CursorMode cursorMode = CursorMode.Auto;
+    private bool isCaptured = false;
+    private Vector2 hotSpot = Vector2.zero;
+    private void Awake()
     {
         renderer = GetComponent<Renderer>();
         if (renderer)
@@ -43,7 +40,6 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (quickOutline)
             quickOutline.enabled = false;
     }
-
 
     public virtual void EnterBuilding(Protestor protestor)
     {
@@ -123,7 +119,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public virtual void LeaveProtestors()
     {
-        if(isCaptured)
+        if (isCaptured)
             EquipProtesters();
         foreach (var protestor in protestors)
         {

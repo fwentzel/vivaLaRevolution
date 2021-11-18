@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Molotov : Item
 {
-    public ParticleSystem explosionParticles;
-    public ParticleSystem burnDamageParticles;
-    public ParticleSystem flameParticles;
-    public LayerMask enemyLayer;
+    [Header("Action")]
+    [SerializeField] private LayerMask enemyLayer;
     public int duration = 10;
     public float ticksPerSecond = 2;
     public int damagePerTick = 5;
+
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem explosionParticles;
+    [SerializeField] private ParticleSystem burnDamageParticles;
+    [SerializeField] private ParticleSystem flameParticles;
 
     private void Start()
     {

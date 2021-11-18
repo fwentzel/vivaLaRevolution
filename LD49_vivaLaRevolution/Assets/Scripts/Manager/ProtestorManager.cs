@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class ProtestorManager : MonoBehaviour
 {
-    [SerializeField] Transform protestorParent;
-    [SerializeField] GameObject protestorPrefab;
     public static ProtestorManager instance { get; private set; }
+    [SerializeField] private Transform protestorParent;
+    [SerializeField] private GameObject protestorPrefab;
 
     private void Awake()
     {
@@ -24,12 +24,12 @@ public class ProtestorManager : MonoBehaviour
         {
             GameManager.instance.EndGame(false);
         }
-       
+
     }
 
     internal void SpawnProtestor()
     {
-        int v = UnityEngine.Random.Range(0,protestorParent.childCount-1);
-        Instantiate(protestorPrefab , protestorParent.GetChild(v).transform.position, Quaternion.identity,transform);
+        int v = UnityEngine.Random.Range(0, protestorParent.childCount - 1);
+        Instantiate(protestorPrefab, protestorParent.GetChild(v).transform.position, Quaternion.identity, transform);
     }
 }

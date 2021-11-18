@@ -8,10 +8,10 @@ using Random = UnityEngine.Random;
 
 public class RTSController : MonoBehaviour
 {
-    private RTSSelection _rtsSelection;
     public LayerMask defaultLayer;
+    private RTSSelection _rtsSelection;
 
-    InputActions.SelectionActions selectionInput;
+    private InputActions.SelectionActions selectionInput;
 
 
 
@@ -46,7 +46,7 @@ public class RTSController : MonoBehaviour
 
     public void OrderGoLoot(Building building)
     {
-        if (!building||!building.lootable)
+        if (!building || !building.lootable)
             return;
 
         for (int i = 0; i < _rtsSelection.selectedUnits.Count; i++)

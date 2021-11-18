@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
-    private RTSSelection _rtsSelection;
+
     public RectTransform content;
     public GameObject iconPrefab;
-    private List<ItemIcon> _itemIcons = new List<ItemIcon>();
-    public CanvasGroup canvasGroup;
-
     public Transform aimingRecticle;
     public Transform maxDistanceRecticle;
-    public ItemIcon selectedItem = null;
-
-    InputActions.ItemActions itemInput;
-
-    //Debugging
+    public ItemIcon selectedItem { get; private set; } = null;
     public int giveItemsToProtestorsOnStart = 3;
     public List<Item> items;
+    private RTSSelection _rtsSelection;
+    private InputActions.ItemActions itemInput;
+    private List<ItemIcon> _itemIcons = new List<ItemIcon>();
+
+    //Debugging
+
 
 
     private void Awake()
@@ -56,6 +52,7 @@ public class ItemManager : MonoBehaviour
         }
 
     }
+
 
     public void OnSelectedUnits(List<Protestor> protestors)
     {
@@ -93,7 +90,7 @@ public class ItemManager : MonoBehaviour
         if (selectedItem == itemIcon)
             DeselectItem();
 
-         Destroy(itemIcon.gameObject);
+        Destroy(itemIcon.gameObject);
 
 
     }
@@ -116,6 +113,11 @@ public class ItemManager : MonoBehaviour
             selectedItem.Deselect();
             selectedItem = null;
         }
+    }
+
+    public void SelectItem(ItemIcon itemIcon)
+    {
+        selectedItem = itemIcon;
     }
 
 

@@ -8,32 +8,22 @@ using DG.Tweening;
 [RequireComponent(typeof(Rigidbody))]
 public class MiscStone : MiscItem
 {
-    public LayerMask policeLayer;
 
-    [SerializeField]
-    SphereCollider pickUpCollider;
+    [Header("Throw settings")]
+    [SerializeField] private SphereCollider rangeCollider;
+    [SerializeField] private int maxThrowRange = 15;
+    [SerializeField] private int baseForce = 4;
+    [SerializeField] private int useTime = 2;
 
-
-    [SerializeField]
-    SphereCollider rangeCollider;
-
-    [SerializeField]
-    int maxThrowRange = 15;
-    [SerializeField]
-    int uncertainty = 1;
-    [SerializeField]
+    [Header("Pick up")]
     [Range(0, 100)]
-    int pickupProbability = 10;
-    int baseSpeed = 10;
-    [SerializeField]
-    int baseForce = 4;
-    [SerializeField]
-    int useTime = 2;
+    [SerializeField] private int pickupProbability = 10;
+    [SerializeField] private SphereCollider pickUpCollider;
 
-    Collider[] hits = new Collider[1];
-    bool isUsing = false;
-
-    Rigidbody rb;
+    private Collider[] hits = new Collider[1];
+    private bool isUsing = false;
+    private Rigidbody rb;
+    private LayerMask policeLayer;
     private void Awake()
     {
         pickUpCollider.enabled = true;
@@ -41,12 +31,14 @@ public class MiscStone : MiscItem
         rangeCollider.radius = maxThrowRange;
         rangeCollider.isTrigger = true;
         rb = GetComponent<Rigidbody>();
+
+        policeLayer = LayerMask.GetMask("Police");
     }
 
     private void FixedUpdate()
     {
         Physics.OverlapSphereNonAlloc(transform.position, maxThrowRange, hits, policeLayer);
-        if (rangeCollider.enabled&&!isUsing && hits[0])
+        if (rangeCollider.enabled && !isUsing && hits[0])
         {
             Use();
         }

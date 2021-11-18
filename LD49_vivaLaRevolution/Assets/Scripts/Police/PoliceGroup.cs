@@ -5,13 +5,10 @@ using System;
 public class PoliceGroup : MonoBehaviour
 {
     public List<HoldPoint> holdPoints;
-    public List<Police> members;
-
-    public int currentHoldIndex = 0;
-
     public int startSize = 10;
-
-    public bool ignoreRespawnAndHoldpointCalc=false;
+    public bool ignoreRespawnAndHoldpointCalc = false;
+    [HideInInspector] public List<Police> members;
+    public int currentHoldIndex { get; private set; } = 0;
 
     public void TryGoToPreviousHoldPoint()
     {

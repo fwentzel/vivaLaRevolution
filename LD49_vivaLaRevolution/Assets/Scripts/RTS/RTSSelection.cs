@@ -8,20 +8,21 @@ using UnityEngine.EventSystems;
 public class RTSSelection : MonoBehaviour
 {
     public static RTSSelection instance;
-    public LayerMask groundLayer;
-    public LayerMask unitMask;
     public UnityEvent<List<Protestor>> OnUnitSelection;
-    public List<Protestor> selectedUnits = new List<Protestor>();
-    public List<Protestor> oldSelectedUnits = new List<Protestor>();
-    [SerializeField] private Transform protestorParent;
+    [HideInInspector] public List<Protestor> selectedUnits = new List<Protestor>();
+    private List<Protestor> oldSelectedUnits = new List<Protestor>();
+    private LayerMask floorLayer;
+    private LayerMask unitMask;
     private Vector3 mouseStart = Vector3.zero;
     private Vector3 mouseEnd = Vector3.zero;
     private bool isDragging;
-    InputActions.SelectionActions selectionInput;
-    int uiLayer;
+    private InputActions.SelectionActions selectionInput;
+    private int uiLayer;
     private void Awake()
     {
         uiLayer = LayerMask.NameToLayer("UI");
+        floorLayer = LayerMask.GetMask("Floor");
+        unitMask = LayerMask.GetMask("Protestor");
         instance = this;
     }
 
@@ -103,19 +104,6 @@ public class RTSSelection : MonoBehaviour
     }
 
 
-    private void SelectAll()
-    {
-        selectedUnits.Clear();
-        foreach (Transform child in protestorParent)
-        {
-            if (child.TryGetComponent(out Protestor protestor))
-            {
-                selectedUnits.Add(protestor);
-            }
-        }
-        OnUnitSelection?.Invoke(selectedUnits);
-    }
-
     private bool IsMouseOverUI()
     {
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -168,7 +156,7 @@ public class RTSSelection : MonoBehaviour
 
 
         // No Unit found
-        if (Physics.Raycast(ray, out hit, 1000, instance.groundLayer))
+        if (Physics.Raycast(ray, out hit, 1000, instance.floorLayer))
         {
             return hit.point;
         }
@@ -193,7 +181,7 @@ public class RTSSelection : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(corners[i]);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1000, groundLayer))
+            if (Physics.Raycast(ray, out hit, 1000, floorLayer))
             {
                 verts[i] = hit.point;
                 vecs[i] = ray.origin - hit.point;

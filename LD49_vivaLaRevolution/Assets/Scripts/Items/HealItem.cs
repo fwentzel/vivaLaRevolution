@@ -6,13 +6,15 @@ using DG.Tweening;
 
 public class HealItem : Item
 {
-    public ParticleSystem flameParticles;
-    public ParticleSystem healParticles;
-    public LayerMask healLayer;
+    [Header("Action")]
+    [SerializeField] private LayerMask healLayer;
     public int duration = 10;
     public float ticksPerSecond = 2;
     public int healPerTick = 5;
 
+    [Header("VFX")]
+    [SerializeField] private ParticleSystem flameParticles;
+    [SerializeField] private ParticleSystem healParticles;
     public float timeToRotate = 10;
     private void Start()
     {
@@ -53,7 +55,7 @@ public class HealItem : Item
     public void DoBaseCompleted()
     {
         healParticles.transform.DOKill();
-       
+
         base.UseCompleted();
     }
 

@@ -7,7 +7,7 @@ using System.Collections;
 public class MiscItem : MonoBehaviour
 {
     public UnityEvent onUse;
-    public NavMeshAgent holderNavmeshAgent;
+    [HideInInspector] public NavMeshAgent holderNavmeshAgent;
 
     protected virtual void Use()
     {

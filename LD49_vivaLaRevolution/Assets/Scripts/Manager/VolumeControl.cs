@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class VolumeControl : MonoBehaviour
 {
-    [SerializeField] string volumeParameter = "MasterVolume";
-    [SerializeField] AudioMixer mixer;
-    [SerializeField] Slider slider;
-    [SerializeField] float multiplier = 30;
-    [SerializeField] Toggle toggle;
+    [SerializeField] private string volumeParameter = "MasterVolume";
+    [SerializeField] private AudioMixer mixer;
+    [SerializeField] private Slider slider;
+    [SerializeField] private float multiplier = 30;
+    [SerializeField] private Toggle toggle;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class VolumeControl : MonoBehaviour
     private void HandleSliderValueChanged(float value)
     {
         mixer.SetFloat(volumeParameter, Mathf.Log10(value) * multiplier);
-        toggle.isOn = slider.value>slider.minValue;
+        toggle.isOn = slider.value > slider.minValue;
     }
     private void HandleToggleValueChanged(bool enableSound)
     {

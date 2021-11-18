@@ -7,15 +7,15 @@ using System.Collections;
 public class Protestor : RTSUnit
 {
 
-    public Building buildingToLoot;
-    public float lootTime = 10;
-
+    [Header("Items")]
     public Item item;
-    public MiscItem miscItem;
     public Transform itemHold;
+    public MiscItem miscItem;
     public Transform miscItemHold;
 
-
+    [Header("Building")]
+    public float lootTime = 10;
+    private Building buildingToLoot;
     private Coroutine enterCoroutine;
     private Coroutine moveRandomlyCoroutine;
 

@@ -7,7 +7,6 @@ public class Police : RTSUnit
 {
     public PoliceGroup group;
     public Transform holdPosition;
-
     public bool isRunning = false;
     public bool isAdvancing = false;
 

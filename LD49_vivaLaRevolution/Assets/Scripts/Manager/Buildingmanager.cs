@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Buildingmanager : MonoBehaviour
 {
-    public float magnitude=10;
+    public float randomnessMultiplier = 10;
     private void Awake()
     {
 
@@ -12,11 +12,11 @@ public class Buildingmanager : MonoBehaviour
             if (building.tag.Equals("MainBuilding"))
                 continue;
             Transform buildingTransform = building.transform;
-            float v = Mathf.PerlinNoise(buildingTransform.position.x, buildingTransform.position.z)-0.5f;
-            v*=magnitude;
+            float v = Mathf.PerlinNoise(buildingTransform.position.x, buildingTransform.position.z) - 0.5f;
+            v *= randomnessMultiplier;
 
-            buildingTransform.localScale += new Vector3(0, v, 0) ;
-            buildingTransform.position= new Vector3(buildingTransform.position.x, buildingTransform.localScale.y/2f, buildingTransform.position.z);
+            buildingTransform.localScale += new Vector3(0, v, 0);
+            buildingTransform.position = new Vector3(buildingTransform.position.x, buildingTransform.localScale.y / 2f, buildingTransform.position.z);
 
             Renderer renderer = building.GetComponent<Renderer>();
             if (renderer)

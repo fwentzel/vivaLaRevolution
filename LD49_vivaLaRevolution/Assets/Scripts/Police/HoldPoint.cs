@@ -8,36 +8,35 @@ using UnityEngine.UI;
 public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
+
+    [SerializeField] private float changePerSecond = 1;
+    [SerializeField] private float captureRadius = 15;
+    [SerializeField] private float buildingInfluenceRadius = 15;
+    [SerializeField] private Image protestorProgessImage;
+    [SerializeField] private Image policeProgessImage;
     public UnityEvent onCapturePoint;
     public UnityEvent onLoosePoint;
-    [SerializeField] float changePerSecond = 1;
 
-    [SerializeField] float captureRadius = 15;
-    [SerializeField] float buildingInfluenceRadius = 15;
+    private LayerMask policeLayer;
+    private LayerMask protestorLayer;
+    private LayerMask buildingLayer;
+    private Collider[] output = new Collider[4];
+    private float capturedAmount = 50;
+    private Building[] buildingsToInfluence;
 
-    [SerializeField] LayerMask policeLayer;
-    [SerializeField] LayerMask protestorLayer;
-    [SerializeField] LayerMask buildingLayer;
-    [SerializeField] Image protestorProgessImage;
-    [SerializeField] Image policeProgessImage;
-    [SerializeField] Image buildingInfluenceRangeImage;
-
-    Collider[] output = new Collider[4];
-    float capturedAmount = 50;
-    Building[] buildingsToInfluence;
-
-    Boolean isCaptured = false;
+    private Boolean isCaptured = false;
 
     private void Awake()
     {
         GetComponent<SphereCollider>().radius = captureRadius;
-        buildingInfluenceRangeImage.gameObject.SetActive(false);
+        policeLayer = LayerMask.GetMask("Police");
+        protestorLayer = LayerMask.GetMask("Protestor");
+        buildingLayer = LayerMask.GetMask("Building");
     }
     private void Start()
     {
         protestorProgessImage.rectTransform.sizeDelta = new Vector2(captureRadius * 2, captureRadius * 2);
         policeProgessImage.rectTransform.sizeDelta = new Vector2(captureRadius * 2, captureRadius * 2);
-        buildingInfluenceRangeImage.rectTransform.sizeDelta = new Vector2(buildingInfluenceRadius * 2, buildingInfluenceRadius * 2);
         UpdateFillAmounts();
         SetupBuildingsToInfluence();
     }

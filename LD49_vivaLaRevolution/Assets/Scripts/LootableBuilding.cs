@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 
-public class MedicalBuilding : Building, IPointerEnterHandler, IPointerExitHandler
+public class LootableBuilding : Building, IPointerEnterHandler, IPointerExitHandler
 {
 
    

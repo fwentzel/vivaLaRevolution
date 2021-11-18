@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PoliceManager : MonoBehaviour
 {
+    public static PoliceManager instance { get; private set; }
     public GameObject policePrefab;
     public HoldPoint defaultSpawnPoint;
-    public List<PoliceGroup> groups;
-    public float respawnInterval = 5;
-    private float nextRespawn = 0;
-
+    public float respawnInterval = 30;
     public int requiredAmountPerHoldPoint = 6;
-
     public Vector2Int minMaxSpawnAmount = new Vector2Int(1, 3);
+    private float nextRespawn = 0;
+    private List<PoliceGroup> groups;
     private float nextChangeHoldpositionCheck = 0;
-    public static PoliceManager instance { get; private set; }
+
 
     private void Awake()
     {

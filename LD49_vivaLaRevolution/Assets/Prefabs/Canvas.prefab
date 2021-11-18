@@ -2331,10 +2331,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 8261962841305142197}
   iconPrefab: {fileID: 6667789797104194386, guid: f7486b3144099654b85a73d30fec2e84, type: 3}
-  canvasGroup: {fileID: 0}
   aimingRecticle: {fileID: 0}
   maxDistanceRecticle: {fileID: 0}
-  selectedItem: {fileID: 0}
   giveItemsToProtestorsOnStart: 3
   items:
   - {fileID: 964455079, guid: bb3bbe5d5fd152d4cb9b6b9c58149fdb, type: 3}

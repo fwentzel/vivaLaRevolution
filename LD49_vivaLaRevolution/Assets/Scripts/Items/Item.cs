@@ -7,14 +7,11 @@ using UnityEngine.Events;
 public class Item : MonoBehaviour
 {
     public Sprite icon;
-
-    public UnityEvent onUseCompleted;
-    public UnityEvent onUse;
-
     public LayerMask obstacleLayer;
-
     public float maxDistance = 50;
     public float influenceRadius = 30f;
+    public UnityEvent onUseCompleted;
+    public UnityEvent onUse;
 
     public virtual void Use(Vector3 position)
     {

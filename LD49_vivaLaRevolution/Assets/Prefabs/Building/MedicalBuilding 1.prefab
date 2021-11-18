@@ -143,26 +143,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3055601367277545980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1243c661a67fbf84991c91b46dfd4937, type: 3}
+  m_Script: {fileID: 11500000, guid: 3921926e024a6bb47b1b3b506add3e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  protestors: []
   itemPrefabs:
   - {fileID: 7958413604708030817, guid: d569dc5df5a4dbc41a9a6821dac240ee, type: 3}
   maxProtestors: 3
   lootable: 1
-  captureDurration: 10
-  isCaptured: 0
+  captureDurration: 5
+  entryPoint: {fileID: 4604696993695135895}
+  lootProbability: 20
   OnCaptured:
     m_PersistentCalls:
       m_Calls: []
   cursorTexture: {fileID: 2800000, guid: ab932fc3a0bf115419e12c20758be310, type: 3}
-  cursorMode: 0
-  hotSpot: {x: 0, y: 0}
-  entryPoint: {fileID: 4604696993695135895}
-  likeAbilityScore: -1
-  quickOutline: {fileID: 7457867973061992716}
-  lootProbability: 50
 --- !u!1 &3184634825838814531
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,6 @@ public class CameraController : MonoBehaviour
 {
     public float minHeight = 5;
     public float maxHeight = 20;
-
     public float horizontalSpeed = 10;
     public float verticalSpeed = 10;
 

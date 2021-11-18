@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ItemIcon : MonoBehaviour
@@ -41,13 +34,13 @@ public class ItemIcon : MonoBehaviour
 
         item.Use(position);
         ItemManager.instance.RemoveItemFromList(this);
-       
+
     }
 
 
     public void Select()
     {
-        ItemManager.instance.selectedItem = this;
+        ItemManager.instance.SelectItem(this);
         print("Selected item");
         onSelect?.Invoke();
     }

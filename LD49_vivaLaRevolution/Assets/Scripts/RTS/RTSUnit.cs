@@ -9,30 +9,21 @@ using Random = UnityEngine.Random;
 
 public class RTSUnit : MonoBehaviour
 {
-    public float attackSpeed = 1;
-
+    [Header("Attackcking")]
     public int attackDamage = 5;
-
-    public float detectRadius = 4f;
+    public float attackSpeed = 1;
     public float attackRange = 2f;
+    [Header("Enemy detection")]
+    public LayerMask enemyLayer;
+    public float detectRadius = 4f;
     public float fightWithinRange = 5f;
-
     public float magnitudeMulitplicator = 5f;
-
-    public LayerMask enemyDetection;
-
-
+    [Header("Selection")]
     public UnityEvent onSelection;
     public UnityEvent onDeselection;
-
-    public Transform target;
-
     public Transform meshTransform;
-
-
     protected Vector3 moveToPosition;
     protected NavMeshAgent navMeshAgent;
-
     protected Health targetHealth;
     protected Health myHealth;
     protected float nextAttackTime = 0;
@@ -40,6 +31,7 @@ public class RTSUnit : MonoBehaviour
     protected Vector3 initialScale;
     protected Vector3 initialScaleMesh;
     protected bool doRandomly = true;
+    protected Transform target;
     protected virtual void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -48,7 +40,7 @@ public class RTSUnit : MonoBehaviour
         moveToPosition = transform.position;
         initialScaleMesh = meshTransform.localScale;
         initialScale = transform.localScale;
-        
+
     }
     protected virtual void Start()
     {
@@ -75,6 +67,7 @@ public class RTSUnit : MonoBehaviour
     public virtual void OnKill()
     {
         meshTransform.DOKill();
+        transform.DOKill();
         Destroy(gameObject);
     }
 
@@ -86,7 +79,7 @@ public class RTSUnit : MonoBehaviour
 
     protected virtual void Update()
     {
-        colliders = Physics.OverlapSphere(transform.position, detectRadius, enemyDetection);
+        colliders = Physics.OverlapSphere(transform.position, detectRadius, enemyLayer);
 
 
         if (target)
@@ -109,7 +102,7 @@ public class RTSUnit : MonoBehaviour
 
     private void Attack()
     {
-        targetHealth.takeDamage(new Damage(DamageType.Meele,attackDamage,transform));
+        targetHealth.takeDamage(new Damage(DamageType.Meele, attackDamage, transform));
         nextAttackTime = Time.time + attackSpeed;
         transform.DOScale(initialScale * 1.2f, 0.1f).OnComplete(() =>
        {
@@ -130,8 +123,8 @@ public class RTSUnit : MonoBehaviour
         }
         moveToPosition = newPosition;
         if (target)
-        {      
-            target.transform.DOKill(); 
+        {
+            target.transform.DOKill();
             target.transform.localScale = Vector3.one;
             target.transform.DOScale(Vector3.zero, 1);
         }

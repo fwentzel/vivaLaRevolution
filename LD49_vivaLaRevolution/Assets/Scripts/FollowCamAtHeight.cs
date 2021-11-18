@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class FollowCamAtHeight : MonoBehaviour
 {
-    [SerializeField] float heightToFollowAt=0;
+    [SerializeField] 
+    private float heightToFollowAt=0;
 
     private Transform mainCam;
     void Start()

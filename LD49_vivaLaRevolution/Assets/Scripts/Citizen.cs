@@ -5,12 +5,11 @@ using UnityEngine.AI;
 
 public class Citizen : MonoBehaviour
 {
-    [SerializeField]
-    GameObject protestorPrefab;
+    [SerializeField] private GameObject protestorPrefab;
 
     [SerializeField] private float magnitudeMulitplicator;
-    NavMeshAgent navMeshAgent;
     protected Vector3 moveToPosition;
+    private NavMeshAgent navMeshAgent;
 
 
     private void Awake()

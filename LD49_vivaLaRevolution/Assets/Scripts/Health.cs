@@ -5,25 +5,27 @@ using DG.Tweening;
 
 public class Health : MonoBehaviour
 {
+    public int maxHealth = 100;
+    public bool randomizeHealth = true;
+    public MeshRenderer meshRenderer;
     public UnityEvent<float> onHeal;
     public UnityEvent<float> onTakeDamage;
-    public int maxHealth = 100;
-    public int currentHealth { get; private set; }
-    public bool randomizeHealth = true;
-    public Damage lastDamage;
-    public MeshRenderer meshRenderer;
-    Transform meshTransform;
-    bool isPolice;
 
+    public int currentHealth { get; private set; }
+
+    public Damage lastDamage;
+
+    private Transform meshTransform;
+    private bool isPolice;
     private Vector3 initialScale;
 
     private void Awake()
     {
 
         meshRenderer = GetComponent<MeshRenderer>();
-        if(!meshRenderer)
-          meshRenderer = GetComponentInChildren<MeshRenderer>();
-           meshTransform=meshRenderer.transform;
+        if (!meshRenderer)
+            meshRenderer = GetComponentInChildren<MeshRenderer>();
+        meshTransform = meshRenderer.transform;
         isPolice = tag.Equals("Police");
         currentHealth = randomizeHealth ? Mathf.FloorToInt(maxHealth - (Random.Range(1, maxHealth * 0.15f))) : maxHealth;
         initialScale = meshTransform.localScale;

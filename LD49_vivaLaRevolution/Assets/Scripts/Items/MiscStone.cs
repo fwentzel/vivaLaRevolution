@@ -21,6 +21,9 @@ public class MiscStone : MiscItem
     int maxThrowRange = 15;
     [SerializeField]
     int uncertainty = 1;
+    [SerializeField]
+    [Range(0, 100)]
+    int pickupProbability = 10;
     int baseSpeed = 10;
     [SerializeField]
     int baseForce = 4;
@@ -43,9 +46,9 @@ public class MiscStone : MiscItem
     private void FixedUpdate()
     {
         Physics.OverlapSphereNonAlloc(transform.position, maxThrowRange, hits, policeLayer);
-        if (!isUsing && hits[0])
+        if (rangeCollider.enabled&&!isUsing && hits[0])
         {
-           Use();
+            Use();
         }
     }
 
@@ -55,7 +58,7 @@ public class MiscStone : MiscItem
         Transform aimTransform = hits[0].transform;
         rangeCollider.enabled = false;
         holderNavmeshAgent.enabled = false;
-        transform.DOMoveY(transform.position.y+5,useTime);
+        transform.DOMoveY(transform.position.y + 5, useTime);
         holderNavmeshAgent.transform.DOLookAt(aimTransform.position, useTime).OnComplete(() => Fly(aimTransform));
         base.Use();
     }
@@ -81,7 +84,8 @@ public class MiscStone : MiscItem
             return;
         }
         if (other.TryGetComponent<Protestor>(out Protestor protestor) &&
-        protestor.CanGiveMiscItem())
+        protestor.CanGiveMiscItem() &&
+        Random.Range(0, 100) <= pickupProbability)
         {
             PickUp(protestor);
         }

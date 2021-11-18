@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3331181711611494185}
   - component: {fileID: 3331181711611494184}
   - component: {fileID: 3097094650414413353}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,8 +135,9 @@ MonoBehaviour:
   rangeCollider: {fileID: 3331181711611494186}
   maxThrowRange: 30
   uncertainty: 1
-  baseForce: 1
-  useTime: 3
+  pickupProbability: 10
+  baseForce: 2
+  useTime: 2
 --- !u!54 &3331181711611494184
 Rigidbody:
   m_ObjectHideFlags: 0

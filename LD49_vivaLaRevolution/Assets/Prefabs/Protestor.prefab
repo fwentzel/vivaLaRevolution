@@ -427,15 +427,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9886c830a50ab814c95585598b310eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  randomizeHealth: 1
+  meshRenderer: {fileID: 8778688292332272393}
   onHeal:
     m_PersistentCalls:
       m_Calls: []
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-  maxHealth: 100
-  randomizeHealth: 1
-  meshRenderer: {fileID: 8778688292332272393}
 --- !u!114 &1875341735549049670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,15 +448,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6184fb9177324ca45746694be8c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1
   attackDamage: 11
-  detectRadius: 15
+  attackSpeed: 1
   attackRange: 4
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  detectRadius: 15
   fightWithinRange: 30
   magnitudeMulitplicator: 2.3
-  enemyDetection:
-    serializedVersion: 2
-    m_Bits: 512
+  moveTarget: {fileID: 2170390156423901853}
+  meshTransform: {fileID: 329363691952813771}
   onSelection:
     m_PersistentCalls:
       m_Calls:
@@ -487,14 +489,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  target: {fileID: 2170390156423901853}
-  meshTransform: {fileID: 329363691952813771}
-  buildingToLoot: {fileID: 0}
-  lootTime: 10
   item: {fileID: 0}
-  miscItem: {fileID: 0}
   itemHold: {fileID: 3149884992394322957}
+  miscItem: {fileID: 0}
   miscItemHold: {fileID: 7140742058112537271}
+  lootTime: 10
 --- !u!54 &1316662580604614716
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -19,9 +19,10 @@ public class RTSUnit : MonoBehaviour
     public float fightWithinRange = 5f;
     public float magnitudeMulitplicator = 5f;
     [Header("Selection")]
+    public Transform moveTarget;
+    public Transform meshTransform;
     public UnityEvent onSelection;
     public UnityEvent onDeselection;
-    public Transform meshTransform;
     protected Vector3 moveToPosition;
     protected NavMeshAgent navMeshAgent;
     protected Health targetHealth;
@@ -31,7 +32,7 @@ public class RTSUnit : MonoBehaviour
     protected Vector3 initialScale;
     protected Vector3 initialScaleMesh;
     protected bool doRandomly = true;
-    protected Transform target;
+
     protected virtual void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -82,8 +83,8 @@ public class RTSUnit : MonoBehaviour
         colliders = Physics.OverlapSphere(transform.position, detectRadius, enemyLayer);
 
 
-        if (target)
-            target.position = moveToPosition;
+        if (moveTarget)
+            moveTarget.position = moveToPosition;
 
 
         if (targetHealth != null && navMeshAgent.enabled)
@@ -122,11 +123,11 @@ public class RTSUnit : MonoBehaviour
             return;
         }
         moveToPosition = newPosition;
-        if (target)
+        if (moveTarget)
         {
-            target.transform.DOKill();
-            target.transform.localScale = Vector3.one;
-            target.transform.DOScale(Vector3.zero, 1);
+            moveTarget.transform.DOKill();
+            moveTarget.transform.localScale = Vector3.one;
+            moveTarget.transform.DOScale(Vector3.zero, 1);
         }
 
     }

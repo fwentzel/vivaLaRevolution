@@ -39,30 +39,16 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         policeProgessImage.rectTransform.sizeDelta = new Vector2(captureRadius * 2, captureRadius * 2);
         UpdateFillAmounts();
         SetupBuildingsToInfluence();
+
     }
 
     private void SetupBuildingsToInfluence()
     {
-        bool isMainBuildingInRange = false;
         Collider[] buildingCollider = Physics.OverlapSphere(transform.position, buildingInfluenceRadius, buildingLayer);
-
-        foreach (var item in buildingCollider)
-        {
-            if (item.CompareTag("MainBuilding"))
-            {
-                isMainBuildingInRange = true;
-                break;
-            }
-        }
-        //Exclude Mainbuilding
-        buildingsToInfluence = isMainBuildingInRange ? new Building[buildingCollider.Length - 1] : new Building[buildingCollider.Length];
+        buildingsToInfluence = new Building[buildingCollider.Length];
         int i = 0;
         foreach (Collider col in buildingCollider)
         {
-            if (isMainBuildingInRange && col.CompareTag("MainBuilding"))
-            {
-                continue;
-            }
             buildingsToInfluence[i] = col.GetComponent<Building>();
             i++;
         }
@@ -128,7 +114,11 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
     {
-        // buildingInfluenceRangeImage.gameObject.SetActive(true);
+        ActivateBuildingOutlines();
+    }
+
+    private void ActivateBuildingOutlines()
+    {
         foreach (Building building in buildingsToInfluence)
         {
             building.quickOutline.OutlineColor = building.lootable ? Color.green : Color.red;
@@ -139,7 +129,13 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     void IPointerExitHandler.OnPointerExit(PointerEventData pointerEventData)
     {
-        // buildingInfluenceRangeImage.gameObject.SetActive(false);
+        DeactivateBuildingOutlines();
+
+    }
+
+
+    private void DeactivateBuildingOutlines()
+    {
         foreach (Building building in buildingsToInfluence)
         {
             building.quickOutline.enabled = false;

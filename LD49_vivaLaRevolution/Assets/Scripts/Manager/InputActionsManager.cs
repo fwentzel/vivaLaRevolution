@@ -13,6 +13,8 @@ public class InputActionsManager : MonoBehaviour
             instance = this;
         else
             Destroy(this);
-        inputActions = new InputActions();
+            
+        if (inputActions == null)
+            inputActions = new InputActions();
     }
 }

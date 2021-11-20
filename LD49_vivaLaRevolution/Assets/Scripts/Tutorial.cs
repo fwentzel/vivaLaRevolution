@@ -25,6 +25,8 @@ public class Tutorial : MonoBehaviour
 
     private void Awake()
     {
+        if (instance)
+            Destroy(instance);
         instance = this;
     }
 

@@ -23,8 +23,9 @@ public class ItemManager : MonoBehaviour
 
     private void Awake()
     {
+       if (instance)
+            Destroy(instance);
         instance = this;
-
     }
 
     private void Start()
@@ -152,5 +153,9 @@ public class ItemManager : MonoBehaviour
 
 
 
+    }
+      private void OnDisable()
+    {
+        itemInput.Disable();
     }
 }

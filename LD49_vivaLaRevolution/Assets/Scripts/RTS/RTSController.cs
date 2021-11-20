@@ -111,4 +111,9 @@ public class RTSController : MonoBehaviour
     {
         return Quaternion.Euler(0, angle, 0) * vec;
     }
+
+      private void OnDisable()
+    {
+        selectionInput.Disable();
+    }
 }

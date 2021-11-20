@@ -23,6 +23,8 @@ public class RTSSelection : MonoBehaviour
         uiLayer = LayerMask.NameToLayer("UI");
         floorLayer = LayerMask.GetMask("Floor");
         unitMask = LayerMask.GetMask("Protestor");
+        if (instance)
+            Destroy(instance);
         instance = this;
     }
 
@@ -36,7 +38,12 @@ public class RTSSelection : MonoBehaviour
     {
         selectionInput.Disable();
     }
+    private void OnDisable()
+    {
+        selectionInput.Disable();
+    }
 
+  
     private void Start()
     {
 

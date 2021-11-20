@@ -33,7 +33,7 @@ public class Musket : MonoBehaviour
     private void TakeAim()
     {
        
-        meshTransform.DOLocalRotate(new Vector3(0,0,0),useTime).OnComplete(()=>Fire());
+        meshTransform.DOLocalRotate(new Vector3(0,0,0),useTime*UnityEngine.Random.Range(.7f,1.3f)).OnComplete(()=>Fire());
     }
 
     private void Update() {

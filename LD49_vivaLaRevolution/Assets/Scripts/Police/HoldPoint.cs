@@ -100,7 +100,6 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
         else if (capturedAmount == 100 && !isCaptured)
         {
-            print("capture");
             CapturePoint();
         }
         UpdateFillAmounts();

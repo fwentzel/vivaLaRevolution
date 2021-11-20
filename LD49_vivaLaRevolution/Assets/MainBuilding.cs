@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class MainBuilding : Building
 {
-    
-  private void Awake() {
-      lootable = true;
-  }
+
+    override protected void Awake()
+    {
+        base.Awake();
+        lootable = true;
+    }
 }

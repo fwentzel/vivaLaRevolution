@@ -29,7 +29,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private CursorMode cursorMode = CursorMode.Auto;
     private bool isCaptured = false;
     private Vector2 hotSpot = Vector2.zero;
-    private void Awake()
+    protected virtual void Awake()
     {
         renderer = GetComponent<Renderer>();
         if (renderer)

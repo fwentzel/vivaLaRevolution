@@ -101,7 +101,7 @@ public class RTSUnit : MonoBehaviour
 
     }
 
-    private void Attack()
+    protected virtual void Attack()
     {
         targetHealth.takeDamage(new Damage(DamageType.Meele, attackDamage, transform));
         nextAttackTime = Time.time + attackSpeed;

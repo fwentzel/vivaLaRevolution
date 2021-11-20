@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   policePrefab: {fileID: 8359640132132065183, guid: 265b56269f9a9f54f87b352854b8f533, type: 3}
+  policeMusketeerPrefab: {fileID: 124025723196966532, guid: 2b34986a5e6804445b05db542d5b76f2, type: 3}
   defaultSpawnPoint: {fileID: 0}
   respawnInterval: 50
   requiredAmountPerHoldPoint: 3

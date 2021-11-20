@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  randomizeHealth: 1
+  randomizeHealth: 0
   meshRenderer: {fileID: 8778688292332272393}
   onHeal:
     m_PersistentCalls:
@@ -453,7 +453,7 @@ MonoBehaviour:
   attackRange: 4
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   detectRadius: 15
   fightWithinRange: 30
   magnitudeMulitplicator: 2.3

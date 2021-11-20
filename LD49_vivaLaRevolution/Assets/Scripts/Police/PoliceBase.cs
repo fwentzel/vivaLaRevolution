@@ -3,12 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Police : RTSUnit
+public class PoliceBase : RTSUnit
 {
-    public PoliceGroup group;
-    public Transform holdPosition;
-    public bool isRunning = false;
-    public bool isAdvancing = false;
+    [HideInInspector] public PoliceGroup group;
+    [HideInInspector] public Transform holdPosition;
+    [HideInInspector] public bool isRunning = false;
+    [HideInInspector] public bool isAdvancing = false;
 
     protected override void Start()
     {
@@ -85,7 +85,6 @@ public class Police : RTSUnit
         group.members.Remove(this);
         //if (group.members.Contains(this))
     }
-
     private void OnDrawGizmos()
     {
 

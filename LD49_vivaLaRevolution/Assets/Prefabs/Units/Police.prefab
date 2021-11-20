@@ -297,15 +297,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9886c830a50ab814c95585598b310eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 110
+  randomizeHealth: 1
+  meshRenderer: {fileID: 1800462135621289516}
   onHeal:
     m_PersistentCalls:
       m_Calls: []
   onTakeDamage:
     m_PersistentCalls:
       m_Calls: []
-  maxHealth: 110
-  randomizeHealth: 1
-  meshRenderer: {fileID: 1800462135621289516}
 --- !u!114 &4777184973159268322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,15 +318,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c79acb5d6512ae846b7ad320834bc263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1
   attackDamage: 10
-  detectRadius: 35
+  attackSpeed: 1
   attackRange: 4
-  fightWithinRange: 35
-  magnitudeMulitplicator: 2
-  enemyDetection:
+  enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
+  detectRadius: 35
+  fightWithinRange: 35
+  magnitudeMulitplicator: 2
+  moveTarget: {fileID: 0}
+  meshTransform: {fileID: 2475510913183630819}
   onSelection:
     m_PersistentCalls:
       m_Calls:
@@ -345,8 +347,6 @@ MonoBehaviour:
   onDeselection:
     m_PersistentCalls:
       m_Calls: []
-  target: {fileID: 0}
-  meshTransform: {fileID: 2475510913183630819}
   group: {fileID: 0}
   holdPosition: {fileID: 0}
   isRunning: 0

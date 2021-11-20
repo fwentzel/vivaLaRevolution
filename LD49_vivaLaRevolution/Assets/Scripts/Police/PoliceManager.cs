@@ -6,6 +6,7 @@ public class PoliceManager : MonoBehaviour
 {
     public static PoliceManager instance { get; private set; }
     public GameObject policePrefab;
+    public GameObject policeMusketeerPrefab;
     public HoldPoint defaultSpawnPoint;
     public float respawnInterval = 30;
     public int requiredAmountPerHoldPoint = 6;
@@ -44,7 +45,7 @@ public class PoliceManager : MonoBehaviour
         }
 
     }
-    public void RegisterFatality(Police member)
+    public void RegisterFatality(PoliceBase member)
     {
         member.group.members.Remove(member);
         CheckChangeHoldPositons();
@@ -100,8 +101,8 @@ public class PoliceManager : MonoBehaviour
             for (int i = 0; i < v; i++)
             {
 
-                GameObject obj = Instantiate(policePrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity);
-                Police police = obj.GetComponent<Police>();
+                GameObject obj = Instantiate(policeMusketeerPrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity);
+                PoliceBase police = obj.GetComponent<PoliceBase>();
                 group.members.Add(police);
                 police.group = group;
                 police.holdPosition = group.holdPoints[group.currentHoldIndex].transform;

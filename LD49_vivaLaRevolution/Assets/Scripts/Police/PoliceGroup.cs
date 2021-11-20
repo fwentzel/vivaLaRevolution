@@ -7,7 +7,7 @@ public class PoliceGroup : MonoBehaviour
     public List<HoldPoint> holdPoints;
     public int startSize = 10;
     public bool ignoreRespawnAndHoldpointCalc = false;
-    [HideInInspector] public List<Police> members;
+    [HideInInspector] public List<PoliceBase> members;
     public int currentHoldIndex { get; private set; } = 0;
 
     public void TryGoToPreviousHoldPoint()
@@ -27,14 +27,14 @@ public class PoliceGroup : MonoBehaviour
         }
     }
 
-    internal bool IsNearCurrentHoldPoint(Police policeEntity)
+    internal bool IsNearCurrentHoldPoint(PoliceBase policeEntity)
     {
         return Vector3.Distance(holdPoints[currentHoldIndex].transform.position, policeEntity.transform.position) < policeEntity.fightWithinRange;
     }
 
     public void UpdateHoldPos(bool isAdvancing)
     {
-        foreach (Police member in members)
+        foreach (PoliceBase member in members)
         {
             if (member == null || holdPoints[currentHoldIndex] == null)
                 continue;
@@ -73,7 +73,7 @@ public class PoliceGroup : MonoBehaviour
     private int GetMembersInRangeOfOrRunningToCurrentHoldpoint()
     {
         int amount = 0;
-        foreach (Police member in members)
+        foreach (PoliceBase member in members)
         {
             if (IsNearCurrentHoldPoint(member) || (member.isRunning || member.isAdvancing))
             {

@@ -15,23 +15,15 @@ public class MiscStone : MiscItem
     [SerializeField] private int baseForce = 4;
     [SerializeField] private int useTime = 2;
 
-    [Header("Pick up")]
-    [Range(0, 100)]
-    [SerializeField] private int pickupProbability = 10;
-    [SerializeField] private SphereCollider pickUpCollider;
-
     private Collider[] hits = new Collider[1];
     private bool isUsing = false;
-    private Rigidbody rb;
+
     private LayerMask policeLayer;
-    private void Awake()
+    protected override void Awake()
     {
-        pickUpCollider.enabled = true;
         rangeCollider.enabled = false;
         rangeCollider.radius = maxThrowRange;
         rangeCollider.isTrigger = true;
-        rb = GetComponent<Rigidbody>();
-
         policeLayer = LayerMask.GetMask("Police");
     }
 
@@ -64,41 +56,16 @@ public class MiscStone : MiscItem
         holderNavmeshAgent.enabled = true;
         Invoke("ReactivatePickUp", 4f);
     }
-    private void ReactivatePickUp()
-    {
-        pickUpCollider.enabled = true;
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!pickUpCollider.enabled)
-        {
-            return;
-        }
-        if (other.TryGetComponent<Protestor>(out Protestor protestor) &&
-        protestor.CanGiveMiscItem() &&
-        Random.Range(0, 100) <= pickupProbability)
-        {
-            PickUp(protestor);
-        }
-    }
 
-    private void PickUp(Protestor protestor)
+
+
+    protected override void PickUp(Protestor protestor)
     {
-        protestor.GiveMiscItem(this);
+        base.PickUp(protestor);
         rangeCollider.enabled = true;
-        rb.useGravity = false;
-        rb.isKinematic = true;
-        pickUpCollider.enabled = false;
     }
 
-    private void OnDrawGizmos()
-    {
-        if (hits[0])
-        {
-            Gizmos.DrawWireSphere(hits[0].transform.position, 4f);
-        }
-    }
 
 
 

@@ -146,6 +146,7 @@ public class Protestor : RTSUnit
         miscItem.onUse.AddListener(() => this.miscItem = null);
         miscItem.transform.SetParent(miscItemHold);
         miscItem.transform.DOLocalMove(Vector3.zero, 0.3f);
+        miscItem.transform.DOLocalRotate(Vector3.zero, 0.3f);
 
         return true;
     }

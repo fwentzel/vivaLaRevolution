@@ -18,7 +18,7 @@ GameObject:
   m_TagString: MainBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5555196915123002202
 Transform:
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5555196915123002206}
   m_LocalRotation: {x: -0.0025743432, y: 0.000027698208, z: 0.0005760573, w: 0.99999654}
   m_LocalPosition: {x: -10.87615, y: -3.8532014, z: -29.545115}
-  m_LocalScale: {x: 45.1646, y: 61.221237, z: 41.44907}
+  m_LocalScale: {x: 15.024481, y: 13.939828, z: 23.155449}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -106,9 +106,9 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.37, y: 0.5, z: 0.2}
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
-  m_Carve: 1
+  m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: -0.18, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5

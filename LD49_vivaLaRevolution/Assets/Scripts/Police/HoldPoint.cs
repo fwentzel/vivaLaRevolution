@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -45,13 +46,17 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private void SetupBuildingsToInfluence()
     {
         Collider[] buildingCollider = Physics.OverlapSphere(transform.position, buildingInfluenceRadius, buildingLayer);
-        buildingsToInfluence = new Building[buildingCollider.Length];
-        int i = 0;
+        List<Building> buildings = new List<Building>();
         foreach (Collider col in buildingCollider)
         {
-            buildingsToInfluence[i] = col.GetComponent<Building>();
-            i++;
+            if (col.GetComponent<QuickOutline>())
+            {
+                buildings.Add(col.GetComponent<Building>());
+            }
         }
+
+        buildingsToInfluence = buildings.ToArray();
+
     }
 
     private void UpdateFillAmounts()

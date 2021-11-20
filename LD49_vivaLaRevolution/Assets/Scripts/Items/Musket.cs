@@ -22,7 +22,7 @@ public class Musket : MonoBehaviour
 
     }
     private void Start() {
-      meshTransform.DOLocalRotate(new Vector3(-90,0,0),useTime/2);   
+      meshTransform.DOLocalRotate(new Vector3(-90,0,0),2f);   
     }
     private void StartAttackProcess()
     {
@@ -33,7 +33,7 @@ public class Musket : MonoBehaviour
     private void TakeAim()
     {
        
-        meshTransform.DOLocalRotate(new Vector3(0,0,0),useTime/2).OnComplete(()=>Fire());
+        meshTransform.DOLocalRotate(new Vector3(0,0,0),useTime).OnComplete(()=>Fire());
     }
 
     private void Update() {
@@ -59,7 +59,7 @@ public class Musket : MonoBehaviour
     {
         onFinishAttack?.Invoke();
         meshTransform.DOKill();
-        meshTransform.DOLocalRotate(new Vector3(-90,0,0),useTime/2);
+        meshTransform.DOLocalRotate(new Vector3(-90,0,0),useTime);
     }
 
 

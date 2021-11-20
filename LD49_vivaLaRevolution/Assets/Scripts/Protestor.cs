@@ -24,7 +24,11 @@ public class Protestor : RTSUnit
     {
         if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
             targetHealth = null;
+
         base.Update();
+
+        if (moveTarget)
+            moveTarget.position = moveToPosition;
 
         if (targetHealth == null)
         {
@@ -35,6 +39,21 @@ public class Protestor : RTSUnit
             }
             if (navMeshAgent.enabled)
                 navMeshAgent.destination = moveToPosition;
+        }
+        else
+        {
+            navMeshAgent.destination = targetHealth.transform.position;
+        }
+    }
+
+    public override void SetMovePosition(Vector3 newPosition)
+    {
+        base.SetMovePosition(newPosition);
+        if (moveTarget)
+        {
+            moveTarget.transform.DOKill();
+            moveTarget.transform.localScale = Vector3.one;
+            moveTarget.transform.DOScale(Vector3.zero, 1);
         }
     }
 

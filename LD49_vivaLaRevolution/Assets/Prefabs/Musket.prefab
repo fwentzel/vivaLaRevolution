@@ -127,10 +127,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 500
-  useTime: 20
+  useTime: 3
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 1024
   onFireParticles: {fileID: 1772737591579297132}
   meshTransform: {fileID: 7904606927205915398}
   attackRange: 0

@@ -29,14 +29,16 @@ public class PoliceMusketeer : PoliceBase
 
     protected override void Update()
     {
-        
+        base.Update();
+
         if (targetHealth)
         {
             Quaternion neededRotation = Quaternion.LookRotation(targetHealth.transform.position - transform.position,Vector3.up);
-
-           transform.rotation= Quaternion.RotateTowards(transform.rotation, neededRotation, turnspeed);
+            transform.rotation= Quaternion.RotateTowards(transform.rotation, neededRotation, turnspeed);
+        }else{
+            navMeshAgent.destination = holdPosition.position;
         }
-        base.Update();
+        
     }
 
     protected override void Attack()

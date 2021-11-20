@@ -25,14 +25,13 @@ public class PoliceBase : RTSUnit
     }
     protected override void Update()
     {
+        base.Update();
+        
         if (isAdvancing && group.IsNearCurrentHoldPoint(this))
         {
             isAdvancing = false;
         }
         // isRunning = myHealth.HealthRatio()<.2f;
-
-        base.Update();
-
         if (targetHealth == null)
         {
             if (!isRunning)
@@ -45,8 +44,8 @@ public class PoliceBase : RTSUnit
                 }
             }
 
-            navMeshAgent.destination = holdPosition == null || isRunning ? moveToPosition : holdPosition.position;
         }
+
     }
     public void onTakeDamage()
     {

@@ -82,14 +82,8 @@ public class RTSUnit : MonoBehaviour
     {
         colliders = Physics.OverlapSphere(transform.position, detectRadius, enemyLayer);
 
-
-        if (moveTarget)
-            moveTarget.position = moveToPosition;
-
-
         if (targetHealth != null && navMeshAgent.enabled)
         {
-            navMeshAgent.destination = targetHealth.transform.position;
             if (Vector3.Distance(targetHealth.transform.position, transform.position) < attackRange)
             {
                 if (Time.time > nextAttackTime)
@@ -98,7 +92,6 @@ public class RTSUnit : MonoBehaviour
                 }
             }
         }
-
     }
 
     protected virtual void Attack()
@@ -114,7 +107,7 @@ public class RTSUnit : MonoBehaviour
        });
     }
 
-    public void SetMovePosition(Vector3 newPosition)
+    public virtual void SetMovePosition(Vector3 newPosition)
     {
         //decide wether it will listen to Order
 
@@ -122,17 +115,9 @@ public class RTSUnit : MonoBehaviour
         {
             return;
         }
-        moveToPosition = newPosition;
-        if (moveTarget)
-        {
-            moveTarget.transform.DOKill();
-            moveTarget.transform.localScale = Vector3.one;
-            moveTarget.transform.DOScale(Vector3.zero, 1);
-        }
+        moveToPosition = newPosition;       
 
     }
-
-
     protected IEnumerator MoveRandomly()
     {
         while (true)
@@ -143,8 +128,6 @@ public class RTSUnit : MonoBehaviour
                 float magnitude = (1 - myHealth.HealthRatio()) * magnitudeMulitplicator;
                 if (doRandomly)
                     moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
-
-
             }
 
         }

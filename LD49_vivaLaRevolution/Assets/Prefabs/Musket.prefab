@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 500
-  useTime: 6
+  useTime: 20
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1536

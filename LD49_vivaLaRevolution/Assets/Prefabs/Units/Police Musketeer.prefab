@@ -195,6 +195,7 @@ MonoBehaviour:
   isAdvancing: 0
   musketHolderTransform: {fileID: 8045641953983237434}
   musketPrefab: {fileID: 1348575240329653603, guid: e9a13efb9b2a7624b92bdf061df64a4d, type: 3}
+  turnspeed: 0.2
 --- !u!1 &2687503569531588684
 GameObject:
   m_ObjectHideFlags: 0

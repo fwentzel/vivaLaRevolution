@@ -7,7 +7,12 @@ public class PoliceBase : RTSUnit
 {
     [HideInInspector] public PoliceGroup group;
     [HideInInspector] public Transform holdPosition;
+    //Running away from a danger source e.g. molotov
     [HideInInspector] public bool isRunning = false;
+
+    //falling back to holdpoint
+    [HideInInspector] public bool isFallingBack = false;
+    //advancing to holdpoint
     [HideInInspector] public bool isAdvancing = false;
 
     protected override void Start()
@@ -17,8 +22,9 @@ public class PoliceBase : RTSUnit
         base.Start();
     }
 
-    private void SetHoldPosition(Transform newPos)
+    public virtual void SetHoldPosition(Transform newPos)
     {
+        targetHealth = null;
         holdPosition = newPos;
         SetMovePosition(newPos.position);
 
@@ -26,15 +32,15 @@ public class PoliceBase : RTSUnit
     protected override void Update()
     {
         base.Update();
-        
-        if (isAdvancing && group.IsNearCurrentHoldPoint(this))
+        if ((isAdvancing || isFallingBack) && group.IsNearCurrentHoldPoint(this))
         {
             isAdvancing = false;
+            isFallingBack = false;
         }
         // isRunning = myHealth.HealthRatio()<.2f;
         if (targetHealth == null)
         {
-            if (!isRunning)
+            if (!isRunning && !isFallingBack)
             {
                 //Staying at holdPoint, so look for enemies
                 foreach (Collider collider in colliders)

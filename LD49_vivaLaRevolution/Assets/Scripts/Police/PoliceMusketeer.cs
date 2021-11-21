@@ -19,10 +19,10 @@ public class PoliceMusketeer : PoliceBase
 
         musket = Instantiate(musketPrefab, musketHolderTransform.position, musketHolderTransform.transform.rotation, musketHolderTransform).GetComponent<Musket>();
         musket.attackRange = attackRange;
-        if (attackSpeed < musket.useTime)
+        if (attackSpeed < musket.useTime*2)
         {
-            Debug.Log("Attackspeed is lower than musket usetime. Adjusted attackspeed accordingly");
-            attackSpeed = musket.useTime;
+            Debug.Log("Attackspeed is lower than double musket usetime. Adjusted attackspeed accordingly");
+            attackSpeed = musket.useTime*2;
         }
         musket.onFinishAttack.AddListener(() => FinishAttack());
     }
@@ -33,12 +33,26 @@ public class PoliceMusketeer : PoliceBase
 
         if (targetHealth)
         {
-            Quaternion neededRotation = Quaternion.LookRotation(targetHealth.transform.position - transform.position,Vector3.up);
-            transform.rotation= Quaternion.RotateTowards(transform.rotation, neededRotation, turnspeed);
-        }else{
-            navMeshAgent.destination = holdPosition.position;
+            Quaternion neededRotation = Quaternion.LookRotation(targetHealth.transform.position - transform.position, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, turnspeed);
         }
-        
+        else
+        {
+            if (isRunning)
+            {
+                navMeshAgent.destination = moveToPosition;
+            }
+            else
+            {
+                navMeshAgent.destination = holdPosition.position;
+            }
+        }
+
+    }
+    public override void SetHoldPosition(Transform newPos)
+    {
+        musket.FinishAttack();
+        base.SetHoldPosition(newPos);
     }
 
     protected override void Attack()

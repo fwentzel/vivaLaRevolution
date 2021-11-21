@@ -7,6 +7,8 @@ using System.Collections;
 public class Protestor : RTSUnit
 {
 
+    public Transform moveTarget;
+
     [Header("Items")]
     public Item item;
     public Transform itemHold;
@@ -152,6 +154,7 @@ public class Protestor : RTSUnit
     }
     public override void OnKill()
     {
+        moveTarget.DOKill();
         if (item)
         {
             ItemManager.instance.RemoveItemFromList(item);

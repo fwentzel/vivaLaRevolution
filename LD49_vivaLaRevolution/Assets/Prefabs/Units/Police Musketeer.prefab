@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 500
-  attackSpeed: 10
+  attackSpeed: 3
   attackRange: 50
   enemyLayer:
     serializedVersion: 2
@@ -181,7 +181,6 @@ MonoBehaviour:
   detectRadius: 30
   fightWithinRange: 10
   magnitudeMulitplicator: 5
-  moveTarget: {fileID: 0}
   meshTransform: {fileID: 6332343491960999160}
   onSelection:
     m_PersistentCalls:
@@ -192,6 +191,7 @@ MonoBehaviour:
   group: {fileID: 0}
   holdPosition: {fileID: 0}
   isRunning: 0
+  isFallingBack: 0
   isAdvancing: 0
   musketHolderTransform: {fileID: 8045641953983237434}
   musketPrefab: {fileID: 1348575240329653603, guid: e9a13efb9b2a7624b92bdf061df64a4d, type: 3}

@@ -7,7 +7,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class MiscItem : MonoBehaviour
 {
-       [Header("Pick up")]
+    [Header("Pick up")]
     [Range(0, 100)]
     [SerializeField] protected int pickupProbability = 10;
     [SerializeField] protected SphereCollider pickUpCollider;
@@ -16,9 +16,9 @@ public class MiscItem : MonoBehaviour
     [HideInInspector] public NavMeshAgent holderNavmeshAgent;
     protected Rigidbody rb;
 
-   protected virtual void Awake()
+    protected virtual void Awake()
     {
-         pickUpCollider.enabled = true;
+        pickUpCollider.enabled = true;
         rb = GetComponent<Rigidbody>();
     }
     protected virtual void Use()
@@ -43,7 +43,7 @@ public class MiscItem : MonoBehaviour
     {
         pickUpCollider.enabled = true;
     }
-        protected virtual void PickUp(Protestor protestor)
+    protected virtual void PickUp(Protestor protestor)
     {
         protestor.GiveMiscItem(this);
         rb.useGravity = false;

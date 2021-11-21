@@ -53,22 +53,24 @@ public class Health : MonoBehaviour
             {
 
                 Destroy(gameObject);
+
             }
         }
         else
         {
             lastDamage = damage;
             onTakeDamage?.Invoke(damage.amount / (float)maxHealth);
+            meshTransform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() =>
+                    {
+                        if (meshTransform != null)
+                        {
+                            meshTransform.DOScale(initialScale, 0.2f);
+                        }
+                    });
+            UpdateColor();
         }
 
-        meshTransform.DOScale(Vector3.one * 0.5f, 0.1f).OnComplete(() =>
-        {
-            if (transform != null)
-            {
-                meshTransform.DOScale(initialScale, 0.2f);
-            }
-        });
-        UpdateColor();
+
     }
 
     private void UpdateColor()

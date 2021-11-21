@@ -19,7 +19,6 @@ public class RTSUnit : MonoBehaviour
     public float fightWithinRange = 5f;
     public float magnitudeMulitplicator = 5f;
     [Header("Selection")]
-    public Transform moveTarget;
     public Transform meshTransform;
     public UnityEvent onSelection;
     public UnityEvent onDeselection;

@@ -41,7 +41,6 @@ public class ItemIcon : MonoBehaviour
     public void Select()
     {
         ItemManager.instance.SelectItem(this);
-        print("Selected item");
         onSelect?.Invoke();
     }
 

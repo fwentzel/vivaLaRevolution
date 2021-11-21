@@ -20,6 +20,7 @@ public class PoliceGroup : MonoBehaviour
     }
     public void TryGoToNextHoldPoint()
     {
+        
         if (currentHoldIndex < holdPoints.Count - 1)
         {
             currentHoldIndex++;
@@ -38,24 +39,25 @@ public class PoliceGroup : MonoBehaviour
         {
             if (member == null || holdPoints[currentHoldIndex] == null)
                 continue;
-            member.holdPosition = holdPoints[currentHoldIndex].transform;
+            member.SetHoldPosition(holdPoints[currentHoldIndex].transform)  ;
             if (isAdvancing)
             {
                 member.isAdvancing = true;
-                member.isRunning = false;
+                member.isFallingBack = false;
             }
             else
             {
                 //fleeing
                 member.isAdvancing = false;
-                member.isRunning = true;
+                member.isFallingBack = true;
             }
         }
     }
     public int CheckChangeHoldPosition()
     {
         int requiredForCurrentHoldPoint = currentHoldIndex * PoliceManager.instance.requiredAmountPerHoldPoint;
-        int membersInRangeOfCurrentHoldpoint = GetMembersInRangeOfOrRunningToCurrentHoldpoint();
+        //-1 since it is checked BEFORE a police unit is Killed/Destroyed
+        int membersInRangeOfCurrentHoldpoint = GetMembersInRangeOfOrRunningToCurrentHoldpoint()-1;
         // if (ratio <= 0.5f)
         if (membersInRangeOfCurrentHoldpoint < requiredForCurrentHoldPoint)
         {
@@ -75,7 +77,7 @@ public class PoliceGroup : MonoBehaviour
         int amount = 0;
         foreach (PoliceBase member in members)
         {
-            if (IsNearCurrentHoldPoint(member) || (member.isRunning || member.isAdvancing))
+            if (IsNearCurrentHoldPoint(member) || (member.isFallingBack || member.isAdvancing))
             {
                 amount++;
             }

@@ -178,7 +178,6 @@ public class RTSSelection : MonoBehaviour
         // if (!Input.GetKey(KeyCode.LeftShift))
         //     selectedUnits = new List<Protestor>();
         selectedUnits = new List<Protestor>();
-        print("Handling Select");
         Vector3[] verts = new Vector3[4];
         Vector3[] vecs = new Vector3[4];
 

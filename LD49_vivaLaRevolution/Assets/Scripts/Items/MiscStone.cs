@@ -62,8 +62,8 @@ public class MiscStone : MiscItem
 
     protected override void PickUp(Protestor protestor)
     {
-        base.PickUp(protestor);
         rangeCollider.enabled = true;
+        base.PickUp(protestor);
     }
 
 

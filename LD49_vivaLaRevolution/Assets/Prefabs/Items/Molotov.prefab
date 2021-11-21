@@ -9857,26 +9857,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: cc4ecf55af1cd724894761687487dc35, type: 3}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  maxDistance: 50
+  influenceRadius: 20
   onUseCompleted:
     m_PersistentCalls:
       m_Calls: []
   onUse:
     m_PersistentCalls:
       m_Calls: []
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  maxDistance: 50
-  influenceRadius: 20
-  explosionParticles: {fileID: 7958413605842114963}
-  burnDamageParticles: {fileID: 2698711876595618718}
-  flameParticles: {fileID: 7958413605684528451}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1536
   duration: 10
   ticksPerSecond: 2
-  damagePerTick: 3
+  damagePerTick: 1
+  explosionParticles: {fileID: 7958413605842114963}
+  burnDamageParticles: {fileID: 2698711876595618718}
+  flameParticles: {fileID: 7958413605684528451}
 --- !u!1 &7958413605842114966
 GameObject:
   m_ObjectHideFlags: 0

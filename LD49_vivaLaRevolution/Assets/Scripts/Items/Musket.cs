@@ -66,6 +66,7 @@ public class Musket : MonoBehaviour
 
     private void OnDestroy()
     {
+        onFinishAttack.RemoveAllListeners();
         meshTransform.DOKill();
     }
 

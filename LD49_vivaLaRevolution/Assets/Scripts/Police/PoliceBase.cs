@@ -43,11 +43,7 @@ public class PoliceBase : RTSUnit
             if (!isRunning && !isFallingBack)
             {
                 //Staying at holdPoint, so look for enemies
-                foreach (Collider collider in colliders)
-                {
-                    targetHealth = collider.GetComponent<Health>();
-                    break;
-                }
+                 FindNewTarget();
             }
 
         }
@@ -89,20 +85,5 @@ public class PoliceBase : RTSUnit
     {
         group.members.Remove(this);
         //if (group.members.Contains(this))
-    }
-    private void OnDrawGizmos()
-    {
-
-        Gizmos.color = Color.grey;
-        Gizmos.DrawWireSphere(moveToPosition, attackRange);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, detectRadius);
-        Gizmos.color = Color.green;
-        if (!holdPosition)
-            return;
-        Gizmos.DrawWireSphere(holdPosition.position, fightWithinRange);
     }
 }

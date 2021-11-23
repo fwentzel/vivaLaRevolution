@@ -178,9 +178,13 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
-  detectRadius: 30
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  detectRadius: 47.69
   fightWithinRange: 10
   magnitudeMulitplicator: 5
+  viewAngle: 355
   meshTransform: {fileID: 6332343491960999160}
   onSelection:
     m_PersistentCalls:

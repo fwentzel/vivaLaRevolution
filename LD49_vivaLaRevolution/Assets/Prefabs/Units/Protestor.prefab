@@ -448,16 +448,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6184fb9177324ca45746694be8c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 11
+  attackDamage: 10
   attackSpeed: 1
   attackRange: 4
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  detectRadius: 15
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  detectRadius: 19.89
   fightWithinRange: 30
   magnitudeMulitplicator: 2.3
-  moveTarget: {fileID: 2170390156423901853}
+  viewAngle: 113
   meshTransform: {fileID: 329363691952813771}
   onSelection:
     m_PersistentCalls:
@@ -489,6 +492,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  moveTarget: {fileID: 2170390156423901853}
   item: {fileID: 0}
   itemHold: {fileID: 3149884992394322957}
   miscItem: {fileID: 0}

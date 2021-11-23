@@ -34,11 +34,8 @@ public class Protestor : RTSUnit
 
         if (targetHealth == null)
         {
-            foreach (Collider collider in colliders)
-            {
-                targetHealth = collider.GetComponent<Health>();
-                break;
-            }
+            FindNewTarget();
+
             if (navMeshAgent.enabled)
                 navMeshAgent.destination = moveToPosition;
         }
@@ -47,6 +44,7 @@ public class Protestor : RTSUnit
             navMeshAgent.destination = targetHealth.transform.position;
         }
     }
+
 
     public override void SetMovePosition(Vector3 newPosition)
     {
@@ -173,16 +171,7 @@ public class Protestor : RTSUnit
         return miscItem == null;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, detectRadius);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(moveToPosition, fightWithinRange);
 
-    }
 
 
 }

@@ -324,10 +324,13 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   detectRadius: 35
   fightWithinRange: 35
   magnitudeMulitplicator: 2
-  moveTarget: {fileID: 0}
+  viewAngle: 0
   meshTransform: {fileID: 2475510913183630819}
   onSelection:
     m_PersistentCalls:
@@ -350,6 +353,7 @@ MonoBehaviour:
   group: {fileID: 0}
   holdPosition: {fileID: 0}
   isRunning: 0
+  isFallingBack: 0
   isAdvancing: 0
 --- !u!54 &3012109985939300580
 Rigidbody:

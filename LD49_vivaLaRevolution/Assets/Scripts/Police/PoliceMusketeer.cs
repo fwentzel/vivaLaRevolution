@@ -19,10 +19,10 @@ public class PoliceMusketeer : PoliceBase
 
         musket = Instantiate(musketPrefab, musketHolderTransform.position, musketHolderTransform.transform.rotation, musketHolderTransform).GetComponent<Musket>();
         musket.attackRange = attackRange;
-        if (attackSpeed < musket.useTime*2)
+        if (attackSpeed < musket.useTime * 2)
         {
             Debug.Log("Attackspeed is lower than double musket usetime. Adjusted attackspeed accordingly");
-            attackSpeed = musket.useTime*2;
+            attackSpeed = musket.useTime * 2;
         }
         musket.onFinishAttack.AddListener(() => FinishAttack());
     }
@@ -30,11 +30,18 @@ public class PoliceMusketeer : PoliceBase
     protected override void Update()
     {
         base.Update();
-
+        if (targetHealth)
+            print(CanSeeTarget(targetHealth.transform));
+        if (targetHealth && !CanSeeTarget(targetHealth.transform))
+            FindNewTarget();
+        print(targetHealth?.name);
         if (targetHealth)
         {
+
             Quaternion neededRotation = Quaternion.LookRotation(targetHealth.transform.position - transform.position, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, neededRotation, turnspeed);
+
+
         }
         else
         {

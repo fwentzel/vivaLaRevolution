@@ -20,7 +20,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3055601367277545976
 Transform:
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3055601367277545980}
   m_LocalRotation: {x: -0.0025743432, y: 0.000027698208, z: 0.0005760573, w: 0.99999654}
   m_LocalPosition: {x: -276.22928, y: -0.78441, z: -75.28}
-  m_LocalScale: {x: 18.519753, y: 11.899686, z: 10.309026}
+  m_LocalScale: {x: 24.74695, y: 11.899685, z: 16.503006}
   m_Children:
   - {fileID: 4604696993695135895}
   - {fileID: 6167920858072281815}
@@ -149,7 +149,7 @@ MonoBehaviour:
   itemPrefabs:
   - {fileID: 7958413604708030817, guid: d569dc5df5a4dbc41a9a6821dac240ee, type: 3}
   maxProtestors: 3
-  lootable: 1
+  lootable: 0
   captureDurration: 5
   entryPoint: {fileID: 4604696993695135895}
   lootProbability: 20
@@ -171,7 +171,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4604696993695135895
 Transform:
@@ -202,7 +202,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6167920858072281815
 Transform:

@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c79acb5d6512ae846b7ad320834bc263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 11
   attackSpeed: 1
   attackRange: 4
   enemyLayer:
@@ -327,10 +327,10 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 2048
-  detectRadius: 35
-  fightWithinRange: 35
-  magnitudeMulitplicator: 2
-  viewAngle: 0
+  detectRadius: 30
+  fightWithinRange: 30
+  magnitudeMulitplicator: 1
+  viewAngle: 180
   meshTransform: {fileID: 2475510913183630819}
   onSelection:
     m_PersistentCalls:

@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9886c830a50ab814c95585598b310eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 110
+  maxHealth: 75
   randomizeHealth: 1
   meshRenderer: {fileID: 7874348311401058103}
   onHeal:
@@ -173,18 +173,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 500
-  attackSpeed: 3
-  attackRange: 50
+  attackSpeed: 8
+  attackRange: 70
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 2048
-  detectRadius: 47.69
+  detectRadius: 55
   fightWithinRange: 10
-  magnitudeMulitplicator: 5
-  viewAngle: 355
+  magnitudeMulitplicator: 1
+  viewAngle: 180
   meshTransform: {fileID: 6332343491960999160}
   onSelection:
     m_PersistentCalls:

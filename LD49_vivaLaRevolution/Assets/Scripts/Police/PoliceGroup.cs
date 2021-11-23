@@ -6,6 +6,8 @@ public class PoliceGroup : MonoBehaviour
 {
     public List<HoldPoint> holdPoints;
     public int startSize = 10;
+    [Range(0,1)]
+    public float musketeerPercentage;    
     public bool ignoreRespawnAndHoldpointCalc = false;
     [HideInInspector] public List<PoliceBase> members;
     public int currentHoldIndex { get; private set; } = 0;

@@ -47,11 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84d9919bd3eb8b40b39cc2fe7ef2696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  policePrefab: {fileID: 8359640132132065183, guid: 265b56269f9a9f54f87b352854b8f533, type: 3}
+  policeMeelePrefab: {fileID: 8359640132132065183, guid: 265b56269f9a9f54f87b352854b8f533, type: 3}
   policeMusketeerPrefab: {fileID: 124025723196966532, guid: 2b34986a5e6804445b05db542d5b76f2, type: 3}
   defaultSpawnPoint: {fileID: 0}
   respawnInterval: 50
-  requiredAmountPerHoldPoint: 3
+  requiredAmountPerHoldPoint: 4
   minMaxSpawnAmount: {x: 0, y: 0}
 --- !u!114 &7060042828405826471
 MonoBehaviour:

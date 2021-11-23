@@ -2208,7 +2208,7 @@ PrefabInstance:
       objectReference: {fileID: 350535722}
     - target: {fileID: 1938743203406289736, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
       propertyPath: startSize
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1938743203406289736, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
       propertyPath: holdPoints.Array.data[5]
@@ -2226,6 +2226,10 @@ PrefabInstance:
       propertyPath: holdPoints.Array.data[8]
       value: 
       objectReference: {fileID: 350535722}
+    - target: {fileID: 1938743203406289736, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
+      propertyPath: musketeerPercentage
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1938743203406289742, guid: fc9908f2fc833834e972b7645537b9e9, type: 3}
       propertyPath: m_Name
       value: PoliceGroup_1
@@ -3469,10 +3473,6 @@ PrefabInstance:
       propertyPath: defaultSpawnPoint
       value: 
       objectReference: {fileID: 1036176358}
-    - target: {fileID: 7060042828405826470, guid: ad4d92a2902d2b2408c5e14d01075d8f, type: 3}
-      propertyPath: requiredAmountPerHoldPoint
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad4d92a2902d2b2408c5e14d01075d8f, type: 3}
 --- !u!1001 &8053068355996753066

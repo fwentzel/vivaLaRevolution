@@ -4,21 +4,22 @@ using UnityEngine;
 public class Buildingmanager : MonoBehaviour
 {
     public float randomnessMultiplier = 10;
+    public Transform buildingParent;
     private void Awake()
     {
 
-        foreach (Building building in FindObjectsOfType<Building>())
+        foreach (Transform child in buildingParent)
         {
-            if (building.tag.Equals("MainBuilding"))
+            
+            if (child.tag.Equals("MainBuilding"))
                 continue;
-            Transform buildingTransform = building.transform;
-            float v = Mathf.PerlinNoise(buildingTransform.position.x, buildingTransform.position.z) - 0.5f;
+            float v = Mathf.PerlinNoise(child.position.x, child.position.z) - 0.5f;
             v *= randomnessMultiplier;
+            print(v);
+            child.localScale += new Vector3(0, v, 0);
+            child.position = new Vector3(child.position.x, child.localScale.y / 2f, child.position.z);
 
-            buildingTransform.localScale += new Vector3(0, v, 0);
-            buildingTransform.position = new Vector3(buildingTransform.position.x, buildingTransform.localScale.y / 2f, buildingTransform.position.z);
-
-            Renderer renderer = building.GetComponent<Renderer>();
+            Renderer renderer = child.GetComponent<Renderer>();
             if (renderer)
             {
                 Color color = renderer.material.color;

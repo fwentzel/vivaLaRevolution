@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomnessMultiplier: 10
+  buildingParent: {fileID: 0}
 --- !u!114 &7060042828405826464
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -30,11 +30,8 @@ public class PoliceMusketeer : PoliceBase
     protected override void Update()
     {
         base.Update();
-        if (targetHealth)
-            print(CanSeeTarget(targetHealth.transform));
         if (targetHealth && !CanSeeTarget(targetHealth.transform))
             FindNewTarget();
-        print(targetHealth?.name);
         if (targetHealth)
         {
 

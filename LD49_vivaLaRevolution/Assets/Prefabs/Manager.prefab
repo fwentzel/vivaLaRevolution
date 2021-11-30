@@ -51,7 +51,7 @@ MonoBehaviour:
   policeMusketeerPrefab: {fileID: 124025723196966532, guid: 2b34986a5e6804445b05db542d5b76f2, type: 3}
   defaultSpawnPoint: {fileID: 0}
   respawnInterval: 50
-  requiredAmountPerHoldPoint: 4
+  requiredAmountPerHoldPoint: 3
   minMaxSpawnAmount: {x: 0, y: 0}
 --- !u!114 &7060042828405826471
 MonoBehaviour:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e8273929154204dbe40b30401e9870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomnessMultiplier: 10
+  randomnessMultiplier: 5
   buildingParent: {fileID: 0}
 --- !u!114 &7060042828405826464
 MonoBehaviour:

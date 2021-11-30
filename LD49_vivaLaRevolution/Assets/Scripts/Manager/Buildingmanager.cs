@@ -15,7 +15,6 @@ public class Buildingmanager : MonoBehaviour
                 continue;
             float v = Mathf.PerlinNoise(child.position.x, child.position.z) - 0.5f;
             v *= randomnessMultiplier;
-            print(v);
             child.localScale += new Vector3(0, v, 0);
             child.position = new Vector3(child.position.x, child.localScale.y / 2f, child.position.z);
 

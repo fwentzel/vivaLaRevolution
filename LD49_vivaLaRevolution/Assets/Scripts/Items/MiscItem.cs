@@ -39,9 +39,10 @@ public class MiscItem : MonoBehaviour
             PickUp(protestor);
         }
     }
-    protected void ReactivatePickUp()
+    public void ReactivatePickUp()
     {
         pickUpCollider.enabled = true;
+        transform.parent=null;
     }
     protected virtual void PickUp(Protestor protestor)
     {

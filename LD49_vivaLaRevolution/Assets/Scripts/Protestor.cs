@@ -156,6 +156,11 @@ public class Protestor : RTSUnit
         if (item)
         {
             ItemManager.instance.RemoveItemFromList(item);
+            
+        }
+
+        if(miscItem){
+            miscItem.ReactivatePickUp();
         }
         RTSSelection.instance.RemoveFromSelection(this);
         ProtestorManager.instance.OnProtestorDeath();

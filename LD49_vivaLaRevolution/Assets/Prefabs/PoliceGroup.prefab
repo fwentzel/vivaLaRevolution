@@ -48,7 +48,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
+  startSize: 9
+  musketeerPercentage: 0.4
+  ignoreRespawnAndHoldpointCalc: 0
   members: []
-  currentHoldIndex: 0
-  startSize: 10

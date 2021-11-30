@@ -101,7 +101,7 @@ public class PoliceManager : MonoBehaviour
             for (int i = 0; i < v; i++)
             {
                 GameObject obj;
-                if (group.startSize * group.musketeerPercentage <= i)
+                if (group.startSize * group.musketeerPercentage > i)
                 {
                     obj = Instantiate(policeMusketeerPrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity);
                 }

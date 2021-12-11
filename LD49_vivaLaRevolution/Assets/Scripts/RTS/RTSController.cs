@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
@@ -36,6 +37,12 @@ public class RTSController : MonoBehaviour
             {
                 OrderGoLoot(building);
             }
+            else if(hit.transform.TryGetComponent<NavMeshObstacle>(out NavMeshObstacle o))
+            {
+                //Clickedon normal, non-lootable building. So set move position to ground level, so move markers dont appear on roof
+                OrderMove(new Vector3(hit.point.x,0,hit.point.z));
+            }
+            
             else
             {
                 OrderMove(hit.point);

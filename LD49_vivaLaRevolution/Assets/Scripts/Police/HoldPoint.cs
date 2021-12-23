@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
-
     [SerializeField] private float changePerSecond = 1;
     [SerializeField] private float captureRadius = 15;
     [SerializeField] private float buildingInfluenceRadius = 15;
@@ -22,10 +20,10 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private LayerMask protestorLayer;
     private LayerMask buildingLayer;
     private Collider[] output = new Collider[4];
-    private float capturedAmount = 50;
+    private float capturedAmount = 0;
     private Building[] buildingsToInfluence;
 
-    private Boolean isCaptured = false;
+    private bool isCaptured = false;
 
     private void Awake()
     {
@@ -63,12 +61,15 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         protestorProgessImage.fillAmount = capturedAmount / 100f;
         policeProgessImage.fillAmount = 1 - capturedAmount / 100f;
+
     }
 
     private void Update()
     {
+
         int policeAmount = Physics.OverlapSphereNonAlloc(transform.position, captureRadius, output, policeLayer);
         int protestorAmount = Physics.OverlapSphereNonAlloc(transform.position, captureRadius, output, protestorLayer);
+
         if (policeAmount > 0 && protestorAmount == 0 && capturedAmount > 0)
         {
             UpdateCaptureAmount(-changePerSecond * 2 * policeAmount);

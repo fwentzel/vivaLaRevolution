@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c008c2c516c4541be2a1ba09f1c66b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 500
-  attackSpeed: 8
+  attackDamage: 5
+  attackSpeed: 15
   attackRange: 70
   enemyLayer:
     serializedVersion: 2

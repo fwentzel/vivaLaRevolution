@@ -7,6 +7,7 @@ public class PoliceManager : MonoBehaviour
     public static PoliceManager instance { get; private set; }
     public GameObject policeMeelePrefab;
     public GameObject policeMusketeerPrefab;
+    public Transform spawnParent;
     public HoldPoint defaultSpawnPoint;
     public float respawnInterval = 30;
     public int requiredAmountPerHoldPoint = 6;
@@ -103,11 +104,11 @@ public class PoliceManager : MonoBehaviour
                 GameObject obj;
                 if (group.startSize * group.musketeerPercentage > i)
                 {
-                    obj = Instantiate(policeMusketeerPrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity);
+                    obj = Instantiate(policeMusketeerPrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity,spawnParent);
                 }
                 else
                 {
-                    obj = Instantiate(policeMeelePrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity);
+                    obj = Instantiate(policeMeelePrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity,spawnParent);
                 }
 
                 PoliceBase police = obj.GetComponent<PoliceBase>();

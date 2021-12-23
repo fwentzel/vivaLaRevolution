@@ -14,7 +14,7 @@ GameObject:
   m_Layer: 0
   m_Name: PoliceHoldPoint
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -45,27 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1501574bf0ba5194fa418f0f34a85406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  changePerSecond: 3
+  captureRadius: 15
+  buildingInfluenceRadius: 65.46
+  protestorProgessImage: {fileID: 8675847321701225500}
+  policeProgessImage: {fileID: 3475207312459042610}
   onCapturePoint:
     m_PersistentCalls:
       m_Calls: []
   onLoosePoint:
     m_PersistentCalls:
       m_Calls: []
-  changePerSecond: 3
-  captureRadius: 15
-  buildingInfluenceRadius: 65.46
-  policeLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  protestorLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  buildingLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  protestorProgessImage: {fileID: 8675847321701225500}
-  policeProgessImage: {fileID: 3475207312459042610}
-  buildingInfluenceRangeImage: {fileID: 3268306945919871932}
 --- !u!135 &5598724295006439210
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -313,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6226415, g: 0, b: 0, a: 0.18431373}
+  m_Color: {r: 0.6226415, g: 0, b: 0, a: 0.0627451}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -388,7 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.056131504, b: 0.7264151, a: 0.18431373}
+  m_Color: {r: 0, g: 0.056131504, b: 0.7264151, a: 0.0627451}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

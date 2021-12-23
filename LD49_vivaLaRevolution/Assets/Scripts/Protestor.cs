@@ -96,7 +96,7 @@ public class Protestor : RTSUnit
         while (toBuilding.CanEnter())
         {
             yield return new WaitForSeconds(0.1f);
-            if (Vector3.Distance(toBuilding.entryPoint.position, transform.position) < 2f)
+            if (Vector3.Distance(toBuilding.entryPoint.position, transform.position) < 4f)
             {
                 navMeshAgent.enabled = false;
                 if (toBuilding.protestors.Count == 0)

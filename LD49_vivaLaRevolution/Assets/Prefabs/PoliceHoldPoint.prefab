@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 184885194858481043}
   - component: {fileID: 5227026000794027754}
   - component: {fileID: 3268306945919871932}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BuildingInfluenceRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 5977274600201571391}
   - component: {fileID: 4330339212608642773}
   - component: {fileID: 5952098332915711165}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1867181227723113222}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -179,11 +179,11 @@ RectTransform:
   - {fileID: 8198942052909928773}
   m_Father: {fileID: 619509940409873050}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.03}
-  m_SizeDelta: {x: 100, y: 100}
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.45}
+  m_SizeDelta: {x: 1920.0001, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5977274600201571391
 Canvas:
@@ -196,7 +196,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 143.2
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 8198942052909928773}
   - component: {fileID: 8138285341467367564}
   - component: {fileID: 8675847321701225500}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ProtestorProgess
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 8185997183099124986}
   - component: {fileID: 6040779969990091530}
   - component: {fileID: 3475207312459042610}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PoliceBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

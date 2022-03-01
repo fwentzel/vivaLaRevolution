@@ -67,13 +67,25 @@ public class RTSUnit : MonoBehaviour
                     Attack();
                 }
             }
+            else
+            {
+                Debug.Log("Looking for target within reach",gameObject);
+                //Target is our of reach
+                //Try to find new target that is within reach to prevent units not attacking when blocked by other units
+                for (int i = 0; i < visibleTargets.Count; i++)
+                {
+                    if (visibleTargets[i] != null)
+                    {
+                        if (Vector3.Distance(visibleTargets[i].position, transform.position) < attackRange)
+                        {
+                            targetHealth = visibleTargets[i].GetComponent<Health>();
+                        }
+                    }
+                }
+            }
         }
     }
 
-    public float GetRemainingDistance()
-    {
-        return navMeshAgent.remainingDistance;
-    }
 
     //https://www.youtube.com/watch?v=rQG9aUWarwE&ab_channel=SebastianLague
     protected void FindVisibleTargets()

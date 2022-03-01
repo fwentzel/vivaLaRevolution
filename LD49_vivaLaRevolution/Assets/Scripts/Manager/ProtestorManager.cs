@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProtestorManager : MonoBehaviour
 {
     public static ProtestorManager instance { get; private set; }
-    [SerializeField] private Transform protestorParent;
+    public Transform protestorParent;
     [SerializeField] private GameObject protestorPrefab;
 
     private void Awake()

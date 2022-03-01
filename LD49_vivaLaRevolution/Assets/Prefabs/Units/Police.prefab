@@ -279,7 +279,7 @@ MonoBehaviour:
   detectRadius: 30
   fightWithinRange: 20
   magnitudeMulitplicator: 1
-  viewAngle: 360
+  viewAngle: 181
   meshTransform: {fileID: 2475510913183630819}
   onSelection:
     m_PersistentCalls:

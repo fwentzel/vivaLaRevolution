@@ -28,7 +28,7 @@ public class Citizen : MonoBehaviour
     {
         if (other.TryGetComponent<Protestor>(out Protestor protestor))
         {
-            GameObject spawnedProtestor = Instantiate(protestorPrefab, transform.position, transform.rotation);
+            GameObject spawnedProtestor = Instantiate(protestorPrefab, transform.position, transform.rotation,ProtestorManager.instance.protestorParent);
             if (RTSSelection.instance.selectedUnits.Contains(protestor))
             {
                 //Add new Protestor to Selection aswell

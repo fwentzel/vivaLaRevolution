@@ -13,10 +13,10 @@ public class Buildingmanager : MonoBehaviour
             
             if (child.tag.Equals("MainBuilding"))
                 continue;
-            float v = Mathf.PerlinNoise(child.position.x, child.position.z) - 0.5f;
+            float v = Mathf.PerlinNoise(child.position.x, child.position.z);
             v *= randomnessMultiplier;
             child.localScale += new Vector3(0, v, 0);
-            child.position = new Vector3(child.position.x, child.localScale.y / 2f, child.position.z);
+            child.position += new Vector3(0, v/2,0);
 
             Renderer renderer = child.GetComponent<Renderer>();
             if (renderer)

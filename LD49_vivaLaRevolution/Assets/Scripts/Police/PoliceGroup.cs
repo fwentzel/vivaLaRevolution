@@ -6,8 +6,8 @@ public class PoliceGroup : MonoBehaviour
 {
     public List<HoldPoint> holdPoints;
     public int startSize = 10;
-    [Range(0,1)]
-    public float musketeerPercentage;    
+    [Range(0, 1)]
+    public float musketeerPercentage;
     public bool ignoreRespawnAndHoldpointCalc = false;
     [HideInInspector] public List<PoliceBase> members;
     public int currentHoldIndex { get; private set; } = 0;
@@ -22,7 +22,7 @@ public class PoliceGroup : MonoBehaviour
     }
     public void TryGoToNextHoldPoint()
     {
-        
+
         if (currentHoldIndex < holdPoints.Count - 1)
         {
             currentHoldIndex++;
@@ -41,7 +41,7 @@ public class PoliceGroup : MonoBehaviour
         {
             if (member == null || holdPoints[currentHoldIndex] == null)
                 continue;
-            member.SetHoldPosition(holdPoints[currentHoldIndex].transform)  ;
+            member.SetHoldPosition(holdPoints[currentHoldIndex].transform);
             if (isAdvancing)
             {
                 member.isAdvancing = true;
@@ -59,7 +59,7 @@ public class PoliceGroup : MonoBehaviour
     {
         int requiredForCurrentHoldPoint = currentHoldIndex * PoliceManager.instance.requiredAmountPerHoldPoint;
         //-1 since it is checked BEFORE a police unit is Killed/Destroyed
-        int membersInRangeOfCurrentHoldpoint = GetMembersInRangeOfOrRunningToCurrentHoldpoint()-1;
+        int membersInRangeOfCurrentHoldpoint = GetMembersInRangeOfOrRunningToCurrentHoldpoint() - 1;
         // if (ratio <= 0.5f)
         if (membersInRangeOfCurrentHoldpoint < requiredForCurrentHoldPoint)
         {
@@ -89,7 +89,7 @@ public class PoliceGroup : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
+        Gizmos.color =UnityEditor.Selection.activeGameObject == gameObject? Color.red:Color.yellow;
         if (holdPoints.Count > 2)
         {
             Gizmos.DrawSphere(holdPoints[0].transform.position, .5f);

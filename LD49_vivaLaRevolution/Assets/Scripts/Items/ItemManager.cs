@@ -39,18 +39,18 @@ public class ItemManager : MonoBehaviour
         itemInput.Cancel.performed += ctx => DeselectItem();
 
 
-        //Debugging 
-        Protestor[] protestors = FindObjectsOfType<Protestor>();
-        int itemsGiven = 0;
-        for (int i = 0; i < protestors.Length; i++)
-        {
-            if (itemsGiven < giveItemsToProtestorsOnStart && items.Count > 0)
-            {
-                Item item = Instantiate(items[UnityEngine.Random.Range(0, items.Count)]);
-                protestors[i].GiveItem(item);
-                itemsGiven++;
-            }
-        }
+        // //Debugging 
+        // Protestor[] protestors = FindObjectsOfType<Protestor>();
+        // int itemsGiven = 0;
+        // for (int i = 0; i < protestors.Length; i++)
+        // {
+        //     if (itemsGiven < giveItemsToProtestorsOnStart && items.Count > 0)
+        //     {
+        //         Item item = Instantiate(items[UnityEngine.Random.Range(0, items.Count)]);
+        //         protestors[i].GiveItem(item);
+        //         itemsGiven++;
+        //     }
+        // }
 
     }
 

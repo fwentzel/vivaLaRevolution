@@ -1,5 +1,6 @@
 ﻿using UnityEngine.ProBuilder;
 using UnityEngine.ProBuilder.MeshOperations;
+using DelaunatorSharp;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
@@ -19,12 +20,11 @@ public class Mapgenerator : MonoBehaviour
     public float buildingHeight = .01f;
 
     public Material material;
-    List<Line> lines;
     private ConvexHullCalculator hullCalculator = new ConvexHullCalculator();
 
     private const float ALLOWED_COLOR_DELTA = 0.000001f;
     private float aspectFactor = 1;
-
+    IEnumerable<ITriangle> triangles;
 
     private void Start()
     {
@@ -47,11 +47,13 @@ public class Mapgenerator : MonoBehaviour
             {
                 Color mapColor = mapImage.GetPixel(x, y);
 
-                if (colorsEqual(mapColor, buildingColor) && mapPlane.transform.childCount < 1)
+                if (colorsEqual(mapColor, buildingColor) && mapPlane.transform.childCount < 2)
                 {
+
+
                     //Get Building
                     List<Vector2> buildingPixels = FloodFill(debugResult, new Vector2Int(x, y), Color.red);
-
+                    print(buildingPixels.Count);
                     generateBuilding(buildingPixels);
                 }
             }
@@ -75,6 +77,7 @@ public class Mapgenerator : MonoBehaviour
 
         Vector2 centerOfMass = CalculateNormalizedCenterOfMass(buildingPixels);
 
+        System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
         for (int i = 0; i < buildingPixels.Count; i++)
         {
@@ -96,25 +99,37 @@ public class Mapgenerator : MonoBehaviour
 
         }
 
-
+        print("Setup Buildpoints in: " + (stopwatch.Elapsed));
         Hull.setConvexHull(buildingPoints);
-        lines = Hull.setConcaveHull(-0.5f, 1);
+        print("Setup Convex Hull in: " + (stopwatch.Elapsed));
+
+        List<Line> lines = Hull.setConcaveHull(-0.5f, 1);
+        print("Setup Concave Hull in: " + (stopwatch.Elapsed));
+
+        // for (int i = 1; i < buildingPoints.Count; i++)
+        // {
+        //     Node nodeA = new Node(buildingPoints[i - 1].x, buildingPoints[i - 1].y, i - 1);
+        //     Node nodeB = new Node(buildingPoints[i].x, buildingPoints[i].y, i);
+        //     lines.Add(new Line(nodeA, nodeB));
+        // }
+        // Node a = new Node(buildingPoints[buildingPoints.Count - 1].x, buildingPoints[buildingPoints.Count - 1].y, buildingPoints.Count - 1);
+        // Node b = new Node(buildingPoints[0].x, buildingPoints[0].y, buildingPoints.Count + 2);
+        // lines.Add(new Line(a, b));
+        // print("Setup lines in: " + (stopwatch.Elapsed));
 
 
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        go.transform.SetParent(mapPlane.transform, false);
-        go.transform.localPosition = Vector3.zero;
-        go.transform.localRotation = Quaternion.identity;
-        go.transform.localScale = Vector3.one;
 
-        GenerateMesh(lines);
-        // go.GetComponent<MeshFilter>().sharedMesh = GenerateMesh(lines);
-        // gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+        ProBuilderMesh proBuilderMesh = GenerateMesh(lines);
+        print("Setup Mesh in: " + (stopwatch.Elapsed));
+        if (proBuilderMesh == null)
+        {
+            return;
+        }
 
         // *2 since the distance center of mass to origin was subtracted previously
-        go.transform.position = new Vector3(centerOfMass.x * 2, 0, centerOfMass.y * 2);
-
-
+        proBuilderMesh.transform.position = new Vector3(centerOfMass.x * 2, 0, centerOfMass.y * 2);
+        proBuilderMesh.transform.parent = mapPlane.transform;
+        print("Placed Object in: " + (stopwatch.Elapsed));
 
     }
 
@@ -218,24 +233,35 @@ public class Mapgenerator : MonoBehaviour
             while (y1 <= targetTexture.height && colorsEqual(targetTexture.GetPixel(temp.x, y1), targetColor))
             {
                 targetTexture.SetPixel(temp.x, y1, replacementColor);
-                buildingPixels.Add(new Vector2Int(temp.x, y1));
-                if (!spanLeft && temp.x > 0 && colorsEqual(targetTexture.GetPixel(temp.x - 1, y1), targetColor))
+                bool equalLeft = colorsEqual(mapImage.GetPixel(temp.x - 1, y1), targetColor);
+                bool equalRight = colorsEqual(mapImage.GetPixel(temp.x + 1, y1), targetColor);
+                bool equalDown = colorsEqual(mapImage.GetPixel(temp.x, y1 - 1), targetColor);
+                bool equalUp = colorsEqual(mapImage.GetPixel(temp.x, y1 + 1), targetColor);
+
+                if (!equalLeft || !equalRight || !equalRight || !equalDown)
+                {
+
+                    //Only add to buildingpixel if not all of the surrounding pixels are targetcolor
+                    //which means it is vorder pixel
+                    //way to cut down calculations in hull generation
+                    buildingPixels.Add(new Vector2(temp.x, y1));
+                }
+
+                if (!spanLeft && temp.x > 0 && equalLeft)
                 {
                     pixels.Push(new Vector2Int(temp.x - 1, y1));
-                    buildingPixels.Add(new Vector2Int(temp.x - 1, y1));
                     spanLeft = true;
                 }
-                else if (spanLeft && temp.x - 1 == 0 && !colorsEqual(targetTexture.GetPixel(temp.x - 1, y1), targetColor))
+                else if (spanLeft && temp.x - 1 == 0 && !equalLeft)
                 {
                     spanLeft = false;
                 }
-                if (!spanRight && temp.x < targetTexture.width - 1 && colorsEqual(targetTexture.GetPixel(temp.x + 1, y1), targetColor))
+                if (!spanRight && temp.x < targetTexture.width - 1 && equalRight)
                 {
                     pixels.Push(new Vector2Int(temp.x + 1, y1));
-                    buildingPixels.Add(new Vector2Int(temp.x + 1, y1));
                     spanRight = true;
                 }
-                else if (spanRight && temp.x < targetTexture.width - 1 && !colorsEqual(targetTexture.GetPixel(temp.x + 1, y1), targetColor))
+                else if (spanRight && temp.x < targetTexture.width - 1 && !equalRight)
                 {
                     spanRight = false;
                 }
@@ -247,7 +273,8 @@ public class Mapgenerator : MonoBehaviour
         return new List<Vector2>(buildingPixels);
 
     }
-    private void GenerateMesh(List<Line> concaveHull)
+
+    private ProBuilderMesh GenerateMesh(List<Line> concaveHull)
     {
         Mesh mesh = new Mesh();
         List<Vector3> verts = new List<Vector3>();
@@ -350,25 +377,61 @@ public class Mapgenerator : MonoBehaviour
         }
 
 
-        List<int> upperVertsIndex = new List<int>();
+        List<IPoint> upperPoints = new List<IPoint>();
 
         for (int i = 0; i < verts.Count; i++)
         {
             if (verts[i].y == buildingHeight)
             {
-                upperVertsIndex.Add(i);
+                upperPoints.Add(new Point(verts[i].x, verts[i].z));
             }
         }
-        faces.Add( new Face(upperVertsIndex));
 
-        ProBuilderMesh proBuilderMesh = ProBuilderMesh.Create(verts, faces);
-        
-        proBuilderMesh.GetVertices(upperVertsIndex);
-       
 
-        proBuilderMesh.SetMaterial(faces, material);
-        proBuilderMesh.Refresh();
-        proBuilderMesh.ToMesh();
+        Delaunator d = new Delaunator(upperPoints.ToArray());
+        triangles = d.GetTriangles();
+        IEnumerator<ITriangle> trisEnumerator = triangles.GetEnumerator();
+        while (trisEnumerator.MoveNext())
+        {
+            Triangle triangle = (Triangle)trisEnumerator.Current;
+
+            IEnumerator<IPoint> pointsEnumerator = triangle.Points.GetEnumerator();
+
+            pointsEnumerator.MoveNext();
+
+            Point point = (Point)pointsEnumerator.Current;
+            tris.Clear();
+            tris.Add(verts.Count);
+            v1 = new Vector3((float)point.X, buildingHeight, (float)point.Y);
+            verts.Add(v1);
+
+            pointsEnumerator.MoveNext();
+            point = (Point)pointsEnumerator.Current;
+
+            tris.Add(verts.Count);
+            v2 = new Vector3((float)point.X, buildingHeight, (float)point.Y);
+            verts.Add(v2);
+
+            pointsEnumerator.MoveNext();
+            point = (Point)pointsEnumerator.Current;
+
+            tris.Add(verts.Count);
+            v3 = new Vector3((float)point.X, buildingHeight, (float)point.Y);
+            verts.Add(v3);
+
+
+            faces.Add(new Face(tris));
+        }
+
+        ProBuilderMesh pm = ProBuilderMesh.Create(verts, faces);
+        pm.unwrapParameters = new UnwrapParameters();
+        pm.Refresh();
+        pm.ToMesh();
+        pm.SetMaterial(faces, material);
+
+
+        return pm;
+
     }
 
 }

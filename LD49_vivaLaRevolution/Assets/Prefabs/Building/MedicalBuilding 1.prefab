@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3055601367277545980}
   m_LocalRotation: {x: -0.0025743432, y: 0.000027698208, z: 0.0005760573, w: 0.99999654}
   m_LocalPosition: {x: -276.22928, y: -0.78441, z: -75.28}
-  m_LocalScale: {x: 24.74695, y: 11.899685, z: 16.503006}
+  m_LocalScale: {x: 30.851969, y: 13.611676, z: 20.20299}
   m_Children:
   - {fileID: 4604696993695135895}
   - {fileID: 6167920858072281815}
@@ -148,11 +148,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefabs:
   - {fileID: 7958413604708030817, guid: d569dc5df5a4dbc41a9a6821dac240ee, type: 3}
-  maxProtestors: 3
+  maxProtestors: 1
   lootable: 0
   captureDurration: 5
   entryPoint: {fileID: 4604696993695135895}
-  lootProbability: 20
+  lootProbability: 100
   OnCaptured:
     m_PersistentCalls:
       m_Calls: []
@@ -181,7 +181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3184634825838814531}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016, y: -0.453, z: 0.736}
+  m_LocalPosition: {x: -0.557, y: -0.446, z: 0.005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3055601367277545976}

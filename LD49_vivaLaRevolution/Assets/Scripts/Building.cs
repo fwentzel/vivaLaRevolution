@@ -138,11 +138,15 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
     {
+        if (quickOutline){
+                quickOutline.OutlineColor = lootable?Color.white:Color.red;
+                quickOutline.enabled = true;
+        }
+
         if (lootable && protestors.Count < maxProtestors)
         {
             Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-            if (quickOutline)
-                quickOutline.enabled = true;
+            
         }
 
 

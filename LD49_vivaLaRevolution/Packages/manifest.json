@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.nol1fe.delaunator": "file:C:/Users/Felix/Downloads/delaunator-sharp-master/DelaunatorSharp.Unity",
     "com.unity.2d.animation": "4.2.4",
     "com.unity.2d.pixel-perfect": "3.0.2",
     "com.unity.2d.psdimporter": "3.1.4",

@@ -152,8 +152,6 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(transform.position, 1.5f);
-
         Gizmos.DrawWireSphere(transform.position, captureRadius);
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, buildingInfluenceRadius);

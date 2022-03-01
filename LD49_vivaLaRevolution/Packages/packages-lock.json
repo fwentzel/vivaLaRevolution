@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.nol1fe.delaunator": {
+      "version": "file:C:/Users/Felix/Downloads/delaunator-sharp-master/DelaunatorSharp.Unity",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "4.2.4",
       "depth": 0,

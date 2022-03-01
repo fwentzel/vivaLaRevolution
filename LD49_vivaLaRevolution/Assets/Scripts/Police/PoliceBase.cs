@@ -8,13 +8,12 @@ public class PoliceBase : RTSUnit
     [HideInInspector] public PoliceGroup group;
     [HideInInspector] public Transform holdPosition;
     //Running away from a danger source e.g. molotov
-    [HideInInspector] public bool isRunning = false;
+    public bool isRunning = false;
 
     //falling back to holdpoint
-    [HideInInspector] public bool isFallingBack = false;
+     public bool isFallingBack = false;
     //advancing to holdpoint
-    [HideInInspector] public bool isAdvancing = false;
-
+     public bool isAdvancing = false;
     protected override void Start()
     {
         moveToPosition = holdPosition.position;

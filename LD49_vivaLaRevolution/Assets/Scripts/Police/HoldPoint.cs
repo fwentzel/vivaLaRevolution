@@ -127,7 +127,7 @@ public class HoldPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         foreach (Building building in buildingsToInfluence)
         {
-            building.quickOutline.OutlineColor = building.lootable ? Color.green : Color.red;
+            building.quickOutline.OutlineColor = building.lootable ? Color.white : Color.red;
             building.quickOutline.enabled = true;
 
         }

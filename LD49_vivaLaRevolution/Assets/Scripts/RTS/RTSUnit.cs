@@ -30,7 +30,7 @@ public class RTSUnit : MonoBehaviour
     public UnityEvent onDeselection;
 
 
-    protected Vector3 moveToPosition;
+    public Vector3 moveToPosition { get; protected set; }
     protected NavMeshAgent navMeshAgent;
     protected Health targetHealth;
     protected Health myHealth;
@@ -53,7 +53,7 @@ public class RTSUnit : MonoBehaviour
     }
     protected virtual void Start()
     {
-        SetMovePosition(transform.position);
+        // SetMovePosition(transform.position);
     }
 
     protected virtual void Update()
@@ -146,12 +146,12 @@ public class RTSUnit : MonoBehaviour
 
     public virtual void SetMovePosition(Vector3 newPosition)
     {
-        //decide wether it will listen to Order
+        // //decide wether it will listen to Order
 
-        if (Random.Range(0, .5f) > myHealth.HealthRatio())
-        {
-            return;
-        }
+        // if (Random.Range(0, .5f) > myHealth.HealthRatio())
+        // {
+        //     return;
+        // }
         moveToPosition = newPosition;
 
     }

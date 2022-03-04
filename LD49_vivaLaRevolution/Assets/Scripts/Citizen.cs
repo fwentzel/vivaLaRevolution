@@ -28,11 +28,13 @@ public class Citizen : MonoBehaviour
     {
         if (other.TryGetComponent<Protestor>(out Protestor protestor))
         {
-            GameObject spawnedProtestor = Instantiate(protestorPrefab, transform.position, transform.rotation,ProtestorManager.instance.protestorParent);
+            GameObject spawnedProtestorObject = Instantiate(protestorPrefab, transform.position, transform.rotation, ProtestorManager.instance.protestorParent);
+            Protestor spawnedProtestor = spawnedProtestorObject.GetComponent<Protestor>();
+            spawnedProtestor.SetMovePosition(protestor.moveToPosition);
             if (RTSSelection.instance.selectedUnits.Contains(protestor))
             {
                 //Add new Protestor to Selection aswell
-                RTSSelection.instance.AddToSelection(spawnedProtestor.GetComponent<Protestor>());
+                RTSSelection.instance.AddToSelection(spawnedProtestor);
             }
             Destroy(gameObject);
         }

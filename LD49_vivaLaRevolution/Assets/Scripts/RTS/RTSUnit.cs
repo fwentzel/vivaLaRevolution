@@ -35,7 +35,8 @@ public class RTSUnit : MonoBehaviour
     protected Health targetHealth;
     protected Health myHealth;
     protected float nextAttackTime = 0;
-    protected Collider[] colliders;
+    protected Collider[] enemysInDetectRange;
+    protected Collider[] enemysInAttackRange = new Collider[1];
     protected Vector3 initialScale;
     protected Vector3 initialScaleMesh;
     protected bool doRandomly = true;
@@ -43,7 +44,7 @@ public class RTSUnit : MonoBehaviour
     protected virtual void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        colliders = new Collider[] { GetComponent<Collider>() };
+        enemysInDetectRange = new Collider[] { GetComponent<Collider>() };
         myHealth = GetComponent<Health>();
         moveToPosition = transform.position;
         initialScaleMesh = meshTransform.localScale;
@@ -57,7 +58,7 @@ public class RTSUnit : MonoBehaviour
 
     protected virtual void Update()
     {
-        colliders = Physics.OverlapSphere(transform.position, detectRadius, enemyLayer);
+        enemysInDetectRange = Physics.OverlapSphere(transform.position, detectRadius, enemyLayer);
         if (targetHealth != null && navMeshAgent.enabled)
         {
             if (Vector3.Distance(targetHealth.transform.position, transform.position) < attackRange)
@@ -69,19 +70,16 @@ public class RTSUnit : MonoBehaviour
             }
             else
             {
-                Debug.Log("Looking for target within reach",gameObject);
+                Debug.Log("Looking for target within reach", gameObject);
                 //Target is our of reach
                 //Try to find new target that is within reach to prevent units not attacking when blocked by other units
-                for (int i = 0; i < visibleTargets.Count; i++)
+
+                Physics.OverlapSphereNonAlloc(transform.position, attackRange, enemysInAttackRange, enemyLayer);
+                if (enemysInAttackRange[0])
                 {
-                    if (visibleTargets[i] != null)
-                    {
-                        if (Vector3.Distance(visibleTargets[i].position, transform.position) < attackRange)
-                        {
-                            targetHealth = visibleTargets[i].GetComponent<Health>();
-                        }
-                    }
+                    targetHealth = enemysInAttackRange[0].GetComponent<Health>();
                 }
+
             }
         }
     }
@@ -91,9 +89,9 @@ public class RTSUnit : MonoBehaviour
     protected void FindVisibleTargets()
     {
         visibleTargets.Clear();
-        for (int i = 0; i < colliders.Length; i++)
+        for (int i = 0; i < enemysInDetectRange.Length; i++)
         {
-            Transform target = colliders[i].transform;
+            Transform target = enemysInDetectRange[i].transform;
             if (CanSeeTarget(target))
             {
                 visibleTargets.Add(target);

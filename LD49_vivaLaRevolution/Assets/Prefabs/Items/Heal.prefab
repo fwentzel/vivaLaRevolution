@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5ec6aae6eed90db4b95d990d4fe27981, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,25 +97,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 64da6fa01fc634d45b74e12407125d84, type: 3}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  maxDistance: 50
+  influenceRadius: 10
   onUseCompleted:
     m_PersistentCalls:
       m_Calls: []
   onUse:
     m_PersistentCalls:
       m_Calls: []
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  maxDistance: 50
-  influenceRadius: 10
-  flameParticles: {fileID: 7958413605684528451}
-  healParticles: {fileID: 2065021946}
   healLayer:
     serializedVersion: 2
     m_Bits: 1024
   duration: 10
   ticksPerSecond: 2
   healPerTick: 5
+  flameParticles: {fileID: 7958413605684528451}
+  healParticles: {fileID: 2065021946}
   timeToRotate: 2
 --- !u!1 &7958413605684528454
 GameObject:

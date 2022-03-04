@@ -132,21 +132,22 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public bool CanEnter()
     {
-        return protestors.Count < maxProtestors;
+        return protestors.Count < maxProtestors && !isCaptured;
     }
 
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData pointerEventData)
     {
-        if (quickOutline){
-                quickOutline.OutlineColor = lootable?Color.white:Color.red;
-                quickOutline.enabled = true;
+        if (quickOutline)
+        {
+            quickOutline.OutlineColor = lootable && !isCaptured ? Color.white : Color.red;
+            quickOutline.enabled = true;
         }
 
-        if (lootable && protestors.Count < maxProtestors)
+        if (lootable && !isCaptured && protestors.Count < maxProtestors)
         {
             Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
-            
+
         }
 
 

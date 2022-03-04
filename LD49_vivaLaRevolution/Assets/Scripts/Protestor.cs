@@ -21,7 +21,11 @@ public class Protestor : RTSUnit
     private Coroutine enterCoroutine;
     private Coroutine moveRandomlyCoroutine;
 
-
+    protected override void Awake()
+    {
+        base.Awake();
+        moveTarget.transform.localScale = Vector3.zero;
+    }
     protected override void Update()
     {
         if (Vector3.Distance(transform.position, moveToPosition) > fightWithinRange)
@@ -98,14 +102,16 @@ public class Protestor : RTSUnit
             yield return new WaitForSeconds(0.1f);
             if (Vector3.Distance(toBuilding.entryPoint.position, transform.position) < 4f)
             {
+                toBuilding.EnterBuilding(this);
                 navMeshAgent.enabled = false;
-                if (toBuilding.protestors.Count == 0)
+                if (toBuilding.protestors.Count == 1)
                     EffectAudioManager.instance.PlayWindowClip(transform.position);
+
                 transform.DOMove(toBuilding.transform.position, 1f);
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() =>
                 {
                     gameObject.SetActive(false);
-                    toBuilding.EnterBuilding(this);
+
                     buildingToLoot = toBuilding;
                 });
                 yield break;
@@ -156,10 +162,11 @@ public class Protestor : RTSUnit
         if (item)
         {
             ItemManager.instance.RemoveItemFromList(item);
-            
+
         }
 
-        if(miscItem){
+        if (miscItem)
+        {
             miscItem.ReactivatePickUp();
         }
         RTSSelection.instance.RemoveFromSelection(this);

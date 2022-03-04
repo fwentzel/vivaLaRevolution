@@ -132,7 +132,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public bool CanEnter()
     {
-        return protestors.Count < maxProtestors || isCaptured;
+        return protestors.Count < maxProtestors;
     }
 
 

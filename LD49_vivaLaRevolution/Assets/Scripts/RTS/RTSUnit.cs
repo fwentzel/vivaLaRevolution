@@ -46,7 +46,7 @@ public class RTSUnit : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         enemysInDetectRange = new Collider[] { GetComponent<Collider>() };
         myHealth = GetComponent<Health>();
-        moveToPosition = transform.position;
+        moveToPosition =   new Vector3(transform.position.x,0,transform.position.z);
         initialScaleMesh = meshTransform.localScale;
         initialScale = transform.localScale;
 

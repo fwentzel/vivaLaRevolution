@@ -42,13 +42,23 @@ public class Citizen : MonoBehaviour
 
     protected IEnumerator MoveRandomly()
     {
+        NavMeshHit hit;
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
             if (Vector3.Distance(moveToPosition, transform.position) < 2f)
             {
                 moveToPosition += new Vector3(Random.Range(-magnitudeMulitplicator, magnitudeMulitplicator), 0, Random.Range(-magnitudeMulitplicator, magnitudeMulitplicator));
-                navMeshAgent.SetDestination(moveToPosition);
+                if (NavMesh.SamplePosition(moveToPosition, out hit, magnitudeMulitplicator * 2, NavMesh.AllAreas))
+                {
+                    moveToPosition = hit.position;
+                }
+                else
+                {
+                    //Reset movePosition for next iteration, stop movepositon from drifitng away
+                    moveToPosition = transform.position;
+                }
+                navMeshAgent.SetDestination(hit.position);
             }
 
         }

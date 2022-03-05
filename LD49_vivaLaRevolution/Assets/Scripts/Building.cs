@@ -16,6 +16,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public float captureDurration = 5f;
     protected float captureTime = 0;
     public Transform entryPoint;
+    public AnimationCurve captureTimeForCitizenCurve;
     [SerializeField] protected int lootProbability = 20;
     public UnityEvent OnCaptured;
 
@@ -58,7 +59,7 @@ public class Building : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             return;
 
 
-        captureTime += Time.deltaTime * (protestors.Count / (float)maxProtestors);
+        captureTime += Time.deltaTime * (captureTimeForCitizenCurve.Evaluate(protestors.Count));
         captureTime = Mathf.Clamp(captureTime, 0, captureDurration);
 
         float percent = captureTime / captureDurration;

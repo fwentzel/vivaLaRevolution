@@ -152,6 +152,30 @@ MonoBehaviour:
   lootable: 0
   captureDurration: 5
   entryPoint: {fileID: 4604696993695135895}
+  captureTimeForCitizenCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.43382812
+      outSlope: 0.43382812
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.0331863
+    - serializedVersion: 3
+      time: 20
+      value: 4
+      inSlope: 0.015202464
+      outSlope: 0.015202464
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1506279
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   lootProbability: 100
   OnCaptured:
     m_PersistentCalls:

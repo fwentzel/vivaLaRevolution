@@ -164,7 +164,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &919668107470728183
 MonoBehaviour:
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6184fb9177324ca45746694be8c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 30
   attackSpeed: 1
   attackRange: 4
   enemyLayer:
@@ -459,7 +459,7 @@ MonoBehaviour:
     m_Bits: 2048
   detectRadius: 20
   fightWithinRange: 20
-  magnitudeMulitplicator: 1.3
+  magnitudeMulitplicator: 1
   viewAngle: 90
   meshTransform: {fileID: 329363691952813771}
   onSelection:
@@ -653,7 +653,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &413581684276088262
 MonoBehaviour:

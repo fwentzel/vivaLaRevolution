@@ -278,7 +278,7 @@ MonoBehaviour:
     m_Bits: 2048
   detectRadius: 30
   fightWithinRange: 20
-  magnitudeMulitplicator: 1
+  magnitudeMulitplicator: 0.5
   viewAngle: 181
   meshTransform: {fileID: 2475510913183630819}
   onSelection:

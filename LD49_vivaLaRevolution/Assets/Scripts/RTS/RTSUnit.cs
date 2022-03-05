@@ -46,7 +46,7 @@ public class RTSUnit : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         enemysInDetectRange = new Collider[] { GetComponent<Collider>() };
         myHealth = GetComponent<Health>();
-        moveToPosition =   new Vector3(transform.position.x,0,transform.position.z);
+        moveToPosition = new Vector3(transform.position.x, 0, transform.position.z);
         initialScaleMesh = meshTransform.localScale;
         initialScale = transform.localScale;
 
@@ -70,7 +70,6 @@ public class RTSUnit : MonoBehaviour
             }
             else
             {
-                Debug.Log("Looking for target within reach", gameObject);
                 //Target is our of reach
                 //Try to find new target that is within reach to prevent units not attacking when blocked by other units
 
@@ -159,12 +158,17 @@ public class RTSUnit : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
-            if (Vector3.Distance(moveToPosition, transform.position) < 2f)
+            yield return new WaitForSeconds(Random.Range(1f, 1.6f));
+       
+            if (Vector3.Distance(moveToPosition, transform.position) < 3f)
             {
-                float magnitude = (1 - myHealth.HealthRatio()) * magnitudeMulitplicator;
+                float magnitude = (1.5f - myHealth.HealthRatio()) * magnitudeMulitplicator;
                 if (doRandomly)
+                {
                     moveToPosition += new Vector3(Random.Range(-magnitude, magnitude), 0, Random.Range(-magnitude, magnitude));
+            
+                }
+
             }
 
         }

@@ -107,7 +107,19 @@ public class PoliceManager : MonoBehaviour
                 }
                 GameObject obj;
 
-                if (group.musketeerPercentage > Random.Range(0, 1f))
+
+                bool spawnMusketeer;
+                if (isStart)
+                {
+                    //Do not use randomness on game start
+                    spawnMusketeer = i / (group.startSize * 1f) < group.musketeerPercentage;
+                }
+                else
+                {
+                    spawnMusketeer = group.musketeerPercentage > Random.Range(0, 1f);
+                }
+
+                if (spawnMusketeer)
                 {
                     obj = Instantiate(policeMusketeerPrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity, spawnParent);
                 }

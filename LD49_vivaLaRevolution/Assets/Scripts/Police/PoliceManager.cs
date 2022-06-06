@@ -28,9 +28,9 @@ public class PoliceManager : MonoBehaviour
     }
     private void Start()
     {
-        foreach (var item in groups)
+        foreach (var group in groups)
         {
-            item.SetupCurrentHoldpoint();
+            group.SetupCurrentHoldpoint();
         }
         FillGroups();
         InvokeRepeating("CheckChangeHoldPositons", respawnInterval, 3f);
@@ -99,16 +99,21 @@ public class PoliceManager : MonoBehaviour
             if (group.ignoreRespawnAndHoldpointCalc && !isStart)
                 continue;
             HoldPoint spawnHoldPoint = isStart ? group.holdPoints[group.currentHoldIndex] : defaultSpawnPoint;
-            for (int i = 0; i < v; i++)
+            for (int i = 0; i <= v; i++)
             {
-                GameObject obj;
-                if (group.startSize * group.musketeerPercentage > i)
+                if (group.members.Count >= group.startSize * 1.5f)
                 {
-                    obj = Instantiate(policeMusketeerPrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity,spawnParent);
+                    continue;
+                }
+                GameObject obj;
+
+                if (group.musketeerPercentage > Random.Range(0, 1f))
+                {
+                    obj = Instantiate(policeMusketeerPrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity, spawnParent);
                 }
                 else
                 {
-                    obj = Instantiate(policeMeelePrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity,spawnParent);
+                    obj = Instantiate(policeMeelePrefab, spawnHoldPoint.transform.position + new Vector3(Random.Range(0, .1f), 0, Random.Range(0, .1f)), Quaternion.identity, spawnParent);
                 }
 
                 PoliceBase police = obj.GetComponent<PoliceBase>();

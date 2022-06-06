@@ -43,7 +43,7 @@ public class RTSSelection : MonoBehaviour
         selectionInput.Disable();
     }
 
-  
+
     private void Start()
     {
 
@@ -135,10 +135,9 @@ public class RTSSelection : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(mouseStart);
         RaycastHit hit;
 
-        // didnt work anyways, maybe later 
-        // if (!Input.GetKey(KeyCode.LeftShift))
-        //     selectedUnits = new List<Protestor>();
-        selectedUnits = new List<Protestor>();
+        //reset selection when shift/AddToSelection button is not pressed. Otherwise the Unit will be added ti selction
+        if (!(selectionInput.AddToSelection.ReadValue<float>() > .1f))
+            selectedUnits = new List<Protestor>();
 
         // No Unit found
         if (!Physics.Raycast(ray, out hit, 1000, unitMask))

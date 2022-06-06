@@ -175,6 +175,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=1)"
+                },
+                {
+                    "name": "AddToSelection",
+                    "type": "Button",
+                    "id": "3c07d225-d78c-452f-8127-33e4527363da",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)"
                 }
             ],
             "bindings": [
@@ -285,6 +293,17 @@
                     "processors": "",
                     "groups": "Touch",
                     "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47ed60fb-e64a-42ec-9324-f1a86f06e731",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Hold(duration=0.01)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AddToSelection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

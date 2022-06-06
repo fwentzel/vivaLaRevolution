@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9886c830a50ab814c95585598b310eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 30
   randomizeHealth: 1
   meshRenderer: {fileID: 7874348311401058103}
   onHeal:

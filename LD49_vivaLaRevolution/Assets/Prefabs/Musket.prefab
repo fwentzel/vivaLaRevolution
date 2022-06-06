@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839048c128e629542905ead1f1d74f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 500
-  useTime: 4
+  damage: 75
+  useTime: 5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024

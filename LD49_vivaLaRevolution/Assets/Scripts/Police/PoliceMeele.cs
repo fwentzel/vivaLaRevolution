@@ -10,9 +10,9 @@ public class PoliceMeele : PoliceBase
     {
         base.Update();
 
-        if (targetHealth!=null && !isRunning)
+        if (targetHealth != null)
         {
-            if (Vector3.Distance(targetHealth.transform.position, holdPosition.transform.position) <= fightWithinRange)
+            if (isAdvancing || Vector3.Distance(targetHealth.transform.position, holdPosition.transform.position) <= fightWithinRange)
             {
                 navMeshAgent.destination = targetHealth.transform.position;
                 return;

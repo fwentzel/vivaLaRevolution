@@ -188,6 +188,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=1)""
+                },
+                {
+                    ""name"": ""AddToSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c07d225-d78c-452f-8127-33e4527363da"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)""
                 }
             ],
             ""bindings"": [
@@ -298,6 +306,17 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Touch"",
                     ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47ed60fb-e64a-42ec-9324-f1a86f06e731"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Hold(duration=0.01)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddToSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -991,6 +1010,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_Selection_Click = m_Selection.FindAction("Click", throwIfNotFound: true);
         m_Selection_Drag = m_Selection.FindAction("Drag", throwIfNotFound: true);
         m_Selection_RightClick = m_Selection.FindAction("RightClick", throwIfNotFound: true);
+        m_Selection_AddToSelection = m_Selection.FindAction("AddToSelection", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1110,6 +1130,7 @@ public class @InputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Selection_Click;
     private readonly InputAction m_Selection_Drag;
     private readonly InputAction m_Selection_RightClick;
+    private readonly InputAction m_Selection_AddToSelection;
     public struct SelectionActions
     {
         private @InputActions m_Wrapper;
@@ -1119,6 +1140,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         public InputAction @Click => m_Wrapper.m_Selection_Click;
         public InputAction @Drag => m_Wrapper.m_Selection_Drag;
         public InputAction @RightClick => m_Wrapper.m_Selection_RightClick;
+        public InputAction @AddToSelection => m_Wrapper.m_Selection_AddToSelection;
         public InputActionMap Get() { return m_Wrapper.m_Selection; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1143,6 +1165,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @RightClick.started -= m_Wrapper.m_SelectionActionsCallbackInterface.OnRightClick;
                 @RightClick.performed -= m_Wrapper.m_SelectionActionsCallbackInterface.OnRightClick;
                 @RightClick.canceled -= m_Wrapper.m_SelectionActionsCallbackInterface.OnRightClick;
+                @AddToSelection.started -= m_Wrapper.m_SelectionActionsCallbackInterface.OnAddToSelection;
+                @AddToSelection.performed -= m_Wrapper.m_SelectionActionsCallbackInterface.OnAddToSelection;
+                @AddToSelection.canceled -= m_Wrapper.m_SelectionActionsCallbackInterface.OnAddToSelection;
             }
             m_Wrapper.m_SelectionActionsCallbackInterface = instance;
             if (instance != null)
@@ -1162,6 +1187,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @RightClick.started += instance.OnRightClick;
                 @RightClick.performed += instance.OnRightClick;
                 @RightClick.canceled += instance.OnRightClick;
+                @AddToSelection.started += instance.OnAddToSelection;
+                @AddToSelection.performed += instance.OnAddToSelection;
+                @AddToSelection.canceled += instance.OnAddToSelection;
             }
         }
     }
@@ -1325,6 +1353,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnDrag(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
+        void OnAddToSelection(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

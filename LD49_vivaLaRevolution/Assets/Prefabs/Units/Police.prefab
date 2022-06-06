@@ -224,7 +224,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 12
   m_Acceleration: 12
-  avoidancePriority: 40
+  avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c79acb5d6512ae846b7ad320834bc263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 11
+  attackDamage: 5
   attackSpeed: 1
   attackRange: 5
   enemyLayer:
@@ -279,7 +279,7 @@ MonoBehaviour:
   detectRadius: 30
   fightWithinRange: 20
   magnitudeMulitplicator: 0.5
-  viewAngle: 181
+  viewAngle: 360
   meshTransform: {fileID: 2475510913183630819}
   onSelection:
     m_PersistentCalls:

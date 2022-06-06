@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9886c830a50ab814c95585598b310eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 101
   randomizeHealth: 0
   meshRenderer: {fileID: 8778688292332272393}
   onHeal:
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b6184fb9177324ca45746694be8c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 30
+  attackDamage: 5
   attackSpeed: 1
   attackRange: 4
   enemyLayer:
